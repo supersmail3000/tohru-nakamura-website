@@ -407,7 +407,6 @@ body:has(.home-section) .navbar {
     width: auto;
     height: 50vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     z-index: 10;
@@ -470,12 +469,13 @@ body:has(.home-section) .navbar {
 }
 
 .hero-logo {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: calc(100% / 1.618);
     height: auto;
     max-width: 90%;
-    margin: 0 auto;
-    display: block;
     z-index: 20;
     opacity: 0;
     animation: logoFadeIn 1s ease 1.5s forwards;
@@ -484,12 +484,13 @@ body:has(.home-section) .navbar {
 }
 
 .michelin-stars {
-    position: relative;
-    margin-top: var(--spacing-md);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(0.809 * (100% / 1.618) / 2 + var(--spacing-md)));
     display: flex;
     gap: 8px;
     align-items: center;
-    justify-content: center;
     z-index: 25;
     opacity: 0;
     animation: starsFadeIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.5s forwards;
@@ -507,22 +508,22 @@ body:has(.home-section) .navbar {
 @keyframes logoFadeIn {
     from {
         opacity: 0;
-        transform: scale(0.95) translateY(-5px);
+        transform: translate(-50%, -50%) scale(0.95);
     }
     to {
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: translate(-50%, -50%) scale(1);
     }
 }
 
 @keyframes starsFadeIn {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translate(-50%, calc(0.809 * (100% / 1.618) / 2 + var(--spacing-md) + 10px));
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate(-50%, calc(0.809 * (100% / 1.618) / 2 + var(--spacing-md)));
     }
 }
 
