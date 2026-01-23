@@ -383,19 +383,19 @@ body:has(.home-section) .navbar {
 .open-dot {
     width: 6px;
     height: 6px;
-    background-color: #8ba888; /* Sage Green - Subtle & Elegant */
+    background-color: #8ba888;
     border-radius: 50%;
     position: relative;
     display: inline-block;
-    animation: breathe 5s ease-in-out infinite;
+    animation: blink 2s ease-in-out infinite;
 }
 
-@keyframes breathe {
+@keyframes blink {
     0%, 100% {
-        opacity: 0.8;
+        opacity: 1;
     }
     50% {
-        opacity: 1;
+        opacity: 0.3;
     }
 }
 
@@ -535,6 +535,19 @@ body:has(.home-section) .navbar {
     }
 }
 
+/* LGTDM Logo - Right side of hero image */
+.lgtdm-logo {
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 120px;
+    height: auto;
+    opacity: 0;
+    animation: fadeIn 0.8s ease 2s forwards;
+    z-index: 10;
+}
+
 .home-navigation {
     position: absolute;
     bottom: var(--spacing-4xl);
@@ -654,6 +667,11 @@ body:has(.home-section) .navbar {
     .home-hero-image {
         padding: 0 var(--spacing-sm);
     }
+    
+    .lgtdm-logo {
+        width: 90px;
+        right: 5%;
+    }
 
     .home-navigation {
         bottom: 72px;
@@ -670,6 +688,10 @@ body:has(.home-section) .navbar {
 }
 
 @media (max-width: 480px) {
+    .lgtdm-logo {
+        display: none;
+    }
+    
     .home-section {
         display: flex;
         flex-direction: column;
