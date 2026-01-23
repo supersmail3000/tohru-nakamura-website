@@ -485,9 +485,9 @@ body:has(.home-section) .navbar {
 
 .michelin-stars {
     position: absolute;
-    top: 50%;
+    top: calc(50% + 55px);
     left: 50%;
-    transform: translate(-50%, calc(0.809 * (100% / 1.618) / 2 + var(--spacing-md)));
+    transform: translateX(-50%);
     display: flex;
     gap: 8px;
     align-items: center;
@@ -519,11 +519,11 @@ body:has(.home-section) .navbar {
 @keyframes starsFadeIn {
     from {
         opacity: 0;
-        transform: translate(-50%, calc(0.809 * (100% / 1.618) / 2 + var(--spacing-md) + 10px));
+        transform: translateX(-50%) translateY(10px);
     }
     to {
         opacity: 1;
-        transform: translate(-50%, calc(0.809 * (100% / 1.618) / 2 + var(--spacing-md)));
+        transform: translateX(-50%) translateY(0);
     }
 }
 
@@ -723,7 +723,7 @@ body:has(.home-section) .navbar {
     }
     
     .michelin-stars {
-        top: calc(50% + var(--spacing-md));
+        top: calc(50% + 45px);
         gap: var(--spacing-sm);
     }
     
