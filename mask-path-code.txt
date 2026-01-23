@@ -1,0 +1,44 @@
+SVG PATH CODE - Organische Hero-Bild Form
+==========================================
+
+Für CSS clip-path (prozentual, skalierbar):
+-------------------------------------------
+clip-path: path('M 30 80 C 60 50 90 35 130 25 C 170 15 210 10 251.5 5 C 293 10 333 15 373 25 C 413 35 443 50 473 80 L 495 120 L 500 520 C 500 545 490 570 470 585 C 450 595 420 600 380 600 L 123 600 C 83 600 53 595 33 585 C 13 570 3 545 3 520 L 8 120 Z');
+
+
+Für inline SVG <clipPath>:
+--------------------------
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+  <defs>
+    <clipPath id="hero-mask" clipPathUnits="objectBoundingBox">
+      <path d="M 0.06 0.133
+               C 0.12 0.083, 0.18 0.058, 0.258 0.042
+               C 0.338 0.025, 0.417 0.017, 0.5 0.008
+               C 0.583 0.017, 0.662 0.025, 0.742 0.042
+               C 0.821 0.058, 0.88 0.083, 0.94 0.133
+               L 0.984 0.2
+               L 0.994 0.867
+               C 0.994 0.908, 0.974 0.95, 0.935 0.975
+               C 0.895 0.992, 0.835 1, 0.755 1
+               L 0.245 1
+               C 0.165 1, 0.105 0.992, 0.066 0.975
+               C 0.026 0.95, 0.006 0.908, 0.006 0.867
+               L 0.016 0.2
+               Z" />
+    </clipPath>
+  </defs>
+</svg>
+
+
+Reine Path-Daten (Pixel-basiert, 503x600):
+------------------------------------------
+M 30 80 C 60 50 90 35 130 25 C 170 15 210 10 251.5 5 C 293 10 333 15 373 25 C 413 35 443 50 473 80 L 495 120 L 500 520 C 500 545 490 570 470 585 C 450 595 420 600 380 600 L 123 600 C 83 600 53 595 33 585 C 13 570 3 545 3 520 L 8 120 Z
+
+
+Beschreibung der Form:
+----------------------
+- Oben: Wellenförmige Kurve mit sanftem Auf und Ab
+- Mitte links: Gerade mit leichter Kurve nach außen  
+- Mitte rechts: Gerade mit leichter Kurve nach außen
+- Unten: Stark abgerundete Ecken (fast halbrund)
+- Gesamt-Eindruck: Organisch, fließend, blob-artig

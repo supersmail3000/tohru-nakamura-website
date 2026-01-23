@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 503 600" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <clipPath id="hero-clip-path">
+      <!-- Organische Form basierend auf dem Figma Design: 503x600px -->
+      <path d="M 40 60 
+               C 80 35 120 25 170 20
+               C 220 18 250 15 280 10
+               C 310 18 340 25 380 30
+               C 420 40 460 50 480 70
+               L 490 100
+               L 500 550
+               C 500 570 490 585 470 595
+               C 450 600 400 600 350 600
+               L 150 600
+               C 100 600 50 600 30 595
+               C 10 585 3 570 3 550
+               L 10 100
+               Z" />
+    </clipPath>
+  </defs>
+  
+  <!-- Das heruntergeladene Bild mit Clip-Path -->
+  <image href="hero-image.png" 
+         x="0" 
+         y="0" 
+         width="503" 
+         height="600" 
+         clip-path="url(#hero-clip-path)"
+         preserveAspectRatio="xMidYMid slice"/>
+</svg>
