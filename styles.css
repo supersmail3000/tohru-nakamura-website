@@ -15,8 +15,8 @@
     --bg-dark: #1a1a1a;
     --bg-section: #1a1714; /* Warm Charcoal - Harmonizes with Warm Black */
     --bg-home: #0e0c0a; /* Warm Black - Premium Fine Dining */
-    --burgundy: #7d1a1a; /* Burgundy - Fine Dining Red */
-    --burgundy-hover: #9b2226; /* Burgundy Hover State */
+    --burgundy: #b8252c; /* Warm Crimson - Vibrant Fine Dining Red */
+    --burgundy-hover: #d32f37; /* Warm Crimson Hover State */
     --transition: all 0.3s ease;
     
     /* 8px Baseline Grid System */
@@ -541,12 +541,11 @@ body:has(.home-section) .navbar {
     right: calc((100vw - 50vh * 1.2) / 4);
     top: 50%;
     transform: translate(50%, -50%);
-    width: 80px;
+    width: 100px;
     height: auto;
     opacity: 0;
     animation: fadeIn 0.8s ease 2s forwards;
     z-index: 10;
-    filter: brightness(0) invert(1);
 }
 
 .home-navigation {
@@ -670,7 +669,7 @@ body:has(.home-section) .navbar {
     }
     
     .lgtdm-logo {
-        width: 60px;
+        width: 80px;
         right: calc((100vw - 50vh * 1.2) / 4);
     }
 
@@ -1000,7 +999,7 @@ body:has(.home-section) .navbar {
 .reserve-button:hover {
     background-color: var(--burgundy-hover);
     transform: translate3d(0, -2px, 0);
-    box-shadow: 0 8px 20px rgba(125, 26, 26, 0.5);
+    box-shadow: 0 8px 20px rgba(184, 37, 44, 0.5);
 }
 
 .reserve-button:hover::before {
@@ -1272,7 +1271,7 @@ body:has(.home-section) .navbar {
 .page-button:hover {
     background-color: var(--burgundy-hover);
     transform: translate3d(0, -2px, 0);
-    box-shadow: 0 8px 20px rgba(125, 26, 26, 0.5);
+    box-shadow: 0 8px 20px rgba(184, 37, 44, 0.5);
 }
 
 .page-button:hover::before {
@@ -1577,7 +1576,7 @@ body:has(.home-section) .navbar {
 .newsletter-button:hover {
     background-color: var(--burgundy-hover);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(125, 26, 26, 0.5);
+    box-shadow: 0 8px 20px rgba(184, 37, 44, 0.5);
 }
 
 .newsletter-button-disabled {
