@@ -27,18 +27,21 @@ function updateCountdown() {
     const currentDay = now.getDay(); // 0=Sunday, 1=Monday, ..., 6=Saturday
     const currentHour = now.getHours();
     
+    const countdownDisplay = document.getElementById('countdown-display');
+    
+    // SPECIAL: 0:00 - 2:00 Uhr = Cleaning time (keine Open-Anzeige)
+    if (currentHour >= 0 && currentHour < 2) {
+        countdownDisplay.innerHTML = '<span>Cleaning the kitchen.</span>';
+        return;
+    }
+    
     // Prüfen ob Restaurant gerade geöffnet ist (19:00 - 02:00, Di-Sa)
     let isOpen = false;
     
     if (currentDay >= 2 && currentDay <= 6 && currentHour >= 19) {
         // Dienstag-Samstag ab 19 Uhr
         isOpen = true;
-    } else if ((currentDay >= 3 && currentDay <= 6 && currentHour < 2) || (currentDay === 0 && currentHour < 2)) {
-        // Mittwoch-Samstag und Sonntag morgens bis 2 Uhr (Fortsetzung vom Vorabend)
-        isOpen = true;
     }
-    
-    const countdownDisplay = document.getElementById('countdown-display');
     
     if (isOpen) {
         // Restaurant ist geöffnet: Zeige grünen Dot und "Open and cooking"
