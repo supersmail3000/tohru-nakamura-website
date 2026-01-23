@@ -538,18 +538,17 @@ body:has(.home-section) .navbar {
 /* LGTDM Logo Link */
 .lgtdm-link {
     position: fixed;
-    left: 50%;
+    left: calc(75vw + (50vh * 120 / 140) / 4);
     top: 50%;
-    margin-left: calc(50vh * 1.2 / 2 + (100vw - 50vh * 1.2) / 4);
     transform: translate(-50%, -50%);
     z-index: 10;
     opacity: 0;
     animation: fadeIn 0.8s ease 2s forwards;
-    transition: opacity 0.3s ease;
+    will-change: opacity;
 }
 
 .lgtdm-link:hover {
-    opacity: 1;
+    /* Kein opacity change auf dem Link selbst */
 }
 
 .lgtdm-link .lgtdm-logo {
@@ -558,6 +557,7 @@ body:has(.home-section) .navbar {
     filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(96%) contrast(92%);
     opacity: 0.6;
     transition: opacity 0.3s ease;
+    display: block;
 }
 
 .lgtdm-link:hover .lgtdm-logo {
@@ -685,7 +685,7 @@ body:has(.home-section) .navbar {
     }
     
     .lgtdm-link {
-        margin-left: calc(50vh * 1.2 / 2 + (100vw - 50vh * 1.2) / 4);
+        left: calc(75vw + (50vh * 120 / 140) / 4);
     }
     
     .lgtdm-link .lgtdm-logo {
@@ -711,12 +711,12 @@ body:has(.home-section) .navbar {
         position: relative;
         left: auto;
         top: auto;
-        margin-left: 0;
         transform: none;
         display: block;
         width: 100px;
         margin: var(--spacing-xl) auto 0 auto;
         order: 4;
+        will-change: auto;
     }
     
     .lgtdm-link .lgtdm-logo {
