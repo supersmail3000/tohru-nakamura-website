@@ -2,6 +2,8 @@
 
 Eine moderne, professionelle Website für den deutsch-japanischen Sternekoch Tohru Nakamura aus München.
 
+**Status:** Live on Vercel 🚀
+
 ## 🎨 Features
 
 - **Responsive Design**: Optimiert für alle Geräte (Desktop, Tablet, Mobile)
