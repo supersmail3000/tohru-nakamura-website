@@ -29,17 +29,21 @@ function updateCountdown() {
     
     const countdownDisplay = document.getElementById('countdown-display');
     
-    // SPECIAL: 0:00 - 2:00 Uhr = Cleaning time (keine Open-Anzeige)
-    if (currentHour >= 0 && currentHour < 2) {
-        countdownDisplay.innerHTML = '<span>Cleaning the kitchen.</span>';
+    // SPECIAL: 23:00 - 02:00 Uhr = Cleaning time after service
+    const isJustClosed = (currentDay >= 2 && currentDay <= 6 && currentHour >= 23) || 
+                         (currentDay >= 3 && currentDay <= 6 && currentHour < 2) || 
+                         (currentDay === 0 && currentHour < 2);
+    
+    if (isJustClosed) {
+        countdownDisplay.innerHTML = '<span>Closed. Preparing for tomorrow.</span>';
         return;
     }
     
-    // Prüfen ob Restaurant gerade geöffnet ist (19:00 - 02:00, Di-Sa)
+    // Prüfen ob Restaurant gerade geöffnet ist (19:00 - 23:00, Di-Sa)
     let isOpen = false;
     
-    if (currentDay >= 2 && currentDay <= 6 && currentHour >= 19) {
-        // Dienstag-Samstag ab 19 Uhr
+    if (currentDay >= 2 && currentDay <= 6 && currentHour >= 19 && currentHour < 23) {
+        // Dienstag-Samstag von 19 bis 23 Uhr
         isOpen = true;
     }
     
