@@ -485,7 +485,7 @@ body:has(.home-section) .navbar {
 
 .michelin-stars {
     position: absolute;
-    top: calc(50% + 115px);
+    top: calc(50% + 105px);
     left: 50%;
     transform: translateX(-50%);
     display: flex;
