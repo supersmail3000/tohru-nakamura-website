@@ -1,18 +1,19 @@
-# macOS
+# Arbeits-Dokumente (nicht für Produktion)
+*.md
+!README.md
+
+# Temporäre Dateien
+.vercel-deploy
+.vercel-trigger
+TAGLINE_UPDATE.md
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 .DS_Store
-.AppleDouble
-.LSOverride
-._*
-
-# Windows
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-
-# Backups
-*-backup.*
-*.bak
 
 # Logs
 *.log
@@ -20,27 +21,24 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# IDEs
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+# Dependencies (falls später Node.js verwendet wird)
+node_modules/
+package-lock.json
+yarn.lock
 
-# Build
+# Build Output
 dist/
 build/
-*.min.js
-*.min.css
+.vercel/
+.cache/
 
-# Environment
+# Environment Variables
 .env
 .env.local
 .env.production
+.env.development
 
-# Node modules (if adding build tools later)
-node_modules/
-
-# Temporary files
+# Backup Files
+*.backup
+*.bak
 *.tmp
-temp/

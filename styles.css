@@ -776,7 +776,7 @@ body:has(.home-section) .navbar {
     }
     
     .michelin-stars {
-        top: calc(50% + 90px);
+        top: calc(50% + 82px);
         gap: var(--spacing-sm);
     }
     
