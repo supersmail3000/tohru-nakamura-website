@@ -485,7 +485,7 @@ body:has(.home-section) .navbar {
 
 .michelin-stars {
     position: absolute;
-    top: calc(50% + 55px);
+    top: calc(50% + 95px);
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -776,7 +776,7 @@ body:has(.home-section) .navbar {
     }
     
     .michelin-stars {
-        top: calc(50% + 45px);
+        top: calc(50% + 75px);
         gap: var(--spacing-sm);
     }
     
@@ -900,6 +900,7 @@ body:has(.home-section) .navbar {
     left: var(--spacing-4xl);
     width: 48px;
     height: 48px;
+    z-index: 100;
     background: none;
     border: none;
     cursor: pointer;
@@ -1685,10 +1686,11 @@ body:has(.home-section) .navbar {
 /* Section Footer - Sichtbar in scrollbaren Sections */
 .section-footer {
     position: absolute;
-    bottom: var(--spacing-md);
+    bottom: var(--spacing-xl);
     left: 0;
     right: 0;
     width: 100%;
+    padding-bottom: env(safe-area-inset-bottom, 20px);
     text-align: center;
     padding: 0;
     display: flex;
@@ -1872,7 +1874,8 @@ body:has(.home-section) .navbar {
     }
     
     .section-footer {
-        bottom: 24px;
+        bottom: 40px;
+        padding-bottom: env(safe-area-inset-bottom, 24px);
     }
     
     .page-section .page-container {
