@@ -1049,7 +1049,7 @@ body:has(.home-section) .navbar {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--burgundy);
+    background-color: #BB93DD;
     color: var(--text-light);
     font-family: 'Work Sans', sans-serif;
     font-size: 16px;
@@ -1080,9 +1080,9 @@ body:has(.home-section) .navbar {
 }
 
 .reserve-button:hover {
-    background-color: var(--burgundy-hover);
+    background-color: #A67DC9;
     transform: translate3d(0, -2px, 0);
-    box-shadow: 0 8px 20px rgba(184, 37, 44, 0.5);
+    box-shadow: 0 8px 20px rgba(187, 147, 221, 0.5);
 }
 
 .reserve-button:hover::before {
