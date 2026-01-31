@@ -96,6 +96,31 @@ body {
     border: none !important;
 }
 
+/* Force Zenchef widget button color */
+#ft-0b624972 button,
+#ft-0b624972 .ft-button,
+#ft-0b624972 .ft-btn,
+#ft-0b624972 [class*="button"],
+#ft-0b624972 input[type="submit"] {
+    background-color: #BB93DD !important;
+    border-color: #BB93DD !important;
+}
+
+#ft-0b624972 button:hover,
+#ft-0b624972 .ft-button:hover,
+#ft-0b624972 .ft-btn:hover,
+#ft-0b624972 [class*="button"]:hover,
+#ft-0b624972 input[type="submit"]:hover {
+    background-color: #A67DC9 !important;
+    border-color: #A67DC9 !important;
+}
+
+/* Force widget accent color */
+#ft-0b624972 a,
+#ft-0b624972 .ft-link {
+    color: #BB93DD !important;
+}
+
 /* Skip Link for Accessibility */
 .skip-link {
     position: absolute;
