@@ -1574,89 +1574,10 @@ body:has(.home-section) .navbar {
 }
 
 /* Newsletter Form Styles */
-/* Flodesk Form Wrapper */
-.flodesk-form-wrapper {
-    width: 100%;
-    max-width: 100%;
-    opacity: 0;
-    animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
-}
-
-.flodesk-form-wrapper * {
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-}
-
-/* Override Flodesk default styles for dark theme */
-.flodesk-form-wrapper fd-form,
-.flodesk-form-wrapper form {
-    background: transparent !important;
-}
-
-.flodesk-form-wrapper input[type="email"],
-.flodesk-form-wrapper input[type="text"] {
-    width: 100% !important;
-    background-color: rgba(255, 255, 255, 0.1) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    color: var(--text-light) !important;
-    font-family: 'Work Sans', sans-serif !important;
-    font-size: 16px !important;
-    font-weight: 300 !important;
-    border-radius: 0 !important;
-}
-
-.flodesk-form-wrapper input[type="email"]::placeholder,
-.flodesk-form-wrapper input[type="text"]::placeholder {
-    color: rgba(255, 255, 255, 0.5) !important;
-}
-
-.flodesk-form-wrapper input[type="email"]:focus,
-.flodesk-form-wrapper input[type="text"]:focus {
-    background-color: rgba(255, 255, 255, 0.15) !important;
-    border-color: rgba(255, 255, 255, 0.4) !important;
-    outline: none !important;
-}
-
-.flodesk-form-wrapper button[type="submit"],
-.flodesk-form-wrapper input[type="submit"] {
-    width: 100% !important;
-    background-color: #ffffff !important;
-    color: #0e0c0a !important;
-    font-family: 'Work Sans', sans-serif !important;
-    font-size: 16px !important;
-    font-weight: 400 !important;
-    border: none !important;
-    border-radius: 0 !important;
-    cursor: pointer !important;
-    transition: background-color 0.3s ease, transform 0.3s ease !important;
-}
-
-.flodesk-form-wrapper button[type="submit"]:hover,
-.flodesk-form-wrapper input[type="submit"]:hover {
-    background-color: #f5f5f5 !important;
-    transform: translateY(-2px) !important;
-}
-
-.flodesk-form-wrapper label,
-.flodesk-form-wrapper p,
-.flodesk-form-wrapper span,
-.flodesk-form-wrapper div {
-    color: rgba(255, 255, 255, 0.8) !important;
-    font-family: 'Work Sans', sans-serif !important;
-}
-
-.flodesk-form-wrapper a {
-    color: rgba(255, 255, 255, 0.6) !important;
-}
-
 .newsletter-form {
     width: 100%;
     opacity: 0;
     animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
-}
-
-.newsletter-form-disabled {
-    opacity: 0.6;
 }
 
 .newsletter-input-group {
@@ -1698,8 +1619,8 @@ body:has(.home-section) .navbar {
     font-family: 'Work Sans', sans-serif;
     font-size: 16px;
     font-weight: 400;
-    color: white;
-    background-color: #7d1a1a; /* Burgundy - Fine Dining Red */
+    color: #0e0c0a;
+    background-color: #ffffff;
     border: none;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
@@ -1707,20 +1628,17 @@ body:has(.home-section) .navbar {
 }
 
 .newsletter-button:hover {
-    background-color: var(--burgundy-hover);
+    background-color: #f5f5f5;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(184, 37, 44, 0.5);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
 }
 
-.newsletter-button-disabled {
-    background-color: #666666 !important;
-    cursor: not-allowed !important;
-}
-
-.newsletter-button-disabled:hover {
-    background-color: #666666 !important;
-    transform: none !important;
-    box-shadow: none !important;
+.newsletter-button:disabled {
+    background-color: #666666;
+    color: #999;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
 .newsletter-success {

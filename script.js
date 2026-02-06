@@ -410,52 +410,58 @@ if (document.readyState === 'loading') {
 }
 
 // ===== NEWSLETTER FORM HANDLER =====
-function handleNewsletterSubmit(event) {
-    event.preventDefault();
+(function() {
+    var form = document.getElementById('newsletter-form');
+    if (!form) return;
     
-    const form = document.getElementById('newsletter-form');
-    const emailInput = document.getElementById('newsletter-email');
-    const successMsg = document.getElementById('newsletter-success');
-    const errorMsg = document.getElementById('newsletter-error');
-    
-    // Hide previous messages
-    successMsg.style.display = 'none';
-    errorMsg.style.display = 'none';
-    
-    const email = emailInput.value.trim();
-    
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        errorMsg.style.display = 'block';
-        return false;
-    }
-    
-    // TODO: Replace with actual newsletter service integration (Mailchimp, Brevo, etc.)
-    // For now, show success message
-    emailInput.value = '';
-    successMsg.style.display = 'block';
-    
-    // Optional: Send to backend or newsletter service
-    // Example for Mailchimp or similar:
-    /*
-    fetch('YOUR_NEWSLETTER_API_ENDPOINT', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: email })
-    })
-    .then(response => response.json())
-    .then(data => {
-        successMsg.style.display = 'block';
-        emailInput.value = '';
-    })
-    .catch(error => {
-        errorMsg.textContent = 'An error occurred. Please try again.';
-        errorMsg.style.display = 'block';
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        var emailInput = document.getElementById('newsletter-email');
+        var messageEl = document.getElementById('newsletter-message');
+        var submitBtn = form.querySelector('.newsletter-button');
+        
+        var email = emailInput.value.trim();
+        
+        // Basic email validation
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            messageEl.textContent = 'Please enter a valid email address.';
+            messageEl.className = 'newsletter-info newsletter-error';
+            return;
+        }
+        
+        // Disable button while submitting
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        messageEl.textContent = '';
+        messageEl.className = 'newsletter-info';
+        
+        fetch('/api/subscribe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: email })
+        })
+        .then(function(response) { return response.json(); })
+        .then(function(data) {
+            if (data.success) {
+                messageEl.textContent = 'Welcome to our circle!';
+                messageEl.className = 'newsletter-info newsletter-success';
+                emailInput.value = '';
+            } else {
+                messageEl.textContent = data.error || 'Something went wrong. Please try again.';
+                messageEl.className = 'newsletter-info newsletter-error';
+            }
+        })
+        .catch(function() {
+            messageEl.textContent = 'Something went wrong. Please try again.';
+            messageEl.className = 'newsletter-info newsletter-error';
+        })
+        .finally(function() {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Subscribe';
+        });
     });
-    */
-    
-    return false;
-}
+})();
