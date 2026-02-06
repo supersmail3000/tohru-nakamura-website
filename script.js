@@ -447,7 +447,7 @@ if (document.readyState === 'loading') {
         .then(function(response) { return response.json(); })
         .then(function(data) {
             if (data.success) {
-                messageEl.textContent = 'Welcome to our circle!';
+                messageEl.textContent = 'Welcome to our Circle \u2013 we look forward to sharing the journey with you.';
                 messageEl.className = 'newsletter-info newsletter-success';
                 emailInput.value = '';
             } else {

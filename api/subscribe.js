@@ -39,7 +39,7 @@ export default async function handler(req, res) {
         });
 
         if (response.ok) {
-            return res.status(200).json({ success: true, message: 'Welcome to our circle!' });
+            return res.status(200).json({ success: true, message: 'Welcome to our Circle \u2013 we look forward to sharing the journey with you.' });
         } else {
             const errorData = await response.json().catch(() => ({}));
             console.error('Flodesk API error:', response.status, errorData);
