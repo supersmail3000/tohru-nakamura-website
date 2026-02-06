@@ -92,6 +92,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     
+    <!-- Flodesk Newsletter SDK -->
+    <script>
+      (function(w, d, t, h, s, n) {
+        w.FlodeskObject = n;
+        var fn = function() {
+          (w[n].q = w[n].q || []).push(arguments);
+        };
+        w[n] = w[n] || fn;
+        var f = d.getElementsByTagName(t)[0];
+        var v = '?v=' + Math.floor(new Date().getTime() / (120 * 1000)) * 60;
+        var sm = d.createElement(t);
+        sm.async = true;
+        sm.type = 'module';
+        sm.src = h + s + '.mjs' + v;
+        f.parentNode.insertBefore(sm, f);
+        var sn = d.createElement(t);
+        sn.async = true;
+        sn.noModule = true;
+        sn.src = h + s + '.js' + v;
+        f.parentNode.insertBefore(sn, f);
+      })(window, document, 'script', 'https://assets.flodesk.com', '/universal', 'fd');
+    </script>
+    
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -337,23 +360,16 @@
                     <p>Stay connected – receive our newsletter and be part of the journey.</p>
                 </div>
                 
-                <!-- Newsletter Form - Temporarily Disabled -->
-                <form class="newsletter-form newsletter-form-disabled" id="newsletter-form" onsubmit="return false;">
-                    <div class="newsletter-input-group">
-                        <input 
-                            type="email" 
-                            id="newsletter-email" 
-                            name="email" 
-                            placeholder="Email address" 
-                            disabled
-                            class="newsletter-input"
-                        />
-                        <button type="button" class="newsletter-button newsletter-button-disabled" disabled>Subscribe</button>
-                    </div>
-                    <div class="newsletter-info">
-                        Newsletter registration will be available soon.
-                    </div>
-                </form>
+                <!-- Flodesk Newsletter Form -->
+                <div class="flodesk-form-wrapper">
+                    <div id="fd-form-69866e6515c468859b405032"></div>
+                    <script>
+                      window.fd('form', {
+                        formId: '69866e6515c468859b405032',
+                        containerEl: '#fd-form-69866e6515c468859b405032'
+                      });
+                    </script>
+                </div>
                 
                 <!-- Footer in Newsletter Section -->
                 <div class="section-footer">
