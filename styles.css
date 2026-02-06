@@ -1379,11 +1379,12 @@ body:has(.home-section) .navbar {
 }
 
 .portrait-card {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .portrait-image {
-    position: relative;
     width: 100%;
     aspect-ratio: 3 / 4;
     overflow: hidden;
@@ -1400,36 +1401,31 @@ body:has(.home-section) .navbar {
     transform: scale(1.05);
 }
 
-.portrait-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: var(--spacing-md) var(--spacing-sm);
-    background: linear-gradient(to top, rgba(14, 12, 10, 0.9) 0%, transparent 100%);
+.portrait-info {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-.portrait-image:hover .portrait-overlay {
-    opacity: 1;
+    gap: 8px;
 }
 
 .portrait-name {
     font-family: 'Work Sans', sans-serif;
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 400;
     color: var(--text-light);
 }
 
 .portrait-role {
     font-family: 'Work Sans', sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-light);
+}
+
+.portrait-desc {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-light);
 }
 
 @media (max-width: 768px) {
@@ -1439,30 +1435,28 @@ body:has(.home-section) .navbar {
     }
     
     .portrait-name {
-        font-size: 16px;
+        font-size: 14px;
     }
     
-    .portrait-role {
-        font-size: 12px;
+    .portrait-role,
+    .portrait-desc {
+        font-size: 11px;
     }
 }
 
 @media (max-width: 480px) {
     .team-portraits {
         grid-template-columns: 1fr;
-        gap: var(--spacing-md);
-    }
-    
-    .portrait-overlay {
-        opacity: 1;
+        gap: var(--spacing-lg);
     }
     
     .portrait-name {
-        font-size: 18px;
+        font-size: 16px;
     }
     
-    .portrait-role {
-        font-size: 14px;
+    .portrait-role,
+    .portrait-desc {
+        font-size: 12px;
     }
 }
 
