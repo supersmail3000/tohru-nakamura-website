@@ -736,20 +736,7 @@ body:has(.home-section) .navbar {
         min-height: 100vh;
     }
     
-    /* Fade-out gradient for mobile scrolling visibility */
-    .home-section::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 100px;
-        background: linear-gradient(to top, var(--bg-home) 0%, transparent 100%);
-        pointer-events: none;
-        z-index: 5;
-    }
-    
-    /* Gradient removed - was floating in mid-air on short pages */
+    /* Gradients removed - were floating in mid-air on pages */
     
     .home-tagline {
         position: relative;
