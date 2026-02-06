@@ -1364,7 +1364,6 @@ body:has(.home-section) .navbar {
 .portrait-card {
     display: flex;
     flex-direction: column;
-    gap: 8px;
 }
 
 .portrait-image {
@@ -1394,6 +1393,7 @@ body:has(.home-section) .navbar {
     font-size: 16px;
     font-weight: 400;
     color: var(--text-light);
+    margin-top: 16px;
     margin-bottom: 8px;
 }
 
