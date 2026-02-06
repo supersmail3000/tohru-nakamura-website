@@ -1369,6 +1369,103 @@ body:has(.home-section) .navbar {
     margin: 0;
 }
 
+/* Team Portrait Grid */
+.team-portraits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    width: 100%;
+    margin-bottom: var(--spacing-lg);
+}
+
+.portrait-card {
+    position: relative;
+}
+
+.portrait-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+}
+
+.portrait-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.portrait-image:hover img {
+    transform: scale(1.05);
+}
+
+.portrait-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-md) var(--spacing-sm);
+    background: linear-gradient(to top, rgba(14, 12, 10, 0.9) 0%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.portrait-image:hover .portrait-overlay {
+    opacity: 1;
+}
+
+.portrait-name {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-light);
+}
+
+.portrait-role {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 768px) {
+    .team-portraits {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-sm);
+    }
+    
+    .portrait-name {
+        font-size: 16px;
+    }
+    
+    .portrait-role {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .team-portraits {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .portrait-overlay {
+        opacity: 1;
+    }
+    
+    .portrait-name {
+        font-size: 18px;
+    }
+    
+    .portrait-role {
+        font-size: 14px;
+    }
+}
+
 .page-image {
     width: 100%;
     overflow: hidden;
