@@ -139,7 +139,7 @@ function handlePageNavigation() {
     if (!homeSection || !reserveSection) return;
     
     const hash = window.location.hash;
-    const isPageSection = hash && (hash === '#reserve' || hash === '#origin' || hash === '#gift' || hash === '#contact' || hash === '#journal' || hash === '#impressum' || hash === '#datenschutz');
+    const isPageSection = hash && (hash === '#reserve' || hash === '#origin' || hash === '#gift' || hash === '#contact' || hash === '#newsletter' || hash === '#impressum' || hash === '#datenschutz');
     
     // Use requestAnimationFrame for smoother transitions
     requestAnimationFrame(() => {
