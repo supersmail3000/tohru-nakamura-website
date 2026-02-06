@@ -1577,9 +1577,14 @@ body:has(.home-section) .navbar {
 /* Flodesk Form Wrapper */
 .flodesk-form-wrapper {
     width: 100%;
-    max-width: 600px;
+    max-width: 100%;
     opacity: 0;
     animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+}
+
+.flodesk-form-wrapper * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 /* Override Flodesk default styles for dark theme */
@@ -1590,6 +1595,7 @@ body:has(.home-section) .navbar {
 
 .flodesk-form-wrapper input[type="email"],
 .flodesk-form-wrapper input[type="text"] {
+    width: 100% !important;
     background-color: rgba(255, 255, 255, 0.1) !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     color: var(--text-light) !important;
@@ -1613,6 +1619,7 @@ body:has(.home-section) .navbar {
 
 .flodesk-form-wrapper button[type="submit"],
 .flodesk-form-wrapper input[type="submit"] {
+    width: 100% !important;
     background-color: #ffffff !important;
     color: #0e0c0a !important;
     font-family: 'Work Sans', sans-serif !important;
