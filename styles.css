@@ -546,10 +546,12 @@ body:has(.home-section) .navbar {
     opacity: 0;
     animation: fadeIn 0.8s ease 2s forwards;
     will-change: opacity;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.lgtdm-link:hover {
-    /* Kein opacity change auf dem Link selbst */
+.lgtdm-link:active {
+    transform: translate(-50%, -50%);
+    opacity: 1;
 }
 
 .lgtdm-link .lgtdm-logo {
