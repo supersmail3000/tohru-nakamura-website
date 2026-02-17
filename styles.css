@@ -13,7 +13,7 @@
     --text-dark: #333;
     --bg-light: #ffffff;
     --bg-dark: #0e0c0a;
-    --bg-section: #1a1714; /* Warm Charcoal - Harmonizes with Warm Black */
+    --bg-section: #0e0c0a; /* Warm Black - Same as homepage */
     --bg-home: #0e0c0a; /* Warm Black - Premium Fine Dining */
     --burgundy: #b8252c; /* Warm Crimson - Vibrant Fine Dining Red */
     --burgundy-hover: #d32f37; /* Warm Crimson Hover State */
@@ -1465,7 +1465,7 @@ body:has(.home-section) .navbar {
     width: 100%;
     overflow: hidden;
     border-radius: 0;
-    background-color: #1a1a1a;
+    background-color: var(--bg-home);
     position: relative;
     opacity: 0;
     transform: translate3d(0, 20px, 0);
