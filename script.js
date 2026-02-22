@@ -12,8 +12,8 @@ function updateDateTime() {
     const monthName = months[now.getMonth()];
     const day = now.getDate();
     
-    // Format: "Friday, January 23, Munich" (ohne Uhrzeit)
-    const dateTimeString = `${dayName}, ${monthName} ${day}, Munich`;
+    const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+    const dateTimeString = `${dayName}, ${monthName} ${day}, ${timeStr}, Munich`;
     
     const display = document.getElementById('datetime-display');
     if (display) {
@@ -33,7 +33,7 @@ function updateCountdown() {
     
     // Sunday (0) or Monday (1): closed all day
     if (day === 0 || day === 1) {
-        countdownDisplay.innerHTML = '<span>We open on Tuesday again</span>';
+        countdownDisplay.innerHTML = '<span>We open on Tuesday again.</span>';
         return;
     }
     
