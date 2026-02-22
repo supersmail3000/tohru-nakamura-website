@@ -33,7 +33,7 @@ function updateCountdown() {
     
     // Sunday (0) or Monday (1): closed all day
     if (day === 0 || day === 1) {
-        countdownDisplay.innerHTML = '<span>Restaurant Tohru is closed!</span>';
+        countdownDisplay.innerHTML = '<span>We open on Tuesday again</span>';
         return;
     }
     
