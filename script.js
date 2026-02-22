@@ -21,94 +21,37 @@ function updateDateTime() {
     }
 }
 
-// Countdown to opening (Dienstag-Samstag ab 19 Uhr bis 02 Uhr) mit Sekunden
 function updateCountdown() {
     const now = new Date();
-    const currentDay = now.getDay(); // 0=Sunday, 1=Monday, ..., 6=Saturday
-    const currentHour = now.getHours();
+    const day = now.getDay(); // 0=Sunday, 1=Monday, ..., 6=Saturday
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const time = hours + minutes / 60;
     
     const countdownDisplay = document.getElementById('countdown-display');
+    if (!countdownDisplay) return;
     
-    // SPECIAL: 23:00 - 02:00 Uhr = Cleaning time after service
-    const isJustClosed = (currentDay >= 2 && currentDay <= 6 && currentHour >= 23) || 
-                         (currentDay >= 3 && currentDay <= 6 && currentHour < 2) || 
-                         (currentDay === 0 && currentHour < 2);
-    
-    if (isJustClosed) {
-        countdownDisplay.innerHTML = '<span>Closed. Preparing for tomorrow.</span>';
+    // Sunday (0) or Monday (1): closed all day
+    if (day === 0 || day === 1) {
+        countdownDisplay.innerHTML = '<span>Restaurant Tohru is closed!</span>';
         return;
     }
     
-    // Prüfen ob Restaurant gerade geöffnet ist (19:00 - 23:00, Di-Sa)
-    let isOpen = false;
-    
-    if (currentDay >= 2 && currentDay <= 6 && currentHour >= 19 && currentHour < 23) {
-        // Dienstag-Samstag von 19 bis 23 Uhr
-        isOpen = true;
-    }
-    
-    if (isOpen) {
-        // Restaurant ist geöffnet: Zeige grünen Dot und "Open and cooking"
-        countdownDisplay.innerHTML = '<div class="open-status"><span class="open-dot"></span><span>Open and cooking.</span></div>';
-        return;
-    }
-    
-    // Restaurant ist geschlossen: Berechne nächste Öffnungszeit
-    let nextOpening = new Date(now);
-    let isClosedDay = false; // Sonntag oder Montag
-    
-    if (currentDay >= 2 && currentDay <= 6) {
-        // Dienstag bis Samstag
-        if (currentHour < 19) {
-            if (currentHour >= 2) {
-                // Nach 2 Uhr und vor 19 Uhr -> öffnet heute um 19 Uhr
-                nextOpening.setHours(19, 0, 0, 0);
-            } else {
-                // Zwischen 0 und 2 Uhr, aber nicht während Öffnungszeit
-                // Das sollte nicht vorkommen bei korrekter isOpen Logik
-                nextOpening.setHours(19, 0, 0, 0);
-            }
-        } else {
-            // Sollte nicht hier sein wenn isOpen korrekt ist
-            if (currentDay === 6) {
-                // Samstag nach 2 Uhr morgens -> nächster Dienstag
-                const daysUntilTuesday = 3;
-                nextOpening.setDate(nextOpening.getDate() + daysUntilTuesday);
-                isClosedDay = true;
-            } else {
-                nextOpening.setDate(nextOpening.getDate() + 1);
-            }
-            nextOpening.setHours(19, 0, 0, 0);
-        }
-    } else if (currentDay === 0) {
-        // Sonntag
-        if (currentHour >= 2) {
-            // Nach 2 Uhr -> nächster Dienstag
-            nextOpening.setDate(nextOpening.getDate() + 2);
-            nextOpening.setHours(19, 0, 0, 0);
-            isClosedDay = true;
-        }
-    } else {
-        // Montag -> morgen (Dienstag)
-        nextOpening.setDate(nextOpening.getDate() + 1);
-        nextOpening.setHours(19, 0, 0, 0);
-        isClosedDay = true;
-    }
-    
-    // Calculate difference mit Sekunden
-    const diff = nextOpening - now;
-    const hoursLeft = Math.floor(diff / (1000 * 60 * 60));
-    const minutesLeft = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const secondsLeft = Math.floor((diff % (1000 * 60)) / 1000);
-    
-    if (countdownDisplay) {
-        if (isClosedDay) {
-            // Sonntag oder Montag
-            countdownDisplay.innerHTML = `Opens on Tuesday in ${hoursLeft} hours, ${minutesLeft} minutes, ${secondsLeft} seconds.`;
-        } else {
-            // Dienstag-Samstag (geschlossen vor 19 Uhr)
-            countdownDisplay.innerHTML = `Opens in ${hoursLeft} hours, ${minutesLeft} minutes, ${secondsLeft} seconds.`;
-        }
+    // Tuesday (2) - Saturday (6): schedule based on time
+    if (time >= 19 && time < 23) {
+        countdownDisplay.innerHTML = '<div class="open-status"><span class="open-dot"></span><span>The restaurant is in Action!</span></div>';
+    } else if (time >= 1 && time < 9) {
+        countdownDisplay.innerHTML = '<span>Sleeping Time!</span>';
+    } else if (time >= 9 && time < 13) {
+        countdownDisplay.innerHTML = '<span>Morning Sports!</span>';
+    } else if (time >= 13 && time < 18) {
+        countdownDisplay.innerHTML = '<span>We are getting ready for Dinner Service!</span>';
+    } else if (time >= 18 && time < 18.75) {
+        countdownDisplay.innerHTML = '<span>Staff Food is served!</span>';
+    } else if (time >= 18.75 && time < 19) {
+        countdownDisplay.innerHTML = '<span>Service Meeting!</span>';
+    } else if (time >= 23 || time < 1) {
+        countdownDisplay.innerHTML = '<span>Polishing the Glasses!</span>';
     }
 }
 
@@ -411,57 +354,57 @@ if (document.readyState === 'loading') {
 
 // ===== NEWSLETTER FORM HANDLER =====
 (function() {
-    var form = document.getElementById('newsletter-form');
-    if (!form) return;
-    
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
+    function setupNewsletterForm(form) {
+        if (!form) return;
         
-        var emailInput = document.getElementById('newsletter-email');
-        var messageEl = document.getElementById('newsletter-message');
-        var submitBtn = form.querySelector('.newsletter-button');
-        
-        var email = emailInput.value.trim();
-        
-        // Basic email validation
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            messageEl.textContent = 'Please enter a valid email address.';
-            messageEl.className = 'newsletter-info newsletter-error';
-            return;
-        }
-        
-        // Disable button while submitting
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
-        messageEl.textContent = '';
-        messageEl.className = 'newsletter-info';
-        
-        fetch('/api/subscribe', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email: email })
-        })
-        .then(function(response) { return response.json(); })
-        .then(function(data) {
-            if (data.success) {
-                messageEl.textContent = 'Welcome to our Circle \u2013 we look forward to sharing the journey with you.';
-                messageEl.className = 'newsletter-info newsletter-success';
-                emailInput.value = '';
-            } else {
-                messageEl.textContent = data.error || 'Something went wrong. Please try again.';
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            var emailInput = form.querySelector('.newsletter-input');
+            var messageEl = form.querySelector('.newsletter-info');
+            var submitBtn = form.querySelector('.newsletter-button');
+            
+            var email = emailInput.value.trim();
+            
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                messageEl.textContent = 'Please enter a valid email address.';
                 messageEl.className = 'newsletter-info newsletter-error';
+                return;
             }
-        })
-        .catch(function() {
-            messageEl.textContent = 'Something went wrong. Please try again.';
-            messageEl.className = 'newsletter-info newsletter-error';
-        })
-        .finally(function() {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Subscribe';
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            messageEl.textContent = '';
+            messageEl.className = 'newsletter-info';
+            
+            fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email })
+            })
+            .then(function(response) { return response.json(); })
+            .then(function(data) {
+                if (data.success) {
+                    messageEl.textContent = 'Welcome to our Circle \u2013 we look forward to sharing the journey with you.';
+                    messageEl.className = 'newsletter-info newsletter-success';
+                    emailInput.value = '';
+                } else {
+                    messageEl.textContent = data.error || 'Something went wrong. Please try again.';
+                    messageEl.className = 'newsletter-info newsletter-error';
+                }
+            })
+            .catch(function() {
+                messageEl.textContent = 'Something went wrong. Please try again.';
+                messageEl.className = 'newsletter-info newsletter-error';
+            })
+            .finally(function() {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Subscribe';
+            });
         });
-    });
+    }
+    
+    var forms = document.querySelectorAll('.newsletter-form');
+    forms.forEach(setupNewsletterForm);
 })();

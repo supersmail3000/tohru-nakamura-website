@@ -38,12 +38,12 @@
       "@type": "Restaurant",
       "name": "Tohru in der Schreiberei",
       "image": "https://tohru-nakamura.de/images/hero-image.png",
-      "description": "A Michelin-starred journey of flavor, craft, and seasonality in the heart of Munich. Chef Tohru Nakamura creates a unique fusion of Japanese, German and French cuisines.",
+      "description": "A Michelin-starred journey of flavor, craft, and seasonality in the heart of Munich. Chef Tohru Nakamura creates a unique blend of Japanese, German and French cuisines.",
       "@id": "https://tohru-nakamura.de",
       "url": "https://tohru-nakamura.de",
       "telephone": "+49-89-21529172",
       "priceRange": "€€€€",
-      "servesCuisine": ["Japanese", "German", "French", "Fine Dining", "Fusion"],
+      "servesCuisine": ["Japanese", "German", "French", "Fine Dining"],
       "acceptsReservations": true,
       "starRating": {
         "@type": "Rating",
@@ -115,7 +115,7 @@
             
             <div class="reserve-content">
                 <div class="reserve-intro">
-                    <p>A unique fusion of Japanese, German and French cuisines, reflecting Chef Tohru Nakamura's diverse heritage.</p>
+                    <p>A unique blend of Japanese, German and French cuisines, reflecting Chef Tohru Nakamura's diverse heritage.</p>
                     <p>We welcome only a limited number of guests each night, to ensure an intimate and unforgettable experience.</p>
                 </div>
                 
@@ -130,13 +130,36 @@
                 </div>
                 
                 <div class="reserve-section-block">
-                    <h2>Cooking with Tohru – Have fun together!</h2>
+                    <h2>Events</h2>
                     <div class="reserve-text">
                         <p>Look forward to a day with us, where we will peel, cut, roast, steam, grill, prepare, taste wine and of course enjoy together.</p>
                         <p>11:30 until 18:30 | €495 per Person</p>
                         <p><strong>Spring</strong><br>Sunday 03. May 2026<br>Sunday 17. May 2026</p>
                         <p><strong>Summer</strong><br>Sunday 12. July 2026<br>Sunday 26. July 2026<br>Sunday 23. August 2026</p>
                     </div>
+                    <a href="#ft-open" class="reserve-button">Book your experience</a>
+                </div>
+                
+                <div class="reserve-section-block">
+                    <h2>Don't miss any upcoming events</h2>
+                    <div class="reserve-text">
+                        <p>The Tohru Newsletter shares stories from behind the scenes, seasonal inspirations and early access to upcoming events.</p>
+                        <p>Stay connected – receive our newsletter and be part of the journey.</p>
+                    </div>
+                    <form class="newsletter-form" id="reserve-newsletter-form">
+                        <div class="newsletter-input-group">
+                            <input 
+                                type="email" 
+                                name="email" 
+                                placeholder="Email address" 
+                                required
+                                class="newsletter-input"
+                                autocomplete="email"
+                            />
+                            <button type="submit" class="newsletter-button">Subscribe</button>
+                        </div>
+                        <div class="newsletter-info reserve-newsletter-message"></div>
+                    </form>
                 </div>
                 
                 <div class="reserve-section-block">
@@ -159,14 +182,14 @@
                         <p>Reservations are released by us for a certain period during the year. Approximately four months in advance.</p>
                         <p>Due to varying table capacities, it is possible that tables for two people are no longer available, but tables for four people can still be booked. We thank you for your flexibility and ask for your understanding that our general conditions do not allow for any other arrangement.</p>
                         <p>Please indicate any food intolerances or allergies when making your reservation.</p>
-                        <p>If you cancel less than 48 hours prior to your reserved date, we reserve the right to charge a cancellation fee equal to the price of the menu. This also applies to no-shows despite a confirmed reservation.</p>
+                        <p>If you cancel less than 48 hours prior to your reserved date, we reserve the right to charge a cancellation fee of 450€ per person. This also applies to no-shows despite a confirmed reservation.</p>
                     </div>
                 </div>
                 
                 <div class="reserve-section-block">
                     <h2>Disabled people</h2>
                     <div class="reserve-text">
-                        <p>Please note that our restaurant is located on the first floor of a heritage listed building. The restaurant can only be accessed via stairs.</p>
+                        <p>Please note that our restaurant is located on the first floor of a heritage listed building.</p>
                         <p>Please inform us in advance if this is not possible for you and/or your guests.</p>
                     </div>
                 </div>
@@ -184,8 +207,6 @@
                     <div class="reserve-text">
                         <p>The restaurant – Tohru*** in der Schreiberei will be taking a creative break during the following periods:</p>
                         <ul class="closure-dates">
-                            <li>December 22–26, 2025</li>
-                            <li>January 1, 2026</li>
                             <li>March 9–16, 2026</li>
                             <li>May 25–June 8, 2026</li>
                             <li>August 31–September 14, 2026</li>
@@ -306,6 +327,11 @@
                 <div class="contact-section-block">
                     <h2>Address</h2>
                     <a href="https://maps.google.com/?q=Burgstraße+5,+80331+München" target="_blank" class="contact-link">Burgstraße 5, 80331 München</a>
+                </div>
+                
+                <div class="contact-section-block">
+                    <h2>Delivery address for suppliers</h2>
+                    <a href="https://maps.google.com/?q=Dienerstraße+20,+80331+München" target="_blank" class="contact-link">Dienerstraße 20, 80331 München</a>
                 </div>
                 
                 <div class="contact-section-block">
@@ -672,8 +698,8 @@
                 <div class="hero-images-container" role="region" aria-label="Restaurant image gallery">
                     <img src="images/hero-image.png" alt="Tohru Restaurant Fine Dining" class="hero-image-slide active" data-slide="0" />
                     <img src="images/hero-image-1.png" alt="Michelin Star Restaurant Interior" class="hero-image-slide" data-slide="1" />
-                    <img src="images/hero-image-2.png" alt="Japanese German Fusion Cuisine" class="hero-image-slide" data-slide="2" />
-                    <img src="images/hero-image-3.png" alt="Fine Dining Munich Experience" class="hero-image-slide" data-slide="3" />
+                    <img src="images/hero-image-2.png" alt="Japanese German Fine Dining" class="hero-image-slide" data-slide="2" />
+                    <img src="images/hero-image-3.png" alt="Carabinero with Yuzukosho" class="hero-image-slide" data-slide="3" />
                     <img src="images/hero-image-4.png" alt="Chef's Table Premium Dining" class="hero-image-slide" data-slide="4" />
                 </div>
                 
