@@ -12,7 +12,7 @@ function updateDateTime() {
     const monthName = months[now.getMonth()];
     const day = now.getDate();
     
-    const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+    const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0') + ':' + now.getSeconds().toString().padStart(2, '0');
     const dateTimeString = `${dayName}, ${monthName} ${day}, ${timeStr}, Munich`;
     
     const display = document.getElementById('datetime-display');
