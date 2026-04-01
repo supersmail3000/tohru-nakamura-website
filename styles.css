@@ -1407,8 +1407,8 @@ body:has(.home-section) .navbar {
     font-size: 16px;
     font-weight: 400;
     color: var(--text-light);
-    margin-top: 16px;
-    margin-bottom: 8px;
+    margin-top: 8px;
+    margin-bottom: 4px;
 }
 
 .portrait-role {
