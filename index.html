@@ -119,7 +119,9 @@
                     <p>We welcome only a limited number of guests each night, to ensure an intimate and unforgettable experience.</p>
                 </div>
                 
-                <a href="#ft-open" class="reserve-button">Reserve a table</a>
+                <div class="opentable-widget">
+                    <script type='text/javascript' src='//www.opentable.de/widget/reservation/loader?rid=216039&type=button&theme=standard&color=8&dark=false&iframe=true&domain=de&lang=de-DE&newtab=false&ot_source=Restaurant%20website&font=tahoma&ot_logo=standard&primary_color=ffffff&primary_font_color=333333&button_color=ffffff&button_font_color=333333&cfe=true'></script>
+                </div>
                 
                 <div class="reserve-section-block">
                     <h2>The Menu</h2>
@@ -208,7 +210,9 @@
                         <p><strong>Summer</strong><br>Sunday 12. July 2026<br>Sunday 26. July 2026<br>Sunday 23. August 2026</p>
                     </div>
                     
-                    <a href="#ft-open" class="reserve-button">Book your experience</a>
+                    <div class="opentable-widget">
+                        <script type='text/javascript' src='//www.opentable.de/widget/reservation/loader?rid=216039&type=button&theme=standard&color=8&dark=false&iframe=true&domain=de&lang=de-DE&newtab=false&ot_source=Restaurant%20website&font=tahoma&ot_logo=standard&primary_color=ffffff&primary_font_color=333333&button_color=ffffff&button_font_color=333333&cfe=true'></script>
+                    </div>
                 </div>
                 
                 <div class="page-section-block">
@@ -338,7 +342,9 @@
                     <p>Our Gift Vouchers are valid for the dining experience or upcoming events at our restaurant.</p>
                 </div>
                 
-                <a href="#ft-openShop-vouchers" class="page-button">Purchase Gift Voucher</a>
+                <div class="opentable-widget">
+                    <script type='text/javascript' src='//www.opentable.de/widget/reservation/loader?rid=216039&type=button&theme=standard&color=8&dark=false&iframe=true&domain=de&lang=de-DE&newtab=false&ot_source=Restaurant%20website&font=tahoma&ot_logo=standard&primary_color=ffffff&primary_font_color=333333&button_color=ffffff&button_font_color=333333&cfe=true'></script>
+                </div>
             </div>
         </div>
     </section>
@@ -639,15 +645,15 @@
                 </div>
 
                 <div class="page-text">
-                    <h2>6. Reservation System (Zenchef/Formitable)</h2>
+                    <h2>6. Reservation System (OpenTable)</h2>
                     <p>
-                        On this website we use the reservation system of Zenchef/Formitable. The provider is Formitable B.V., Gebouw Stationsplein 45 A4.004, 3013 AK Rotterdam, Netherlands.
+                        On this website we use the reservation system of OpenTable. The provider is OpenTable, Inc., 1 Montgomery St, Suite 500, San Francisco, CA 94104, USA.
                     </p>
                     <p>
-                        When you make a reservation via our widget, your entered data (name, email address, phone number, date, time, number of people) will be transmitted to Zenchef/Formitable for processing the reservation and stored there. Data processing is based on Art. 6 para. 1 lit. b GDPR to fulfill the reservation contract.
+                        When you make a reservation via our widget, your entered data (name, email address, phone number, date, time, number of people) will be transmitted to OpenTable for processing the reservation and stored there. Data processing is based on Art. 6 para. 1 lit. b GDPR to fulfill the reservation contract.
                     </p>
                     <p>
-                        Further information on the handling of user data can be found in the privacy policy of Zenchef/Formitable at: <a href="https://www.formitable.com/privacy" target="_blank" rel="noopener noreferrer" class="contact-link">formitable.com/privacy</a>
+                        Further information on the handling of user data can be found in the privacy policy of OpenTable at: <a href="https://www.opentable.de/legal/privacy-policy" target="_blank" rel="noopener noreferrer" class="contact-link">opentable.de/legal/privacy-policy</a>
                     </p>
                 </div>
 
@@ -772,32 +778,7 @@
 
     <script src="script.js"></script>
 
-    <!-- Zenchef/Formitable Widget Integration -->
-    <script>
-    (function (d, s, id, h) {
-        var ftjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        var js = d.createElement(s);
-        js.id = id;
-        js.src = "https://cdn.formitable.com/sdk/v1/ft.sdk.min.js";
-        h && (js.onload = h);
-        ftjs.parentNode.insertBefore(js, ftjs);
-    }(document, 'script', 'formitable-sdk', function () {
-        FT.load('analytics');
-    }));
-    </script>
-
-    <!-- Zenchef Widget Container -->
-    <div class="ft-widget-b2"
-         data-restaurant="0b624972"
-         data-open="false"
-         data-open-mobile="false"
-         data-color="#0e0c0a"
-         data-language="de"
-         data-tag="tohru-website"
-         data-toolbar="false"
-         data-toolbar-mobile="false">
-    </div>
+    <!-- OpenTable Widget Integration handled inline -->
 
     <!-- Footer - Hidden, using home-footer and section-footer instead -->
     <!-- <footer class="footer">
