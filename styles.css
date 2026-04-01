@@ -625,6 +625,10 @@ body:has(.home-section) .navbar {
     animation-delay: 1.6s;
 }
 
+.home-navigation .nav-item:nth-child(6) {
+    animation-delay: 1.7s;
+}
+
 .home-navigation .nav-item::before {
     content: '';
     position: absolute;
