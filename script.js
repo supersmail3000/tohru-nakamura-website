@@ -33,25 +33,25 @@ function updateCountdown() {
     
     // Sunday (0) or Monday (1): closed all day
     if (day === 0 || day === 1) {
-        countdownDisplay.innerHTML = '<span>We open on Tuesday again.</span>';
+        countdownDisplay.innerHTML = '<span>We reopen on Tuesday evening.</span>';
         return;
     }
-    
+
     // Tuesday (2) - Saturday (6): schedule based on time
     if (time >= 19 && time < 23) {
-        countdownDisplay.innerHTML = '<div class="open-status"><span class="open-dot"></span><span>The restaurant is in Action!</span></div>';
+        countdownDisplay.innerHTML = '<div class="open-status"><span class="open-dot"></span><span>Dinner service is underway.</span></div>';
     } else if (time >= 1 && time < 9) {
-        countdownDisplay.innerHTML = '<span>Sleeping Time!</span>';
+        countdownDisplay.innerHTML = '<span>The kitchen is resting.</span>';
     } else if (time >= 9 && time < 13) {
-        countdownDisplay.innerHTML = '<span>Morning Sports!</span>';
+        countdownDisplay.innerHTML = '<span>Sourcing the finest ingredients.</span>';
     } else if (time >= 13 && time < 18) {
-        countdownDisplay.innerHTML = '<span>We are getting ready for Dinner Service!</span>';
+        countdownDisplay.innerHTML = '<span>Preparing for tonight\'s service.</span>';
     } else if (time >= 18 && time < 18.75) {
-        countdownDisplay.innerHTML = '<span>Staff Food is served!</span>';
+        countdownDisplay.innerHTML = '<span>The team is gathering for family meal.</span>';
     } else if (time >= 18.75 && time < 19) {
-        countdownDisplay.innerHTML = '<span>Service Meeting!</span>';
+        countdownDisplay.innerHTML = '<span>Final preparations before service.</span>';
     } else if (time >= 23 || time < 1) {
-        countdownDisplay.innerHTML = '<span>Polishing the Glasses!</span>';
+        countdownDisplay.innerHTML = '<span>Winding down for the evening.</span>';
     }
 }
 
