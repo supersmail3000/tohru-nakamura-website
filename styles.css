@@ -354,12 +354,17 @@ body:has(.home-section) .navbar {
     color: #999999;
     font-size: 12px;
     animation-delay: 0.8s;
+    font-variant-numeric: tabular-nums;
+    min-height: 1.4em;
+    line-height: 1.4;
 }
 
 .home-tagline .countdown {
     margin-top: 4px;
     color: #F2F2F2;
     animation-delay: 1s;
+    min-height: 1.6em;
+    line-height: 1.6;
 }
 
 .home-tagline .open-status {
@@ -370,6 +375,8 @@ body:has(.home-section) .navbar {
     color: #F2F2F2;
     justify-content: center;
     opacity: 1;
+    min-height: 1.6em;
+    line-height: 1.6;
 }
 
 /* Location Time */
