@@ -12,9 +12,9 @@
     --text-light: #faf8f6; /* Warm White - Soft & Luxurious */
     --text-dark: #ffffff;
     --bg-light: #ffffff;
-    --bg-dark: #ccc6b2;
-    --bg-section: #ccc6b2; /* Warm Beige - Schreiberei */
-    --bg-home: #ccc6b2; /* Warm Beige - Matching Verteilerseite */
+    --bg-dark: #c6b47b;
+    --bg-section: #c6b47b; /* Warm Gold - Bar Tatar */
+    --bg-home: #c6b47b; /* Warm Gold - Bar Tatar */
     --burgundy: #1D1D1B; /* Dark, matching Bar Tatar's card */
     --burgundy-hover: #2a2a28; /* Darker on hover */
     --transition: all 0.3s ease;
@@ -330,16 +330,33 @@ body:has(.home-section) .navbar {
     font-weight: 300;
     letter-spacing: 1px;
     text-transform: uppercase;
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards;
 }
 
-.countdown-display {
-    font-size: 0.85rem;
-    font-weight: 300;
-    letter-spacing: 0.5px;
-    margin-top: 8px;
-    min-height: 1.4em;
+.home-tagline #datetime-display {
+    animation-delay: 0.8s;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
     font-variant-numeric: tabular-nums;
+    min-height: 1.4em;
+    line-height: 1.4;
     text-transform: none;
+    letter-spacing: 0.3px;
+}
+
+.home-tagline #countdown-display {
+    animation-delay: 1s;
+}
+
+.home-tagline .countdown {
+    margin-top: 4px;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 300;
+    text-transform: none;
+    letter-spacing: 0.3px;
+    min-height: 1.6em;
 }
 
 .open-status {
@@ -362,75 +379,48 @@ body:has(.home-section) .navbar {
     50% { opacity: 0.4; }
 }
 
-.home-tagline .hero-headline {
-    font-size: 2rem;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    margin-top: 8px;
-    margin-bottom: 8px;
-}
-
-.home-tagline .hero-subline {
-    font-size: 0.95rem;
-    font-weight: 300;
-    letter-spacing: 0.5px;
-    margin-top: 8px;
-}
-
-/* Home Hero Image Area */
+/* Home Hero Image Area — same structure as Tohru */
 .home-hero-image {
     position: absolute;
-    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0);
     width: auto;
-    height: auto;
-    z-index: 5;
-    opacity: 0;
-    animation: heroReveal 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1s forwards;
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-}
-
-.hero-images-container {
-    position: relative;
-    width: calc(50vh * 120 / 140);
     height: 50vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
-/* Legacy hero-logo (kept for compatibility) */
+.hero-images-container {
+    position: relative;
+    width: auto;
+    height: 50vh;
+    aspect-ratio: 120 / 140;
+    margin: 0 auto;
+    overflow: hidden;
+    clip-path: url(#heroClipPath);
+    -webkit-clip-path: url(#heroClipPath);
+}
+
 .hero-logo {
-    display: none;
-}
-
-/* Arch Clip Path */
-.arch-clipped {
-    clip-path: url(#archClipPath);
-    -webkit-clip-path: url(#archClipPath);
-}
-
-/* Bar Tatar Logo overlaying hero (centered in arch) */
-.hero-logo-container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 20;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    animation: fadeIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards;
-    pointer-events: none;
-}
-
-.hero-bt-logo {
-    width: 80px;
+    width: calc(100% / 1.618);
     height: auto;
-    filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+    max-width: 90%;
+    z-index: 20;
+    opacity: 0;
+    animation: logoFadeIn 1s ease 1.5s forwards;
+    pointer-events: none;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
 }
 
 /* Hero Image Slider */
@@ -705,22 +695,6 @@ body:has(.home-section) .navbar {
 }
 
 @media (max-width: 480px) {
-    .lgtdm-link {
-        position: relative;
-        left: auto;
-        top: auto;
-        transform: none;
-        display: block;
-        width: 100px;
-        margin: var(--spacing-xl) auto 0 auto;
-        order: 4;
-        will-change: auto;
-    }
-
-    .lgtdm-link .lgtdm-logo {
-        width: 100px;
-    }
-
     .home-section {
         display: flex;
         flex-direction: column;
@@ -749,17 +723,8 @@ body:has(.home-section) .navbar {
         letter-spacing: 0.5px;
     }
 
-    .hero-logo-container {
-        position: relative;
-        top: auto;
-        left: auto;
-        transform: none;
-        order: 2;
-        margin-top: var(--spacing-lg);
-    }
-
-    .hero-bt-logo {
-        width: 60px;
+    .home-tagline .countdown {
+        font-size: 0.9rem;
     }
 
     .home-hero-image {
@@ -767,11 +732,11 @@ body:has(.home-section) .navbar {
         top: auto;
         left: auto;
         transform: none;
-        margin-top: var(--spacing-sm);
+        margin-top: var(--spacing-lg);
         width: 80%;
         max-width: 300px;
         height: auto;
-        order: 3;
+        order: 2;
         padding: 0;
     }
 
@@ -782,14 +747,8 @@ body:has(.home-section) .navbar {
         aspect-ratio: 120 / 140;
     }
 
-    .michelin-stars {
-        top: calc(50% + 82px);
-        gap: var(--spacing-sm);
-    }
-
-    .michelin-star {
-        width: 14px;
-        height: 14px;
+    .hero-logo {
+        width: 60%;
     }
 
     .home-navigation {
@@ -802,7 +761,7 @@ body:has(.home-section) .navbar {
         gap: var(--spacing-md);
         flex-direction: column;
         align-items: center;
-        order: 4;
+        order: 3;
     }
 
     .home-navigation .nav-item {

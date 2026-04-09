@@ -237,7 +237,7 @@ body {
   .card {
     width: 100%;
     max-width: none;
-    height: calc((100dvh - 140px) / 2);
+    height: calc((100dvh - 180px) / 2);
     min-height: 120px;
   }
 
@@ -266,11 +266,14 @@ body {
   }
 
   .footer {
-    bottom: 24px;
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    right: 0;
   }
 
   .tagline {
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 
