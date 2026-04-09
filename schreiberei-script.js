@@ -115,6 +115,44 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// ===== COUNTDOWN / STATUS DISPLAY =====
+function updateCountdown() {
+    const now = new Date();
+    const day = now.getDay(); // 0=Sun, 1=Mon, 2=Tue...6=Sat
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const time = hours + minutes / 60;
+
+    const countdownDisplay = document.getElementById('countdown-display');
+    if (!countdownDisplay) return;
+
+    // Sunday (0) or Monday (1): closed all day
+    if (day === 0 || day === 1) {
+        countdownDisplay.innerHTML = '<span>Ab Dienstag wieder für euch da.</span>';
+        return;
+    }
+
+    // Tuesday (2) - Saturday (6): schedule based on time
+    if (time >= 18 && time < 23.5) {
+        countdownDisplay.innerHTML = '<div class="open-status"><span class="open-dot"></span><span>Die Bar ist geöffnet.</span></div>';
+    } else if (time >= 1 && time < 10) {
+        countdownDisplay.innerHTML = '<span>Die Bar schläft noch.</span>';
+    } else if (time >= 10 && time < 14) {
+        countdownDisplay.innerHTML = '<span>Frische Zutaten werden ausgewählt.</span>';
+    } else if (time >= 14 && time < 17) {
+        countdownDisplay.innerHTML = '<span>Die Vorbereitungen laufen.</span>';
+    } else if (time >= 17 && time < 17.75) {
+        countdownDisplay.innerHTML = '<span>Das Team kommt zusammen.</span>';
+    } else if (time >= 17.75 && time < 18) {
+        countdownDisplay.innerHTML = '<span>Gleich geht es los.</span>';
+    } else if (time >= 23.5 || time < 1) {
+        countdownDisplay.innerHTML = '<span>Der Abend klingt aus.</span>';
+    }
+}
+
+updateCountdown();
+setInterval(updateCountdown, 60000);
+
 // Image Loading Handler
 const pageImages = document.querySelectorAll('.page-image img');
 pageImages.forEach(img => {

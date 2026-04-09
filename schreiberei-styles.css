@@ -10,11 +10,11 @@
     --secondary-color: #c6b47b;
     --accent-color: #8b7355;
     --text-light: #faf8f6; /* Warm White - Soft & Luxurious */
-    --text-dark: #333;
+    --text-dark: #ffffff;
     --bg-light: #ffffff;
-    --bg-dark: #0e0c0a;
-    --bg-section: #0e0c0a; /* Warm Black - Same as homepage */
-    --bg-home: #0e0c0a; /* Warm Black - Premium Fine Dining */
+    --bg-dark: #ccc6b2;
+    --bg-section: #ccc6b2; /* Warm Beige - Schreiberei */
+    --bg-home: #ccc6b2; /* Warm Beige - Matching Verteilerseite */
     --burgundy: #1D1D1B; /* Dark, matching Bar Tatar's card */
     --burgundy-hover: #2a2a28; /* Darker on hover */
     --transition: all 0.3s ease;
@@ -332,6 +332,36 @@ body:has(.home-section) .navbar {
     text-transform: uppercase;
 }
 
+.countdown-display {
+    font-size: 0.85rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    margin-top: 8px;
+    min-height: 1.4em;
+    font-variant-numeric: tabular-nums;
+    text-transform: none;
+}
+
+.open-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.open-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #4caf50;
+    display: inline-block;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
 .home-tagline .hero-headline {
     font-size: 2rem;
     font-weight: 400;
@@ -371,13 +401,36 @@ body:has(.home-section) .navbar {
     justify-content: center;
 }
 
+/* Legacy hero-logo (kept for compatibility) */
 .hero-logo {
-    width: calc(100% / 1.618);
+    display: none;
+}
+
+/* Arch Clip Path */
+.arch-clipped {
+    clip-path: url(#archClipPath);
+    -webkit-clip-path: url(#archClipPath);
+}
+
+/* Bar Tatar Logo overlaying hero (centered in arch) */
+.hero-logo-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.2s forwards;
+    pointer-events: none;
+}
+
+.hero-bt-logo {
+    width: 80px;
     height: auto;
-    max-height: 100%;
-    object-fit: contain;
-    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(96%) contrast(92%);
-    will-change: opacity;
+    filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
 }
 
 /* Hero Image Slider */
@@ -696,16 +749,29 @@ body:has(.home-section) .navbar {
         letter-spacing: 0.5px;
     }
 
+    .hero-logo-container {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        order: 2;
+        margin-top: var(--spacing-lg);
+    }
+
+    .hero-bt-logo {
+        width: 60px;
+    }
+
     .home-hero-image {
         position: relative;
         top: auto;
         left: auto;
         transform: none;
-        margin-top: var(--spacing-lg);
+        margin-top: var(--spacing-sm);
         width: 80%;
         max-width: 300px;
         height: auto;
-        order: 2;
+        order: 3;
         padding: 0;
     }
 
@@ -714,11 +780,6 @@ body:has(.home-section) .navbar {
         width: 100%;
         height: auto;
         aspect-ratio: 120 / 140;
-    }
-
-    .hero-logo {
-        width: calc(100% / 1.618);
-        max-width: 80%;
     }
 
     .michelin-stars {
@@ -741,7 +802,7 @@ body:has(.home-section) .navbar {
         gap: var(--spacing-md);
         flex-direction: column;
         align-items: center;
-        order: 3;
+        order: 4;
     }
 
     .home-navigation .nav-item {
@@ -859,7 +920,7 @@ body:has(.home-section) .navbar {
 .back-button:hover {
     opacity: 1;
     transform: translateX(-4px);
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .back-button:active {
@@ -932,8 +993,8 @@ body:has(.home-section) .navbar {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #ffffff;
-    color: #0e0c0a;
+    background-color: #1D1D1B;
+    color: #ffffff;
     font-family: 'Work Sans', sans-serif;
     font-size: 16px;
     font-weight: 400;
@@ -963,9 +1024,9 @@ body:has(.home-section) .navbar {
 }
 
 .reserve-button:hover {
-    background-color: #f5f5f5;
+    background-color: #2a2a28;
     transform: translate3d(0, -2px, 0);
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .reserve-button:hover::before {
@@ -1029,7 +1090,7 @@ body:has(.home-section) .navbar {
 
 .closure-dates li {
     padding: 0.5rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     font-family: 'Work Sans', sans-serif;
     font-size: 16px;
     font-weight: 300;
@@ -1183,7 +1244,7 @@ body:has(.home-section) .navbar {
     flex-direction: column;
     gap: var(--spacing-lg);
     flex: 1;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .page-text {
@@ -1394,7 +1455,8 @@ body:has(.home-section) .navbar {
     width: 100%;
     overflow: hidden;
     border-radius: 0;
-    background-color: var(--bg-home);
+    background-color: transparent;
+    aspect-ratio: 406 / 480;
     position: relative;
     opacity: 0;
     transform: translate3d(0, 20px, 0);
@@ -1404,8 +1466,9 @@ body:has(.home-section) .navbar {
 
 .page-image img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
+    object-fit: cover;
     opacity: 0;
     transition: opacity 0.6s ease;
 }
@@ -1609,9 +1672,9 @@ body:has(.home-section) .navbar {
     font-family: 'Work Sans', sans-serif;
     font-size: 16px;
     font-weight: 300;
-    color: var(--text-light);
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 0;
     outline: none;
     transition: all 0.3s ease;
@@ -1622,8 +1685,8 @@ body:has(.home-section) .navbar {
 }
 
 .newsletter-input:focus {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(0, 0, 0, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
 }
 
 .newsletter-input:disabled {
@@ -1636,8 +1699,8 @@ body:has(.home-section) .navbar {
     font-family: 'Work Sans', sans-serif;
     font-size: 16px;
     font-weight: 400;
-    color: #0e0c0a;
-    background-color: #ffffff;
+    color: #ffffff;
+    background-color: #1D1D1B;
     border: none;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
@@ -1645,9 +1708,9 @@ body:has(.home-section) .navbar {
 }
 
 .newsletter-button:hover {
-    background-color: #f5f5f5;
+    background-color: #2a2a28;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .newsletter-button:disabled {
@@ -1887,7 +1950,7 @@ body:has(.home-section) .navbar {
 .placeholder-image {
     width: 100%;
     min-height: 400px;
-    background-color: #1a1a1a;
+    background-color: rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;

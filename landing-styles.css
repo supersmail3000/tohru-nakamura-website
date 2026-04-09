@@ -229,16 +229,16 @@ body {
 
   .restaurants {
     flex-direction: column;
-    gap: 40px;
-    padding: 0 40px;
+    gap: 16px;
+    padding: 0 24px;
     width: 100%;
   }
 
   .card {
     width: 100%;
     max-width: none;
-    height: calc((100vh - 180px) / 2);
-    min-height: 160px;
+    height: calc((100dvh - 140px) / 2);
+    min-height: 120px;
   }
 
   .card__logo--bt {
