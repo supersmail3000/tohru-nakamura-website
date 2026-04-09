@@ -1,0 +1,331 @@
+/* ========================================
+   Schreiberei - Landing Page
+   Viewport-locked, no scroll
+   ======================================== */
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Prevent scroll */
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #ccc6b2;
+  color: #101010;
+}
+
+/* ========================================
+   Page Container - Viewport locked
+   ======================================== */
+.page {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* ========================================
+   Header / Logo
+   ======================================== */
+.header {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+}
+
+/* ========================================
+   Restaurants Section
+   ======================================== */
+.restaurants {
+  display: flex;
+  gap: 80px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ========================================
+   Card Component
+   ======================================== */
+.card {
+  position: relative;
+  width: 320px;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+/* Card Background SVG */
+.card__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Card Content */
+.card__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card Logos */
+.card__logo {
+  display: block;
+}
+
+.card__logo--bt {
+  width: 80px;
+  height: 133px;
+}
+
+.card__logo--tohru {
+  width: 160px;
+  height: 43px;
+}
+
+/* Michelin Stars - like Tohru Website */
+.michelin-stars {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.michelin-star {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  /* Invert red to white for dark background */
+  filter: brightness(0) invert(1);
+}
+
+/* Card CTA */
+.card__cta {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover .card__cta {
+  opacity: 0.7;
+}
+
+.card__cta--gold {
+  color: #c6b47b;
+}
+
+.card__cta--white {
+  color: #ffffff;
+}
+
+/* ========================================
+   Footer / Tagline
+   ======================================== */
+.footer {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tagline {
+  font-size: 24px;
+  font-weight: 300;
+  text-align: center;
+  color: #101010;
+  white-space: nowrap;
+}
+
+/* ========================================
+   Responsive - Tablet
+   ======================================== */
+@media (max-width: 960px) {
+  .restaurants {
+    gap: 40px;
+  }
+
+  .card {
+    width: 280px;
+    height: 340px;
+  }
+
+  .card__logo--bt {
+    width: 70px;
+    height: 117px;
+  }
+
+  .card__logo--tohru {
+    width: 140px;
+    height: 38px;
+  }
+
+  .header {
+    top: 60px;
+  }
+
+  .footer {
+    bottom: 60px;
+  }
+
+  .tagline {
+    font-size: 20px;
+  }
+}
+
+/* ========================================
+   Responsive - Mobile Portrait
+   ======================================== */
+@media (max-width: 768px) and (orientation: portrait) {
+  .header {
+    position: absolute;
+    top: 24px;
+    left: 0;
+    right: 0;
+    transform: none;
+    display: flex;
+    justify-content: center;
+  }
+
+  .logo {
+    height: 28px;
+  }
+
+  .restaurants {
+    flex-direction: column;
+    gap: 40px;
+    padding: 0 40px;
+    width: 100%;
+  }
+
+  .card {
+    width: 100%;
+    max-width: none;
+    height: calc((100vh - 180px) / 2);
+    min-height: 160px;
+  }
+
+  .card__logo--bt {
+    width: 50px;
+    height: 83px;
+  }
+
+  .card__logo--tohru {
+    width: 100px;
+    height: 27px;
+  }
+
+  .michelin-stars {
+    margin-top: 12px;
+  }
+
+  .michelin-star {
+    width: 12px;
+    height: 12px;
+  }
+
+  .card__cta {
+    bottom: 16px;
+    font-size: 12px;
+  }
+
+  .footer {
+    bottom: 24px;
+  }
+
+  .tagline {
+    font-size: 14px;
+  }
+}
+
+/* ========================================
+   Responsive - Mobile Landscape
+   ======================================== */
+@media (max-width: 960px) and (orientation: landscape) and (max-height: 500px) {
+  .header {
+    top: 16px;
+  }
+
+  .logo {
+    height: 24px;
+  }
+
+  .restaurants {
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .card {
+    width: 40vw;
+    height: 70vh;
+    min-height: 200px;
+  }
+
+  .card__logo--bt {
+    width: 50px;
+    height: 83px;
+  }
+
+  .card__logo--tohru {
+    width: 100px;
+    height: 27px;
+  }
+
+  .michelin-stars {
+    margin-top: 12px;
+  }
+
+  .michelin-star {
+    width: 12px;
+    height: 12px;
+  }
+
+  .card__cta {
+    bottom: 12px;
+    font-size: 11px;
+  }
+
+  .footer {
+    bottom: 16px;
+  }
+
+  .tagline {
+    font-size: 14px;
+  }
+}

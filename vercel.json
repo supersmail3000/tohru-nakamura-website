@@ -1,4 +1,8 @@
 {
+  "rewrites": [
+    { "source": "/tohru", "destination": "/tohru.html" },
+    { "source": "/schreiberei", "destination": "/schreiberei.html" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
