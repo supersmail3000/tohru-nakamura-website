@@ -409,18 +409,16 @@ body:has(.home-section) .navbar {
 
 .hero-logo {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: calc(100% / 1.618);
+    width: 22%;
     height: auto;
-    max-width: 90%;
     z-index: 20;
     opacity: 0;
     animation: logoFadeIn 1s ease 1.5s forwards;
     pointer-events: none;
     object-fit: contain;
-    filter: brightness(0) invert(1);
 }
 
 /* Hero Image Slider */
@@ -748,7 +746,7 @@ body:has(.home-section) .navbar {
     }
 
     .hero-logo {
-        width: 60%;
+        width: 22%;
     }
 
     .home-navigation {
