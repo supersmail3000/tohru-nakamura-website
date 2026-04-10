@@ -926,7 +926,7 @@ body:has(.home-section) .navbar {
     max-width: 90%;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-3xl);
+    gap: var(--spacing-lg);
 }
 
 .reserve-intro {
@@ -999,6 +999,7 @@ body:has(.home-section) .navbar {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
+    margin-top: var(--spacing-xl);
     opacity: 0;
     transform: translate3d(0, 20px, 0);
     animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
@@ -1206,7 +1207,7 @@ body:has(.home-section) .navbar {
     max-width: 90%;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-3xl);
+    gap: var(--spacing-lg);
     flex: 1;
     overflow: visible;
 }
@@ -1278,10 +1279,15 @@ body:has(.home-section) .navbar {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
+    margin-top: var(--spacing-xl);
     opacity: 0;
     transform: translate3d(0, 20px, 0);
     animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     will-change: transform, opacity;
+}
+
+.page-section-block:first-child {
+    margin-top: 0;
 }
 
 .page-section-block:nth-of-type(1) {
