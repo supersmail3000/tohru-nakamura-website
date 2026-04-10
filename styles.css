@@ -352,7 +352,7 @@ body:has(.home-section) .navbar {
 
 .home-tagline #datetime-display {
     color: #faf8f6;
-    font-size: 16px;
+    font-size: 12px;
     animation-delay: 0.8s;
     font-variant-numeric: tabular-nums;
     min-height: 1.4em;
