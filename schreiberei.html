@@ -319,13 +319,15 @@
                 </div>
 
                 <div class="page-section-block">
-                    <form class="newsletter-form" id="newsletter-form-bt" novalidate>
+                    <iframe name="fd-iframe-bt" style="display:none"></iframe>
+                    <form class="newsletter-form" id="newsletter-form-bt" action="https://form.flodesk.com/forms/69d8d93bdd2f311ef9b1076e/submit" method="POST" target="fd-iframe-bt" novalidate>
                         <div class="newsletter-input-group">
                             <input type="email" name="email" class="newsletter-input" placeholder="E-Mail-Adresse" required>
                             <button type="submit" class="newsletter-button">Anmelden</button>
                         </div>
+                        <input type="text" name="confirm_email_address" style="display:none" tabindex="-1" autocomplete="off">
                         <label class="newsletter-consent">
-                            <input type="checkbox" name="acceptsGdpr" required>
+                            <input type="checkbox" name="acceptsGdpr" value="true" required>
                             <span>Ich stimme zu, E-Mails zu erhalten und akzeptiere die <a href="#datenschutz" style="color: inherit; text-decoration: underline;">Datenschutzerklärung</a>.</span>
                         </label>
                         <div class="newsletter-status" id="newsletter-status-bt"></div>
@@ -607,65 +609,57 @@
 
     <script src="schreiberei-script.js"></script>
     <script>
-    /* Newsletter form submission to Flodesk */
+    /* Newsletter form: validation + iframe submit */
     (function() {
-      function setupForm(formId, flodeskId) {
+      function setupForm(formId, iframeName) {
         var form = document.getElementById(formId);
-        var status = document.getElementById(formId.replace('newsletter-form', 'newsletter-status'));
-        if (!form) return;
+        var statusId = formId.replace('newsletter-form', 'newsletter-status');
+        var status = document.getElementById(statusId);
+        var iframe = document.querySelector('iframe[name="' + iframeName + '"]');
+        if (!form || !iframe) return;
 
         form.addEventListener('submit', function(e) {
-          e.preventDefault();
           var email = form.querySelector('input[name="email"]');
           var consent = form.querySelector('input[name="acceptsGdpr"]');
           var btn = form.querySelector('.newsletter-button');
 
           status.textContent = '';
           status.className = 'newsletter-status';
-          btn.disabled = false;
-          btn.textContent = 'Anmelden';
 
           if (!email.value || !email.validity.valid) {
+            e.preventDefault();
             status.textContent = 'Bitte gib eine gültige E-Mail-Adresse ein.';
             status.classList.add('newsletter-error');
             return;
           }
           if (consent && !consent.checked) {
+            e.preventDefault();
             status.textContent = 'Bitte stimme der Datenschutzerklärung zu.';
             status.classList.add('newsletter-error');
             return;
           }
 
+          /* Validation passed — form submits natively into hidden iframe */
           btn.disabled = true;
           btn.textContent = 'Wird gesendet…';
+        });
 
-          var data = new FormData();
-          data.append('email', email.value);
-          if (consent) data.append('acceptsGdpr', 'true');
-
-          fetch('https://form.flodesk.com/forms/' + flodeskId + '/submit', {
-            method: 'POST',
-            body: data
-          }).then(function(res) {
-            if (res.ok || res.status === 0) {
-              status.textContent = 'Vielen Dank! Du bist jetzt angemeldet.';
-              status.classList.add('newsletter-success');
-              email.value = '';
-              if (consent) consent.checked = false;
-            } else {
-              throw new Error('Server error');
-            }
-          }).catch(function() {
-            status.textContent = 'Ein Fehler ist aufgetreten. Bitte versuche es erneut.';
-            status.classList.add('newsletter-error');
-          }).finally(function() {
-            btn.disabled = false;
-            btn.textContent = 'Anmelden';
-          });
+        iframe.addEventListener('load', function() {
+          var btn = form.querySelector('.newsletter-button');
+          var email = form.querySelector('input[name="email"]');
+          var consent = form.querySelector('input[name="acceptsGdpr"]');
+          /* iframe loaded = form was submitted */
+          if (!email.value && btn.disabled) return; /* initial load */
+          status.textContent = 'Vielen Dank! Du bist jetzt angemeldet.';
+          status.className = 'newsletter-status newsletter-success';
+          email.value = '';
+          if (consent) consent.checked = false;
+          btn.disabled = false;
+          btn.textContent = 'Anmelden';
         });
       }
 
-      setupForm('newsletter-form-bt', '69d8d93bdd2f311ef9b1076e');
+      setupForm('newsletter-form-bt', 'fd-iframe-bt');
     })();
     </script>
 </body>

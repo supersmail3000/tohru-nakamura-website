@@ -219,11 +219,17 @@
                         <p>Stay connected – receive our newsletter and be part of the journey.</p>
                     </div>
                     
-                    <form class="newsletter-form" id="newsletter-form-events" novalidate>
+                    <iframe name="fd-iframe-events" style="display:none"></iframe>
+                    <form class="newsletter-form" id="newsletter-form-events" action="https://form.flodesk.com/forms/69866e6515c468859b405032/submit" method="POST" target="fd-iframe-events" novalidate>
                         <div class="newsletter-input-group">
                             <input type="email" name="email" class="newsletter-input" placeholder="Email address" required>
                             <button type="submit" class="newsletter-button">Sign up</button>
                         </div>
+                        <input type="text" name="confirm_email_address" style="display:none" tabindex="-1" autocomplete="off">
+                        <label class="newsletter-consent">
+                            <input type="checkbox" name="acceptsGdpr" value="true" required>
+                            <span>I agree to receive emails. <a href="#datenschutz" style="color: inherit; text-decoration: underline;">Privacy policy</a></span>
+                        </label>
                         <div class="newsletter-status" id="newsletter-status-events"></div>
                     </form>
                 </div>
@@ -414,11 +420,17 @@
                 </div>
                 
                 <div class="page-section-block">
-                    <form class="newsletter-form" id="newsletter-form-newsletter" novalidate>
+                    <iframe name="fd-iframe-newsletter" style="display:none"></iframe>
+                    <form class="newsletter-form" id="newsletter-form-newsletter" action="https://form.flodesk.com/forms/69866e6515c468859b405032/submit" method="POST" target="fd-iframe-newsletter" novalidate>
                         <div class="newsletter-input-group">
                             <input type="email" name="email" class="newsletter-input" placeholder="Email address" required>
                             <button type="submit" class="newsletter-button">Sign up</button>
                         </div>
+                        <input type="text" name="confirm_email_address" style="display:none" tabindex="-1" autocomplete="off">
+                        <label class="newsletter-consent">
+                            <input type="checkbox" name="acceptsGdpr" value="true" required>
+                            <span>I agree to receive emails. <a href="#datenschutz" style="color: inherit; text-decoration: underline;">Privacy policy</a></span>
+                        </label>
                         <div class="newsletter-status" id="newsletter-status-newsletter"></div>
                     </form>
                 </div>
@@ -755,59 +767,57 @@
 
     <script src="script.js"></script>
     <script>
-    /* Newsletter form submission to Flodesk */
+    /* Newsletter form: validation + iframe submit */
     (function() {
-      function setupForm(formId, flodeskId) {
+      function setupForm(formId, iframeName) {
         var form = document.getElementById(formId);
         var statusId = formId.replace('newsletter-form', 'newsletter-status');
         var status = document.getElementById(statusId);
-        if (!form) return;
+        var iframe = document.querySelector('iframe[name="' + iframeName + '"]');
+        if (!form || !iframe) return;
 
         form.addEventListener('submit', function(e) {
-          e.preventDefault();
           var email = form.querySelector('input[name="email"]');
+          var consent = form.querySelector('input[name="acceptsGdpr"]');
           var btn = form.querySelector('.newsletter-button');
 
           status.textContent = '';
           status.className = 'newsletter-status';
-          btn.disabled = false;
-          btn.textContent = 'Sign up';
 
           if (!email.value || !email.validity.valid) {
+            e.preventDefault();
             status.textContent = 'Please enter a valid email address.';
             status.classList.add('newsletter-error');
             return;
           }
+          if (consent && !consent.checked) {
+            e.preventDefault();
+            status.textContent = 'Please agree to the privacy policy.';
+            status.classList.add('newsletter-error');
+            return;
+          }
 
+          /* Validation passed — form submits natively into hidden iframe */
           btn.disabled = true;
           btn.textContent = 'Sending…';
+        });
 
-          var data = new FormData();
-          data.append('email', email.value);
-
-          fetch('https://form.flodesk.com/forms/' + flodeskId + '/submit', {
-            method: 'POST',
-            body: data
-          }).then(function(res) {
-            if (res.ok || res.status === 0) {
-              status.textContent = 'Thank you! You are now subscribed.';
-              status.classList.add('newsletter-success');
-              email.value = '';
-            } else {
-              throw new Error('Server error');
-            }
-          }).catch(function() {
-            status.textContent = 'Something went wrong. Please try again.';
-            status.classList.add('newsletter-error');
-          }).finally(function() {
-            btn.disabled = false;
-            btn.textContent = 'Sign up';
-          });
+        iframe.addEventListener('load', function() {
+          var btn = form.querySelector('.newsletter-button');
+          var email = form.querySelector('input[name="email"]');
+          var consent = form.querySelector('input[name="acceptsGdpr"]');
+          if (!email.value && btn.disabled) return; /* initial load */
+          status.textContent = 'Thank you! You are now subscribed.';
+          status.className = 'newsletter-status newsletter-success';
+          email.value = '';
+          if (consent) consent.checked = false;
+          btn.disabled = false;
+          btn.textContent = 'Sign up';
         });
       }
 
-      setupForm('newsletter-form-events', '69866e6515c468859b405032');
-      setupForm('newsletter-form-newsletter', '69866e6515c468859b405032');
+      setupForm('newsletter-form-events', 'fd-iframe-events');
+      setupForm('newsletter-form-newsletter', 'fd-iframe-newsletter');
     })();
     </script>
 
