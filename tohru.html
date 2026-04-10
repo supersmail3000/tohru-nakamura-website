@@ -763,106 +763,80 @@
 
     <script src="script.js"></script>
     <script>
-    /* Restyle Flodesk form after it renders */
+    /* Restyle Flodesk forms — persistent observer, re-applies on every mutation */
     (function() {
       var formId = '69866e6515c468859b405032';
-      var prefix = 'ff-' + formId;
+      var p = 'ff-' + formId;
+      var S = function(el, css) { if (el) el.style.cssText = css; };
+      var H = function(el) { if (el) el.style.cssText = 'display:none!important;'; };
 
-      function styleForm(container) {
-        var root = container.querySelector('.' + prefix);
-        if (!root) return false;
+      function style(c) {
+        var root = c.querySelector('.' + p);
+        if (!root) return;
 
-        /* Root + container: transparent */
-        var box = container.querySelector('.' + prefix + '__container');
-        [root, box].forEach(function(el) {
-          if (!el) return;
-          el.style.cssText = 'background:transparent!important;padding:0!important;margin:0!important;border:none!important;box-shadow:none!important;max-width:100%!important;';
+        S(root, 'background:transparent!important;padding:0!important;margin:0!important;border:none!important;box-shadow:none!important;max-width:100%!important;');
+        S(c.querySelector('.' + p + '__container'), 'background:transparent!important;padding:0!important;margin:0!important;border:none!important;box-shadow:none!important;max-width:100%!important;');
+        S(c.querySelector('.' + p + '__form'), 'background:transparent!important;padding:0!important;margin:0!important;');
+        S(c.querySelector('.' + p + '__content'), 'padding:0!important;');
+
+        /* Hide: title, subtitle, config */
+        H(c.querySelector('.' + p + '__title'));
+        H(c.querySelector('.' + p + '__subtitle'));
+        H(c.querySelector('[data-ff-el="config"]'));
+
+        /* Fields row */
+        S(c.querySelector('.' + p + '__fields'), 'display:flex!important;gap:12px!important;margin:0!important;align-items:stretch!important;');
+
+        /* All field wrappers */
+        var allFields = c.querySelectorAll('.' + p + '__field');
+        allFields.forEach(function(f) {
+          S(f, 'flex:1!important;min-width:0!important;margin:0!important;padding:0!important;');
         });
 
-        /* Form */
-        var form = container.querySelector('.' + prefix + '__form');
-        if (form) form.style.cssText = 'background:transparent!important;padding:0!important;margin:0!important;';
-
-        /* Hide title + subtitle + config */
-        var hide = [
-          container.querySelector('.' + prefix + '__title'),
-          container.querySelector('.' + prefix + '__subtitle'),
-          container.querySelector('[data-ff-el="config"]')
-        ];
-        hide.forEach(function(el) { if (el) el.style.display = 'none'; });
-
-        /* Content area */
-        var content = container.querySelector('.' + prefix + '__content');
-        if (content) content.style.cssText = 'padding:0!important;';
-
-        /* Fields row: flex horizontal */
-        var fields = container.querySelector('.' + prefix + '__fields');
-        if (fields) fields.style.cssText = 'display:flex!important;gap:12px!important;margin:0!important;align-items:stretch!important;';
-
-        /* Field wrapper — must grow to fill row */
-        var field = container.querySelector('.' + prefix + '__field');
-        if (field) field.style.cssText = 'flex:1!important;min-width:0!important;margin:0!important;padding:0!important;';
+        /* Hide honeypot + any non-email inputs */
+        c.querySelectorAll('input[name="confirm_email_address"]').forEach(function(el) { H(el); });
 
         /* Email input */
-        var input = container.querySelector('.' + prefix + '__control');
+        var input = c.querySelector('input[name="email"]');
         if (input) {
-          input.style.cssText = 'width:100%!important;height:100%!important;box-sizing:border-box!important;padding:16px 20px!important;font-family:"Work Sans",sans-serif!important;font-size:16px!important;font-weight:300!important;color:#fff!important;background:rgba(255,255,255,0.1)!important;border:1px solid rgba(255,255,255,0.2)!important;border-radius:0!important;outline:none!important;';
+          S(input, 'width:100%!important;height:100%!important;box-sizing:border-box!important;padding:16px 20px!important;font-family:"Work Sans",sans-serif!important;font-size:16px!important;font-weight:300!important;color:#fff!important;background:rgba(255,255,255,0.1)!important;border:1px solid rgba(255,255,255,0.2)!important;border-radius:0!important;outline:none!important;');
           input.setAttribute('placeholder', 'Email address');
         }
 
-        /* Hide label */
-        var label = container.querySelector('.' + prefix + '__label');
-        if (label) label.style.display = 'none';
+        /* Hide labels */
+        c.querySelectorAll('.' + p + '__label').forEach(function(el) { H(el); });
 
-        /* Footer (contains button) */
-        var footer = container.querySelector('.' + prefix + '__footer');
-        if (footer) footer.style.cssText = 'padding:0!important;margin:0!important;';
-
-        /* Submit button */
-        var btn = container.querySelector('.' + prefix + '__button');
+        /* Footer + button */
+        S(c.querySelector('.' + p + '__footer'), 'padding:0!important;margin:0!important;');
+        var btn = c.querySelector('.' + p + '__button');
         if (btn) {
-          btn.style.cssText = 'padding:16px 28px!important;font-family:"Work Sans",sans-serif!important;font-size:16px!important;font-weight:400!important;color:#0e0c0a!important;background:#fff!important;border:none!important;border-radius:0!important;cursor:pointer!important;white-space:nowrap!important;';
-          btn.textContent = 'Sign up';
+          S(btn, 'padding:16px 28px!important;font-family:"Work Sans",sans-serif!important;font-size:16px!important;font-weight:400!important;color:#0e0c0a!important;background:#fff!important;border:none!important;border-radius:0!important;cursor:pointer!important;white-space:nowrap!important;');
+          if (btn.textContent.trim() === 'Subscribe') btn.textContent = 'Sign up';
         }
 
-        /* GDPR block */
-        var gdpr = container.querySelector('.' + prefix + '__accepts-gdpr-block');
-        if (gdpr) gdpr.style.cssText = 'margin-top:12px!important;padding:0!important;';
+        /* GDPR */
+        S(c.querySelector('.' + p + '__accepts-gdpr-block'), 'margin-top:12px!important;padding:0!important;');
+        S(c.querySelector('.' + p + '__accepts-gdpr-checkbox'), 'display:flex!important;align-items:center!important;gap:8px!important;cursor:pointer!important;');
 
-        var gdprLabel = container.querySelector('.' + prefix + '__accepts-gdpr-checkbox');
-        if (gdprLabel) gdprLabel.style.cssText = 'display:flex!important;align-items:center!important;gap:8px!important;cursor:pointer!important;';
+        /* Checkbox: force visible */
+        var cb = c.querySelector('.fd-form-check__input');
+        if (cb) S(cb, 'position:static!important;opacity:1!important;width:16px!important;height:16px!important;accent-color:#fff!important;flex-shrink:0!important;pointer-events:auto!important;appearance:auto!important;-webkit-appearance:checkbox!important;margin:0!important;');
 
-        /* Checkbox: force visible (Flodesk hides it via position/opacity) */
-        var checkbox = container.querySelector('.fd-form-check__input');
-        if (checkbox) checkbox.style.cssText = 'position:static!important;opacity:1!important;width:16px!important;height:16px!important;accent-color:#fff!important;flex-shrink:0!important;pointer-events:auto!important;appearance:auto!important;-webkit-appearance:checkbox!important;margin:0!important;';
-
-        /* Custom checkmark: hide (we show the real checkbox instead) */
-        var checkmark = container.querySelector('.fd-form-check__checkmark');
-        if (checkmark) checkmark.style.display = 'none';
-
-        /* Checkbox label text */
-        var checkLabel = container.querySelector('.fd-form-check__label');
-        if (checkLabel) checkLabel.style.cssText = 'font-family:"Work Sans",sans-serif!important;font-size:12px!important;font-weight:300!important;color:rgba(255,255,255,0.8)!important;line-height:1.3!important;';
-
-        /* Privacy link */
-        var privacyLink = container.querySelector('.' + prefix + '__privacy-policy-link');
-        if (privacyLink) privacyLink.style.cssText = 'color:rgba(255,255,255,0.8)!important;text-decoration:underline!important;';
-
-        /* Success message */
-        var success = container.querySelector('.' + prefix + '__success');
-        if (success) success.style.cssText = 'font-family:"Work Sans",sans-serif!important;font-size:16px!important;color:rgba(255,255,255,0.8)!important;background:transparent!important;padding:12px 0!important;';
-
-        return true;
+        H(c.querySelector('.fd-form-check__checkmark'));
+        S(c.querySelector('.fd-form-check__label'), 'font-family:"Work Sans",sans-serif!important;font-size:12px!important;font-weight:300!important;color:rgba(255,255,255,0.8)!important;line-height:1.3!important;');
+        S(c.querySelector('.' + p + '__privacy-policy-link'), 'color:rgba(255,255,255,0.8)!important;text-decoration:underline!important;');
+        S(c.querySelector('.' + p + '__success'), 'font-family:"Work Sans",sans-serif!important;font-size:16px!important;color:rgba(255,255,255,0.8)!important;background:transparent!important;padding:12px 0!important;');
       }
 
       function observe(id) {
-        var container = document.getElementById(id);
-        if (!container) return;
-        var observer = new MutationObserver(function() {
-          if (styleForm(container)) observer.disconnect();
-        });
-        observer.observe(container, { childList: true, subtree: true });
-        styleForm(container);
+        var c = document.getElementById(id);
+        if (!c) return;
+        new MutationObserver(function() { style(c); }).observe(c, { childList: true, subtree: true, attributes: true });
+        style(c);
+        /* Re-apply after Flodesk's own scripts finish */
+        setTimeout(function() { style(c); }, 500);
+        setTimeout(function() { style(c); }, 1500);
+        setTimeout(function() { style(c); }, 3000);
       }
 
       observe('fd-form-events');
