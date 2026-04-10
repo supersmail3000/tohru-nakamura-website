@@ -902,7 +902,7 @@ body:has(.home-section) .navbar {
 /* Reserve slides up when active */
 .reserve-section:target,
 .reserve-section.active {
-    transform: translate3d(0, 0, 0);
+    transform: none;
 }
 
 /* Reserve slides down when closing */
@@ -916,7 +916,6 @@ body:has(.home-section) .navbar {
     left: var(--spacing-4xl);
     width: 48px;
     height: 48px;
-    z-index: 100;
     background: none;
     border: none;
     cursor: pointer;
@@ -1225,7 +1224,7 @@ body:has(.home-section) .navbar {
 
 .page-section:target,
 .page-section.active {
-    transform: translate3d(0, 0, 0);
+    transform: none;
 }
 
 .page-section.slide-down {
@@ -1943,9 +1942,13 @@ body:has(.home-section) .navbar {
     gap: 48px;
 }
 
+.legal-content .page-text {
+    font-size: 14px;
+}
+
 .legal-content h2 {
     font-family: 'Work Sans', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     margin: 0 0 16px 0;
     color: var(--text-light);
@@ -1967,6 +1970,7 @@ body:has(.home-section) .navbar {
 .legal-content ul li {
     margin-bottom: 8px;
     line-height: 1.6;
+    font-size: 14px;
 }
 
 /* Footer Responsive */

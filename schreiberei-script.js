@@ -56,7 +56,7 @@ function updateCountdown() {
         } else if (time >= 11 && time < 12.5) {
             countdownDisplay.innerHTML = '<span>In der Küche wird schon geschnippelt.</span>';
         } else if (time >= 12.5 && time < 13) {
-            countdownDisplay.innerHTML = '<span>Gleich geht's los.</span>';
+            countdownDisplay.innerHTML = '<span>Gleich geht\u2019s los.</span>';
         }
         return;
     }
@@ -73,7 +73,7 @@ function updateCountdown() {
     } else if (time >= 16 && time < 16.75) {
         countdownDisplay.innerHTML = '<span>Das Team trudelt ein.</span>';
     } else if (time >= 16.75 && time < 17) {
-        countdownDisplay.innerHTML = '<span>Gleich geht's los.</span>';
+        countdownDisplay.innerHTML = '<span>Gleich geht\u2019s los.</span>';
     }
 }
 
