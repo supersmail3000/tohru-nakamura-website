@@ -36,48 +36,44 @@ function updateCountdown() {
 
     // Sunday (0) or Monday (1): closed all day
     if (day === 0 || day === 1) {
-        countdownDisplay.innerHTML = '<span>Ab Dienstag wieder für euch da.</span>';
+        // Different message depending on day
+        if (day === 0) {
+            countdownDisplay.innerHTML = '<span>Ruhetag. Morgen auch. Ab Dienstag wieder.</span>';
+        } else {
+            countdownDisplay.innerHTML = '<span>Ruhetag. Morgen ab 17 Uhr wieder da.</span>';
+        }
         return;
     }
 
     // Saturday (6): opens at 13:00
     if (day === 6) {
-        if (time >= 13 && time < 1 + 24 || time < 1) {
-            // Open (13:00–01:00)
-            if (time >= 13) {
-                countdownDisplay.innerHTML = '<div class="open-status"><span class="open-dot"></span><span>Die Bar ist geöffnet.</span></div>';
-            } else {
-                // After midnight, still open until 01:00
-                countdownDisplay.innerHTML = '<div class="open-status"><span class="open-dot"></span><span>Die Bar ist geöffnet.</span></div>';
-            }
+        if (time >= 13 || time < 1) {
+            countdownDisplay.innerHTML = '<div class="open-status"><span class="open-dot"></span><span>Wir sind da. Kommt vorbei.</span></div>';
         } else if (time >= 1 && time < 10) {
-            countdownDisplay.innerHTML = '<span>Die Bar schläft noch.</span>';
+            countdownDisplay.innerHTML = '<span>Noch geschlossen. Samstags ab 13 Uhr.</span>';
         } else if (time >= 10 && time < 11) {
-            countdownDisplay.innerHTML = '<span>Frische Zutaten werden ausgewählt.</span>';
+            countdownDisplay.innerHTML = '<span>Der Markt wird gerade leergeräumt.</span>';
         } else if (time >= 11 && time < 12.5) {
-            countdownDisplay.innerHTML = '<span>Die Vorbereitungen laufen.</span>';
+            countdownDisplay.innerHTML = '<span>In der Küche wird schon geschnippelt.</span>';
         } else if (time >= 12.5 && time < 13) {
-            countdownDisplay.innerHTML = '<span>Gleich geht es los.</span>';
+            countdownDisplay.innerHTML = '<span>Gleich geht's los.</span>';
         }
         return;
     }
 
     // Tuesday (2) – Friday (5): opens at 17:00
-    if (time >= 17 && time <= 23.99) {
-        countdownDisplay.innerHTML = '<div class="open-status"><span class="open-dot"></span><span>Die Bar ist geöffnet.</span></div>';
-    } else if (time >= 0 && time < 1) {
-        // After midnight, still open until 01:00
-        countdownDisplay.innerHTML = '<div class="open-status"><span class="open-dot"></span><span>Die Bar ist geöffnet.</span></div>';
+    if (time >= 17 || time < 1) {
+        countdownDisplay.innerHTML = '<div class="open-status"><span class="open-dot"></span><span>Wir sind da. Kommt vorbei.</span></div>';
     } else if (time >= 1 && time < 10) {
-        countdownDisplay.innerHTML = '<span>Die Bar schläft noch.</span>';
+        countdownDisplay.innerHTML = '<span>Noch geschlossen. Ab 17 Uhr wieder.</span>';
     } else if (time >= 10 && time < 13) {
-        countdownDisplay.innerHTML = '<span>Frische Zutaten werden ausgewählt.</span>';
+        countdownDisplay.innerHTML = '<span>Der Markt wird gerade leergeräumt.</span>';
     } else if (time >= 13 && time < 16) {
-        countdownDisplay.innerHTML = '<span>Die Vorbereitungen laufen.</span>';
+        countdownDisplay.innerHTML = '<span>In der Küche wird schon geschnippelt.</span>';
     } else if (time >= 16 && time < 16.75) {
-        countdownDisplay.innerHTML = '<span>Das Team kommt zusammen.</span>';
+        countdownDisplay.innerHTML = '<span>Das Team trudelt ein.</span>';
     } else if (time >= 16.75 && time < 17) {
-        countdownDisplay.innerHTML = '<span>Gleich geht es los.</span>';
+        countdownDisplay.innerHTML = '<span>Gleich geht's los.</span>';
     }
 }
 

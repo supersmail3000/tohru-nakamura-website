@@ -9,8 +9,8 @@
     --primary-color: #1a1a1a;
     --secondary-color: #c6b47b;
     --accent-color: #8b7355;
-    --text-light: #faf8f6; /* Warm White - Soft & Luxurious */
-    --text-dark: #ffffff;
+    --text-light: #242423;
+    --text-dark: #242423;
     --bg-light: #ffffff;
     --bg-dark: #c6b47b;
     --bg-section: #c6b47b; /* Warm Gold - Bar Tatar */
@@ -72,7 +72,7 @@ html {
 }
 
 body {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
     background-color: var(--bg-dark);
@@ -160,7 +160,7 @@ body:has(.home-section) {
 }
 
 h1, h2, h3 {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-weight: 600;
 }
 
@@ -323,7 +323,7 @@ body:has(.home-section) .navbar {
 .home-tagline p {
     margin: 0;
     color: var(--text-light);
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 0.95rem;
     font-weight: 300;
     letter-spacing: 1px;
@@ -334,7 +334,7 @@ body:has(.home-section) .navbar {
 
 .home-tagline #datetime-display {
     animation-delay: 0.8s;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(36, 36, 35, 0.5);
     font-size: 12px;
     font-variant-numeric: tabular-nums;
     min-height: 1.4em;
@@ -349,7 +349,7 @@ body:has(.home-section) .navbar {
 
 .home-tagline .countdown {
     margin-top: 4px;
-    color: #ffffff;
+    color: #242423;
     font-size: 1.1rem;
     font-weight: 300;
     text-transform: none;
@@ -557,7 +557,7 @@ body:has(.home-section) .navbar {
 
 .home-navigation .nav-item {
     color: var(--text-light);
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 1rem;
     font-weight: 300;
     text-decoration: none;
@@ -823,7 +823,7 @@ body:has(.home-section) .navbar {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     background-color: var(--bg-section);
     color: var(--text-light);
     overflow-y: auto;
@@ -902,7 +902,7 @@ body:has(.home-section) .navbar {
 }
 
 .reserve-headline h1 {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 32px;
     font-weight: 500;
     letter-spacing: 0.5px;
@@ -922,7 +922,7 @@ body:has(.home-section) .navbar {
 }
 
 .reserve-intro {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 16px;
     font-weight: 300;
     line-height: 1.6;
@@ -949,7 +949,7 @@ body:has(.home-section) .navbar {
     justify-content: center;
     background-color: #1D1D1B;
     color: #ffffff;
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 16px;
     font-weight: 400;
     text-decoration: none;
@@ -1014,14 +1014,14 @@ body:has(.home-section) .navbar {
 }
 
 .reserve-section-block h2 {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 24px;
     font-weight: 400;
     margin: 0;
 }
 
 .reserve-text {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 16px;
     font-weight: 300;
     line-height: 1.6;
@@ -1045,7 +1045,7 @@ body:has(.home-section) .navbar {
 .closure-dates li {
     padding: 0.5rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 16px;
     font-weight: 300;
 }
@@ -1077,7 +1077,7 @@ body:has(.home-section) .navbar {
     }
 
     .reserve-container {
-        padding: 100px var(--spacing-md) var(--spacing-xl) var(--spacing-md);
+        padding: 100px var(--spacing-md) calc(80px + env(safe-area-inset-bottom, 0px)) var(--spacing-md);
         gap: var(--spacing-xl);
     }
 
@@ -1105,6 +1105,7 @@ body:has(.home-section) .navbar {
 
     .reserve-container {
         padding-top: 80px;
+        padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px));
     }
 
     .reserve-headline h1 {
@@ -1132,7 +1133,7 @@ body:has(.home-section) .navbar {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     background-color: var(--bg-section);
     color: var(--text-light);
     overflow-y: auto;
@@ -1149,8 +1150,8 @@ body:has(.home-section) .navbar {
 
 .page-section .page-container {
     position: relative;
-    min-height: calc(100vh - 160px);
-    padding-bottom: 120px;
+    min-height: 100dvh;
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
     display: flex;
     flex-direction: column;
 }
@@ -1180,7 +1181,7 @@ body:has(.home-section) .navbar {
 }
 
 .page-headline h1 {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 32px;
     font-weight: 500;
     letter-spacing: 0.5px;
@@ -1202,7 +1203,7 @@ body:has(.home-section) .navbar {
 }
 
 .page-text {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 16px;
     font-weight: 300;
     line-height: 1.6;
@@ -1226,7 +1227,7 @@ body:has(.home-section) .navbar {
     justify-content: center;
     background-color: var(--burgundy);
     color: var(--text-light);
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 16px;
     font-weight: 400;
     text-decoration: none;
@@ -1291,7 +1292,7 @@ body:has(.home-section) .navbar {
 }
 
 .page-section-block h2 {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 24px;
     font-weight: 400;
     margin: 0;
@@ -1336,7 +1337,7 @@ body:has(.home-section) .navbar {
 }
 
 .portrait-name {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 16px;
     font-weight: 400;
     color: var(--text-light);
@@ -1345,18 +1346,18 @@ body:has(.home-section) .navbar {
 }
 
 .portrait-role {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 12px;
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(36, 36, 35, 0.4);
     margin-bottom: 8px;
 }
 
 .portrait-desc {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 12px;
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(36, 36, 35, 0.4);
 }
 
 @media (max-width: 768px) {
@@ -1418,6 +1419,11 @@ body:has(.home-section) .navbar {
     will-change: transform, opacity;
 }
 
+.page-image.arch-clipped {
+    clip-path: url(#archClipPath);
+    -webkit-clip-path: url(#archClipPath);
+}
+
 .page-image img {
     width: 100%;
     height: 100%;
@@ -1463,14 +1469,14 @@ body:has(.home-section) .navbar {
 }
 
 .contact-section-block h2 {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 24px;
     font-weight: 400;
     margin: 0;
 }
 
 .contact-link {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 16px;
     font-weight: 400;
     color: var(--text-light);
@@ -1570,10 +1576,10 @@ body:has(.home-section) .navbar {
 }
 
 .home-footer a {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 12px;
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(36, 36, 35, 0.5);
     text-decoration: none;
     display: inline-block;
     position: relative;
@@ -1588,7 +1594,7 @@ body:has(.home-section) .navbar {
     height: 1px;
     bottom: 0;
     left: 0;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(36, 36, 35, 0.6);
     visibility: hidden;
     transform: scaleX(0);
     transform-origin: center;
@@ -1596,7 +1602,7 @@ body:has(.home-section) .navbar {
 }
 
 .home-footer a:hover {
-    color: rgba(255, 255, 255, 0.95);
+    color: rgba(36, 36, 35, 0.9);
 }
 
 .home-footer a:hover::before {
@@ -1605,7 +1611,7 @@ body:has(.home-section) .navbar {
 }
 
 .home-footer span {
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(36, 36, 35, 0.2);
     font-size: 12px;
 }
 
@@ -1623,24 +1629,24 @@ body:has(.home-section) .navbar {
 .newsletter-input {
     flex: 1;
     padding: var(--spacing-sm) var(--spacing-md);
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 16px;
     font-weight: 300;
     color: #ffffff;
     background-color: rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(36, 36, 35, 0.2);
     border-radius: 0;
     outline: none;
     transition: all 0.3s ease;
 }
 
 .newsletter-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(36, 36, 35, 0.4);
 }
 
 .newsletter-input:focus {
     background-color: rgba(0, 0, 0, 0.15);
-    border-color: rgba(255, 255, 255, 0.5);
+    border-color: rgba(36, 36, 35, 0.4);
 }
 
 .newsletter-input:disabled {
@@ -1650,7 +1656,7 @@ body:has(.home-section) .navbar {
 
 .newsletter-button {
     padding: var(--spacing-sm) var(--spacing-lg);
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 16px;
     font-weight: 400;
     color: #ffffff;
@@ -1676,7 +1682,7 @@ body:has(.home-section) .navbar {
 }
 
 .newsletter-success {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 16px;
     font-weight: 400;
     color: #4caf50;
@@ -1686,7 +1692,7 @@ body:has(.home-section) .navbar {
 }
 
 .newsletter-error {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 14px;
     font-weight: 400;
     color: #ff5252;
@@ -1696,10 +1702,10 @@ body:has(.home-section) .navbar {
 }
 
 .newsletter-info {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 14px;
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(36, 36, 35, 0.5);
     padding: 12px;
     text-align: center;
     margin-top: 8px;
@@ -1747,20 +1753,21 @@ body:has(.home-section) .navbar {
     padding: 0;
     margin-top: auto;
     padding-top: var(--spacing-xl);
-    padding-bottom: 40px;
+    padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px));
     display: flex;
     justify-content: center;
     align-items: center;
     gap: var(--spacing-sm);
     opacity: 0;
     animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
+    flex-shrink: 0;
 }
 
 .section-footer a {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 12px;
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(36, 36, 35, 0.5);
     text-decoration: none;
     display: inline-block;
     position: relative;
@@ -1775,7 +1782,7 @@ body:has(.home-section) .navbar {
     height: 1px;
     bottom: 0;
     left: 0;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(36, 36, 35, 0.6);
     visibility: hidden;
     transform: scaleX(0);
     transform-origin: center;
@@ -1783,7 +1790,7 @@ body:has(.home-section) .navbar {
 }
 
 .section-footer a:hover {
-    color: rgba(255, 255, 255, 0.95);
+    color: rgba(36, 36, 35, 0.9);
 }
 
 .section-footer a:hover::before {
@@ -1792,7 +1799,7 @@ body:has(.home-section) .navbar {
 }
 
 .section-footer span {
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(36, 36, 35, 0.2);
     font-size: 12px;
 }
 
@@ -1817,11 +1824,11 @@ body:has(.home-section) .navbar {
 }
 
 .footer-copyright {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 12px;
     font-weight: 300;
     margin: 0;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(36, 36, 35, 0.5);
 }
 
 .footer-links {
@@ -1831,10 +1838,10 @@ body:has(.home-section) .navbar {
 }
 
 .footer-links a {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 12px;
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(36, 36, 35, 0.5);
     text-decoration: none;
     position: relative;
     transition: color 0.3s ease;
@@ -1847,7 +1854,7 @@ body:has(.home-section) .navbar {
     height: 1px;
     bottom: -2px;
     left: 0;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(36, 36, 35, 0.5);
     visibility: hidden;
     transform: scaleX(0);
     transform-origin: left;
@@ -1855,7 +1862,7 @@ body:has(.home-section) .navbar {
 }
 
 .footer-links a:hover {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(36, 36, 35, 0.8);
 }
 
 .footer-links a:hover::before {
@@ -1864,7 +1871,7 @@ body:has(.home-section) .navbar {
 }
 
 .footer-separator {
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(36, 36, 35, 0.2);
     font-weight: 300;
     font-size: 12px;
 }
@@ -1875,7 +1882,7 @@ body:has(.home-section) .navbar {
 }
 
 .legal-content h2 {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 20px;
     font-weight: 500;
     margin: 0 0 16px 0;
@@ -1883,7 +1890,7 @@ body:has(.home-section) .navbar {
 }
 
 .legal-content h3 {
-    font-family: 'Work Sans', sans-serif;
+    font-family: aktiv-grotesk, sans-serif;
     font-size: 18px;
     font-weight: 400;
     margin: 24px 0 12px 0;
@@ -1952,7 +1959,7 @@ body:has(.home-section) .navbar {
 
     .page-section .page-container {
         padding-top: 80px;
-        padding-bottom: 120px;
+        padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px));
     }
 
     .home-footer a,
