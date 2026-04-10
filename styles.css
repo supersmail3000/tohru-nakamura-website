@@ -899,6 +899,23 @@ body:has(.home-section) .navbar {
     -webkit-backface-visibility: hidden;
 }
 
+.reserve-section::before,
+.page-section::before {
+    content: '';
+    position: fixed;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background-image: url('images/hero-image.png');
+    background-size: cover;
+    background-position: center;
+    filter: blur(40px);
+    opacity: 0.15;
+    z-index: -1;
+    pointer-events: none;
+}
+
 /* Reserve slides up when active */
 .reserve-section:target,
 .reserve-section.active {
