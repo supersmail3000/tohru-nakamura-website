@@ -319,8 +319,7 @@
                 </div>
 
                 <div class="page-section-block">
-                    <iframe name="fd-iframe-bt" style="display:none"></iframe>
-                    <form class="newsletter-form" id="newsletter-form-bt" action="https://form.flodesk.com/forms/69d8d93bdd2f311ef9b1076e/submit" method="POST" target="fd-iframe-bt" novalidate>
+                    <form class="newsletter-form" id="newsletter-form-bt" novalidate>
                         <div class="newsletter-input-group">
                             <input type="email" name="email" class="newsletter-input" placeholder="E-Mail-Adresse" required>
                             <button type="submit" class="newsletter-button">Anmelden</button>
@@ -609,16 +608,16 @@
 
     <script src="schreiberei-script.js"></script>
     <script>
-    /* Newsletter form: validation + iframe submit */
+    /* Newsletter form submission via no-cors fetch */
     (function() {
-      function setupForm(formId, iframeName) {
+      function setupForm(formId, flodeskId) {
         var form = document.getElementById(formId);
         var statusId = formId.replace('newsletter-form', 'newsletter-status');
         var status = document.getElementById(statusId);
-        var iframe = document.querySelector('iframe[name="' + iframeName + '"]');
-        if (!form || !iframe) return;
+        if (!form) return;
 
         form.addEventListener('submit', function(e) {
+          e.preventDefault();
           var email = form.querySelector('input[name="email"]');
           var consent = form.querySelector('input[name="acceptsGdpr"]');
           var btn = form.querySelector('.newsletter-button');
@@ -627,39 +626,45 @@
           status.className = 'newsletter-status';
 
           if (!email.value || !email.validity.valid) {
-            e.preventDefault();
             status.textContent = 'Bitte gib eine gültige E-Mail-Adresse ein.';
             status.classList.add('newsletter-error');
             return;
           }
           if (consent && !consent.checked) {
-            e.preventDefault();
             status.textContent = 'Bitte stimme der Datenschutzerklärung zu.';
             status.classList.add('newsletter-error');
             return;
           }
 
-          /* Validation passed — form submits natively into hidden iframe */
           btn.disabled = true;
           btn.textContent = 'Wird gesendet…';
-        });
 
-        iframe.addEventListener('load', function() {
-          var btn = form.querySelector('.newsletter-button');
-          var email = form.querySelector('input[name="email"]');
-          var consent = form.querySelector('input[name="acceptsGdpr"]');
-          /* iframe loaded = form was submitted */
-          if (!email.value && btn.disabled) return; /* initial load */
-          status.textContent = 'Vielen Dank! Du bist jetzt angemeldet.';
-          status.className = 'newsletter-status newsletter-success';
-          email.value = '';
-          if (consent) consent.checked = false;
-          btn.disabled = false;
-          btn.textContent = 'Anmelden';
+          var params = new URLSearchParams();
+          params.append('email', email.value);
+          params.append('confirm_email_address', '');
+          if (consent) params.append('acceptsGdpr', 'true');
+
+          fetch('https://form.flodesk.com/forms/' + flodeskId + '/submit', {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+          }).then(function() {
+            status.textContent = 'Vielen Dank! Du bist jetzt angemeldet.';
+            status.className = 'newsletter-status newsletter-success';
+            email.value = '';
+            if (consent) consent.checked = false;
+          }).catch(function() {
+            status.textContent = 'Ein Fehler ist aufgetreten. Bitte versuche es erneut.';
+            status.classList.add('newsletter-error');
+          }).finally(function() {
+            btn.disabled = false;
+            btn.textContent = 'Anmelden';
+          });
         });
       }
 
-      setupForm('newsletter-form-bt', 'fd-iframe-bt');
+      setupForm('newsletter-form-bt', '69d8d93bdd2f311ef9b1076e');
     })();
     </script>
 </body>
