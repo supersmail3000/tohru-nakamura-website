@@ -1194,6 +1194,17 @@ a.button-outline:hover {
 }
 
 @media (max-width: 768px) {
+    .reserve-section,
+    .page-section {
+        background-size: cover, cover;
+    }
+    .reserve-section:target,
+    .reserve-section.active,
+    .page-section:target,
+    .page-section.active {
+        animation: none;
+    }
+
     .back-button {
         top: var(--spacing-md);
         left: var(--spacing-md);
@@ -1201,7 +1212,7 @@ a.button-outline:hover {
         height: 40px;
         padding: 10px;
     }
-    
+
     .reserve-container {
         padding: 100px var(--spacing-md) calc(80px + env(safe-area-inset-bottom, 0px)) var(--spacing-md);
         gap: var(--spacing-xl);
