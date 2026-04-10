@@ -1612,27 +1612,14 @@ a.button-outline:hover {
     color: var(--text-light);
     text-decoration: none;
     display: inline-block;
+    align-self: flex-start;
     position: relative;
     padding-bottom: 4px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.contact-link::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    bottom: 0;
-    left: 0;
-    background-color: var(--text-light);
-    visibility: hidden;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: all 0.3s ease-in-out 0s;
-}
-
-.contact-link:hover::before {
-    visibility: visible;
-    transform: scaleX(1);
+.contact-link:hover {
+    border-bottom-color: var(--text-light);
 }
 
 .contact-subheadline {
