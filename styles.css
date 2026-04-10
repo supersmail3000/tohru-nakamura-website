@@ -1054,6 +1054,46 @@ body:has(.home-section) .navbar {
     left: 100%;
 }
 
+/* Event date block */
+.event-date {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: var(--spacing-xs);
+}
+
+.event-date p {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+}
+
+/* Outline button (small) */
+.button-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: #ffffff;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: none;
+    padding: 8px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+    align-self: flex-start;
+    letter-spacing: 0.02em;
+}
+
+.button-outline:hover {
+    background-color: #ffffff;
+    color: #0e0c0a;
+    border-color: #ffffff;
+}
+
 .reserve-section-block {
     display: flex;
     flex-direction: column;
