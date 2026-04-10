@@ -1,3 +1,37 @@
+/* Self-hosted Work Sans — no external Google Fonts dependency */
+@font-face {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url('fonts/work-sans-latin-300-normal.woff2') format('woff2'),
+         url('fonts/work-sans-latin-300-normal.woff') format('woff');
+}
+@font-face {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('fonts/work-sans-latin-400-normal.woff2') format('woff2'),
+         url('fonts/work-sans-latin-400-normal.woff') format('woff');
+}
+@font-face {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('fonts/work-sans-latin-500-normal.woff2') format('woff2'),
+         url('fonts/work-sans-latin-500-normal.woff') format('woff');
+}
+@font-face {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('fonts/work-sans-latin-600-normal.woff2') format('woff2'),
+         url('fonts/work-sans-latin-600-normal.woff') format('woff');
+}
+
 /* Reset & Base Styles */
 * {
     margin: 0;

@@ -3,6 +3,34 @@
    Viewport-locked, no scroll
    ======================================== */
 
+/* Self-hosted Work Sans */
+@font-face {
+  font-family: 'Work Sans';
+  src: url('fonts/work-sans-latin-300-normal.woff2') format('woff2'),
+       url('fonts/work-sans-latin-300-normal.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Work Sans';
+  src: url('fonts/work-sans-latin-400-normal.woff2') format('woff2'),
+       url('fonts/work-sans-latin-400-normal.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Work Sans';
+  src: url('fonts/work-sans-latin-500-normal.woff2') format('woff2'),
+       url('fonts/work-sans-latin-500-normal.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Reset */
 *, *::before, *::after {
   box-sizing: border-box;
