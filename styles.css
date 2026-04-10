@@ -1230,7 +1230,21 @@ a.button-outline:hover {
 @media (max-width: 768px) {
     .reserve-section,
     .page-section {
+        background: none;
+    }
+    .reserve-section::before,
+    .page-section::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image:
+            linear-gradient(rgba(14, 12, 10, 0.85), rgba(14, 12, 10, 0.85)),
+            url('images/hero-image-blur.jpg');
         background-size: cover, cover;
+        background-position: center, center;
+        background-repeat: no-repeat, no-repeat;
+        z-index: -1;
+        pointer-events: none;
     }
     .reserve-section:target,
     .reserve-section.active,
