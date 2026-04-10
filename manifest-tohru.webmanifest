@@ -1,13 +1,13 @@
 {
-  "name": "Schreiberei München — Bar Tatar & Tohru",
-  "short_name": "Schreiberei",
-  "start_url": "/",
+  "name": "Tohru — 3-starred Michelin Restaurant by Tohru Nakamura",
+  "short_name": "Tohru",
+  "start_url": "/tohru",
   "display": "standalone",
   "background_color": "#0e0c0a",
   "theme_color": "#0e0c0a",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "/favicon-tohru.svg",
       "sizes": "any",
       "type": "image/svg+xml"
     }

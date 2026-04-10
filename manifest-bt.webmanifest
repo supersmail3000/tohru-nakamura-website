@@ -1,0 +1,15 @@
+{
+  "name": "Bar Tatar in der Schreiberei",
+  "short_name": "Bar Tatar",
+  "start_url": "/bar-tatar",
+  "display": "standalone",
+  "background_color": "#c6b47b",
+  "theme_color": "#c6b47b",
+  "icons": [
+    {
+      "src": "/favicon-bt.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
