@@ -9,6 +9,12 @@
     <!-- Canonical -->
     <link rel="canonical" href="https://schreiberei-muc.de/schreiberei">
 
+    <!-- Favicon (Bar Tatar) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon-bt.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#c6b47b">
+
     <!-- Typekit Font -->
     <link rel="stylesheet" href="https://use.typekit.net/wgt4dgw.css">
 
@@ -16,6 +22,29 @@
     <link rel="preload" href="schreiberei-styles.css" as="style">
 
     <link rel="stylesheet" href="schreiberei-styles.css">
+
+    <!-- Flodesk -->
+    <script>
+      (function(w, d, t, h, s, n) {
+        w.FlodeskObject = n;
+        var fn = function() {
+          (w[n].q = w[n].q || []).push(arguments);
+        };
+        w[n] = w[n] || fn;
+        var f = d.getElementsByTagName(t)[0];
+        var v = '?v=' + Math.floor(new Date().getTime() / (120 * 1000)) * 60;
+        var sm = d.createElement(t);
+        sm.async = true;
+        sm.type = 'module';
+        sm.src = h + s + '.mjs' + v;
+        f.parentNode.insertBefore(sm, f);
+        var sn = d.createElement(t);
+        sn.async = true;
+        sn.noModule = true;
+        sn.src = h + s + '.js' + v;
+        f.parentNode.insertBefore(sn, f);
+      })(window, document, 'script', 'https://assets.flodesk.com', '/universal', 'fd');
+    </script>
 
     <!-- Theme Color -->
     <meta name="theme-color" content="#c6b47b">
@@ -314,20 +343,13 @@
                 </div>
 
                 <div class="page-section-block">
-                    <form class="newsletter-form" id="newsletter-form">
-                        <div class="newsletter-input-group">
-                            <input
-                                type="email"
-                                name="email"
-                                placeholder="E-Mail Adresse"
-                                required
-                                class="newsletter-input"
-                                autocomplete="email"
-                            />
-                            <button type="submit" class="newsletter-button">Abonnieren</button>
-                        </div>
-                        <div class="newsletter-info"></div>
-                    </form>
+                    <div id="fd-form-69866e6515c468859b405032"></div>
+                    <script>
+                      window.fd('form', {
+                        formId: '69866e6515c468859b405032',
+                        containerEl: '#fd-form-69866e6515c468859b405032'
+                      });
+                    </script>
                 </div>
 
                 <div class="section-footer">
