@@ -410,7 +410,7 @@ body:has(.home-section) .navbar {
 .home-hero-image {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 46%;
     transform: translate3d(-50%, -50%, 0);
     width: auto;
     height: 50vh;
