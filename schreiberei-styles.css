@@ -1285,7 +1285,7 @@ a.button-outline:hover {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--burgundy);
+    background-color: #1D1D1B;
     color: #ffffff;
     font-family: "orpheuspro", serif;
     font-size: 16px;
@@ -1316,7 +1316,7 @@ a.button-outline:hover {
 }
 
 .page-button:hover {
-    background-color: var(--burgundy-hover);
+    background-color: #2a2a28;
     transform: translate3d(0, -2px, 0);
     box-shadow: 0 8px 20px rgba(29, 29, 27, 0.5);
 }

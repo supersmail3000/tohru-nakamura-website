@@ -1337,8 +1337,8 @@ a.button-outline:hover {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--burgundy);
-    color: var(--text-light);
+    background-color: #ffffff;
+    color: #0e0c0a;
     font-family: 'Work Sans', sans-serif;
     font-size: 16px;
     font-weight: 400;
@@ -1368,9 +1368,9 @@ a.button-outline:hover {
 }
 
 .page-button:hover {
-    background-color: var(--burgundy-hover);
+    background-color: #f5f5f5;
     transform: translate3d(0, -2px, 0);
-    box-shadow: 0 8px 20px rgba(184, 37, 44, 0.5);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
 }
 
 .page-button:hover::before {
