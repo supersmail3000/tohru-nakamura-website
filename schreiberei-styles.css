@@ -857,7 +857,8 @@ body:has(.home-section) .navbar {
     overflow-x: hidden;
     z-index: 200;
     transform: translate3d(0, 100%, 0);
-    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+    visibility: hidden;
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), visibility 0s linear 1s;
     display: flex;
     flex-direction: column;
     -webkit-overflow-scrolling: touch;
@@ -871,6 +872,8 @@ body:has(.home-section) .navbar {
 .reserve-section:target,
 .reserve-section.active {
     transform: none;
+    visibility: visible;
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), visibility 0s;
     will-change: auto;
     animation: bgDrift 25s ease-in-out 1s infinite;
 }
@@ -1216,7 +1219,8 @@ a.button-outline:hover {
     overflow-x: hidden;
     z-index: 200;
     transform: translate3d(0, 100%, 0);
-    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+    visibility: hidden;
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), visibility 0s linear 1s;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
     will-change: transform;
@@ -1236,6 +1240,8 @@ a.button-outline:hover {
 .page-section:target,
 .page-section.active {
     transform: none;
+    visibility: visible;
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1), visibility 0s;
     will-change: auto;
     animation: bgDrift 25s ease-in-out 1s infinite;
 }
