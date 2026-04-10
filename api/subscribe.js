@@ -39,7 +39,7 @@ export default async function handler(req, res) {
     const segmentId = segmentMap[segment];
 
     try {
-        // Step 1: Create or update subscriber
+        // Create or update subscriber with segment assignment in one call
         const subscriberRes = await fetch('https://api.flodesk.com/v1/subscribers', {
             method: 'POST',
             headers: {
@@ -48,6 +48,7 @@ export default async function handler(req, res) {
             },
             body: JSON.stringify({
                 email: email,
+                segment_ids: [segmentId],
                 optin_ip: req.headers['x-forwarded-for'] || req.socket?.remoteAddress || '',
                 ...(gdpr && { custom_fields: { gdpr_consent: 'true' } })
             })
@@ -57,25 +58,6 @@ export default async function handler(req, res) {
             const err = await subscriberRes.json().catch(() => ({}));
             console.error('Flodesk subscriber error:', subscriberRes.status, err);
             return res.status(subscriberRes.status >= 500 ? 502 : 400).json({ error: 'subscribe_failed' });
-        }
-
-        // Step 2: Add to segment (if segment ID is configured)
-        if (segmentId) {
-            const segmentRes = await fetch(`https://api.flodesk.com/v1/segments/${segmentId}/subscribers`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Basic ' + Buffer.from(apiKey + ':').toString('base64')
-                },
-                body: JSON.stringify({
-                    subscriber_emails: [email]
-                })
-            });
-
-            if (!segmentRes.ok) {
-                console.error('Flodesk segment error:', segmentRes.status);
-                // Don't fail — subscriber was already created
-            }
         }
 
         return res.status(200).json({ success: true });
