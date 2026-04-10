@@ -903,10 +903,10 @@ body:has(.home-section) .navbar {
 .page-section::before {
     content: '';
     position: fixed;
-    top: -40px;
-    left: -40px;
-    right: -40px;
-    bottom: -40px;
+    top: -60px;
+    left: -60px;
+    right: -60px;
+    bottom: -60px;
     background-image: url('images/hero-image.png');
     background-size: cover;
     background-position: center;
@@ -914,6 +914,22 @@ body:has(.home-section) .navbar {
     opacity: 0.15;
     z-index: 0;
     pointer-events: none;
+    animation: blurDrift 20s ease-in-out infinite alternate;
+}
+
+@keyframes blurDrift {
+    0% {
+        transform: scale(1) translate(0, 0);
+    }
+    33% {
+        transform: scale(1.05) translate(10px, -15px);
+    }
+    66% {
+        transform: scale(1.02) translate(-15px, 10px);
+    }
+    100% {
+        transform: scale(1.06) translate(5px, 15px);
+    }
 }
 
 .reserve-container,
