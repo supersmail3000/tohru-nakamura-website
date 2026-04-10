@@ -860,17 +860,28 @@ body:has(.home-section) .navbar {
 .page-section::before {
     content: '';
     position: fixed;
-    top: -20px;
-    left: -20px;
-    right: -20px;
-    bottom: -20px;
-    background-image: url('images/hero-1.jpg');
+    top: -40px;
+    left: -40px;
+    right: -40px;
+    bottom: -40px;
+    background-image: url('images/hero-5.jpg');
     background-size: cover;
     background-position: center;
-    filter: blur(40px);
+    filter: blur(50px);
     opacity: 0.12;
-    z-index: -1;
+    z-index: 0;
     pointer-events: none;
+}
+
+.reserve-container,
+.page-container {
+    position: relative;
+    z-index: 1;
+}
+
+.reserve-section > .back-button,
+.page-section > .back-button {
+    z-index: 1;
 }
 
 /* Reserve slides up when active */
@@ -1226,6 +1237,7 @@ a.button-outline:hover {
 
 .page-section .page-container {
     position: relative;
+    z-index: 1;
     min-height: 100dvh;
     padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
     display: flex;
