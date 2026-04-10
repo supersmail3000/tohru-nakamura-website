@@ -903,6 +903,7 @@ body:has(.home-section) .navbar {
 .reserve-section:target,
 .reserve-section.active {
     transform: none;
+    will-change: auto;
 }
 
 /* Reserve slides down when closing */
@@ -1225,6 +1226,7 @@ body:has(.home-section) .navbar {
 .page-section:target,
 .page-section.active {
     transform: none;
+    will-change: auto;
 }
 
 .page-section.slide-down {
@@ -1943,12 +1945,12 @@ body:has(.home-section) .navbar {
 }
 
 .legal-content .page-text {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .legal-content h2 {
     font-family: 'Work Sans', sans-serif;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
     margin: 0 0 16px 0;
     color: var(--text-light);
@@ -1970,7 +1972,7 @@ body:has(.home-section) .navbar {
 .legal-content ul li {
     margin-bottom: 8px;
     line-height: 1.6;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 /* Footer Responsive */

@@ -335,7 +335,7 @@ body:has(.home-section) .navbar {
 .home-tagline #datetime-display {
     animation-delay: 0.8s;
     color: rgba(36, 36, 35, 0.5);
-    font-size: 12px;
+    font-size: 13px;
     font-variant-numeric: tabular-nums;
     min-height: 1.4em;
     line-height: 1.4;
@@ -345,13 +345,15 @@ body:has(.home-section) .navbar {
 
 .home-tagline #countdown-display {
     animation-delay: 1s;
+    font-variant-numeric: tabular-nums;
 }
 
 .home-tagline .countdown {
     margin-top: 4px;
     color: #242423;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 400;
+    font-variant-numeric: tabular-nums;
     text-transform: none;
     letter-spacing: 0.3px;
     min-height: 1.6em;
@@ -844,6 +846,7 @@ body:has(.home-section) .navbar {
 .reserve-section:target,
 .reserve-section.active {
     transform: none;
+    will-change: auto;
 }
 
 /* Reserve slides down when closing */
@@ -1158,6 +1161,7 @@ body:has(.home-section) .navbar {
 .page-section:target,
 .page-section.active {
     transform: none;
+    will-change: auto;
 }
 
 .page-section.slide-down {
@@ -1225,7 +1229,7 @@ body:has(.home-section) .navbar {
     align-items: center;
     justify-content: center;
     background-color: var(--burgundy);
-    color: var(--text-light);
+    color: #ffffff;
     font-family: "orpheuspro", serif;
     font-size: 16px;
     font-weight: 400;
@@ -1876,12 +1880,12 @@ body:has(.home-section) .navbar {
 }
 
 .legal-content .page-text {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .legal-content h2 {
     font-family: "orpheuspro", serif;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
     margin: 0 0 16px 0;
     color: var(--text-light);
@@ -1889,7 +1893,7 @@ body:has(.home-section) .navbar {
 
 .legal-content h3 {
     font-family: "orpheuspro", serif;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     margin: 24px 0 12px 0;
     color: var(--text-light);
@@ -1903,7 +1907,7 @@ body:has(.home-section) .navbar {
 .legal-content ul li {
     margin-bottom: 8px;
     line-height: 1.6;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 /* Placeholder Image Styles */
