@@ -620,9 +620,10 @@
       var prefix = 'ff-' + formId;
 
       function styleForm(container) {
-        /* Root + container: transparent */
         var root = container.querySelector('.' + prefix);
         if (!root) return false;
+
+        /* Root + container: transparent */
         var box = container.querySelector('.' + prefix + '__container');
         [root, box].forEach(function(el) {
           if (!el) return;
@@ -633,11 +634,13 @@
         var form = container.querySelector('.' + prefix + '__form');
         if (form) form.style.cssText = 'background:transparent!important;padding:0!important;margin:0!important;';
 
-        /* Hide title + subtitle */
-        var title = container.querySelector('.' + prefix + '__title');
-        var subtitle = container.querySelector('.' + prefix + '__subtitle');
-        var config = container.querySelector('[data-ff-el="config"]');
-        [title, subtitle, config].forEach(function(el) { if (el) el.style.display = 'none'; });
+        /* Hide title + subtitle + config */
+        var hide = [
+          container.querySelector('.' + prefix + '__title'),
+          container.querySelector('.' + prefix + '__subtitle'),
+          container.querySelector('[data-ff-el="config"]')
+        ];
+        hide.forEach(function(el) { if (el) el.style.display = 'none'; });
 
         /* Content area */
         var content = container.querySelector('.' + prefix + '__content');
@@ -645,18 +648,26 @@
 
         /* Fields row: flex horizontal */
         var fields = container.querySelector('.' + prefix + '__fields');
-        if (fields) fields.style.cssText = 'display:flex!important;gap:12px!important;margin:0!important;';
+        if (fields) fields.style.cssText = 'display:flex!important;gap:12px!important;margin:0!important;align-items:stretch!important;';
+
+        /* Field wrapper — must grow to fill row */
+        var field = container.querySelector('.' + prefix + '__field');
+        if (field) field.style.cssText = 'flex:1!important;min-width:0!important;margin:0!important;padding:0!important;';
 
         /* Email input */
         var input = container.querySelector('.' + prefix + '__control');
         if (input) {
-          input.style.cssText = 'flex:1!important;padding:16px 20px!important;font-family:"orpheuspro",serif!important;font-size:16px!important;font-weight:400!important;color:#242423!important;background:rgba(0,0,0,0.1)!important;border:1px solid rgba(36,36,35,0.2)!important;border-radius:0!important;outline:none!important;';
+          input.style.cssText = 'width:100%!important;height:100%!important;box-sizing:border-box!important;padding:16px 20px!important;font-family:"orpheuspro",serif!important;font-size:16px!important;font-weight:400!important;color:#242423!important;background:rgba(0,0,0,0.1)!important;border:1px solid rgba(36,36,35,0.2)!important;border-radius:0!important;outline:none!important;';
           input.setAttribute('placeholder', 'E-Mail-Adresse');
         }
 
         /* Hide label */
         var label = container.querySelector('.' + prefix + '__label');
         if (label) label.style.display = 'none';
+
+        /* Footer (contains button) */
+        var footer = container.querySelector('.' + prefix + '__footer');
+        if (footer) footer.style.cssText = 'padding:0!important;margin:0!important;';
 
         /* Submit button */
         var btn = container.querySelector('.' + prefix + '__button');
@@ -665,10 +676,6 @@
           btn.textContent = 'Anmelden';
         }
 
-        /* Footer */
-        var footer = container.querySelector('.' + prefix + '__footer');
-        if (footer) footer.style.cssText = 'padding:0!important;margin:0!important;';
-
         /* GDPR block */
         var gdpr = container.querySelector('.' + prefix + '__accepts-gdpr-block');
         if (gdpr) gdpr.style.cssText = 'margin-top:12px!important;padding:0!important;';
@@ -676,11 +683,11 @@
         var gdprLabel = container.querySelector('.' + prefix + '__accepts-gdpr-checkbox');
         if (gdprLabel) gdprLabel.style.cssText = 'display:flex!important;align-items:center!important;gap:8px!important;cursor:pointer!important;';
 
-        /* Checkbox */
+        /* Checkbox: force visible (Flodesk hides it via position/opacity) */
         var checkbox = container.querySelector('.fd-form-check__input');
-        if (checkbox) checkbox.style.cssText = 'width:16px!important;height:16px!important;accent-color:#1D1D1B!important;flex-shrink:0!important;';
+        if (checkbox) checkbox.style.cssText = 'position:static!important;opacity:1!important;width:16px!important;height:16px!important;accent-color:#1D1D1B!important;flex-shrink:0!important;pointer-events:auto!important;appearance:auto!important;-webkit-appearance:checkbox!important;margin:0!important;';
 
-        /* Custom checkmark: hide */
+        /* Custom checkmark: hide (we show the real checkbox instead) */
         var checkmark = container.querySelector('.fd-form-check__checkmark');
         if (checkmark) checkmark.style.display = 'none';
 
