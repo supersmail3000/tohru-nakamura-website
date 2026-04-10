@@ -351,8 +351,8 @@ body:has(.home-section) .navbar {
 }
 
 .home-tagline #datetime-display {
-    color: #999999;
-    font-size: 12px;
+    color: #faf8f6;
+    font-size: 16px;
     animation-delay: 0.8s;
     font-variant-numeric: tabular-nums;
     min-height: 1.4em;
@@ -663,6 +663,12 @@ body:has(.home-section) .navbar {
 /* Removed: .btn, .section, .about-content, .restaurant-card, .tv-show-card, .philosophy-content, .contact-content, .contact-form, old .footer */
 
 /* Animations */
+@keyframes bgDrift {
+    0%, 100% { background-position: center, 48% 48%; }
+    33% { background-position: center, 52% 48%; }
+    66% { background-position: center, 50% 52%; }
+}
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -883,15 +889,18 @@ body:has(.home-section) .navbar {
     left: 0;
     width: 100%;
     height: 100dvh;
-    background:
+    background-image:
         linear-gradient(rgba(14, 12, 10, 0.85), rgba(14, 12, 10, 0.85)),
-        url('images/hero-image-blur.jpg') center / cover no-repeat;
+        url('images/hero-image-blur.jpg');
+    background-size: cover, 120%;
+    background-position: center, 50% 50%;
+    background-repeat: no-repeat, no-repeat;
     color: var(--text-light);
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 200;
     transform: translate3d(0, 100%, 0);
-    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
     display: flex;
     flex-direction: column;
     -webkit-overflow-scrolling: touch;
@@ -901,25 +910,12 @@ body:has(.home-section) .navbar {
     -webkit-backface-visibility: hidden;
 }
 
-.reserve-section.active,
-.reserve-section:target,
-.page-section.active,
-.page-section:target {
-    animation: bgDrift 20s ease-in-out infinite alternate;
-}
-
-@keyframes bgDrift {
-    0%   { background-position: center center, center center; }
-    33%  { background-position: center center, 55% 45%; }
-    66%  { background-position: center center, 45% 55%; }
-    100% { background-position: center center, 52% 48%; }
-}
-
 /* Reserve slides up when active */
 .reserve-section:target,
 .reserve-section.active {
     transform: none;
     will-change: auto;
+    animation: bgDrift 25s ease-in-out 1s infinite;
 }
 
 /* Reserve slides down when closing */
@@ -1261,15 +1257,18 @@ a.button-outline:hover {
     left: 0;
     width: 100%;
     height: 100dvh;
-    background:
+    background-image:
         linear-gradient(rgba(14, 12, 10, 0.85), rgba(14, 12, 10, 0.85)),
-        url('images/hero-image-blur.jpg') center / cover no-repeat;
+        url('images/hero-image-blur.jpg');
+    background-size: cover, 120%;
+    background-position: center, 50% 50%;
+    background-repeat: no-repeat, no-repeat;
     color: var(--text-light);
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 200;
     transform: translate3d(0, 100%, 0);
-    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
     will-change: transform;
@@ -1290,6 +1289,7 @@ a.button-outline:hover {
 .page-section.active {
     transform: none;
     will-change: auto;
+    animation: bgDrift 25s ease-in-out 1s infinite;
 }
 
 .page-section.slide-down {
@@ -1356,17 +1356,16 @@ a.button-outline:hover {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #ffffff;
-    color: #0e0c0a;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
     font-family: 'Work Sans', sans-serif;
     font-size: 16px;
     font-weight: 400;
     text-decoration: none;
     padding: var(--spacing-sm) var(--spacing-md);
-    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
     align-self: flex-start;
-    position: relative;
-    overflow: hidden;
     opacity: 0;
     transform: translate3d(0, 20px, 0);
     animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
@@ -1374,26 +1373,9 @@ a.button-outline:hover {
     backface-visibility: hidden;
 }
 
-.page-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.6s;
-    pointer-events: none;
-}
-
 .page-button:hover {
-    background-color: #f5f5f5;
-    transform: translate3d(0, -2px, 0);
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
-}
-
-.page-button:hover::before {
-    left: 100%;
+    background-color: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 .page-section-block {
