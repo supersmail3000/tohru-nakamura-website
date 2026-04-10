@@ -92,20 +92,6 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Flodesk Universal -->
-    <script>
-      (function(w, d, t, h, s, n) {
-        w.FlodeskObject = n;
-        var fn = function() { (w[n].q = w[n].q || []).push(arguments); };
-        w[n] = w[n] || fn;
-        var f = d.getElementsByTagName(t)[0];
-        var v = '?v=' + Math.floor(new Date().getTime() / (120 * 1000)) * 60;
-        var sm = d.createElement(t); sm.async = true; sm.type = 'module';
-        sm.src = h + s + '.mjs' + v; f.parentNode.insertBefore(sm, f);
-        var sn = d.createElement(t); sn.async = true; sn.noModule = true;
-        sn.src = h + s + '.js' + v; f.parentNode.insertBefore(sn, f);
-      })(window, document, 'script', 'https://assets.flodesk.com', '/universal', 'fd');
-    </script>
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -233,10 +219,17 @@
                         <p>Stay connected – receive our newsletter and be part of the journey.</p>
                     </div>
                     
-                    <div id="fd-form-events"></div>
-                    <script>
-                      window.fd('form', { formId: '69866e6515c468859b405032', containerEl: '#fd-form-events' });
-                    </script>
+                    <form class="newsletter-form" id="newsletter-form-events" novalidate>
+                        <div class="newsletter-input-group">
+                            <input type="email" name="email" class="newsletter-input" placeholder="Email address" required>
+                            <button type="submit" class="newsletter-button">Sign up</button>
+                        </div>
+                        <label class="newsletter-consent">
+                            <input type="checkbox" name="gdpr" required>
+                            <span>I agree to receive emails and accept the <a href="#datenschutz">Privacy Policy</a>.</span>
+                        </label>
+                        <div class="newsletter-status" id="newsletter-status-events"></div>
+                    </form>
                 </div>
 
                 <div class="section-footer">
@@ -425,10 +418,17 @@
                 </div>
                 
                 <div class="page-section-block">
-                    <div id="fd-form-newsletter"></div>
-                    <script>
-                      window.fd('form', { formId: '69866e6515c468859b405032', containerEl: '#fd-form-newsletter' });
-                    </script>
+                    <form class="newsletter-form" id="newsletter-form-tohru" novalidate>
+                        <div class="newsletter-input-group">
+                            <input type="email" name="email" class="newsletter-input" placeholder="Email address" required>
+                            <button type="submit" class="newsletter-button">Sign up</button>
+                        </div>
+                        <label class="newsletter-consent">
+                            <input type="checkbox" name="gdpr" required>
+                            <span>I agree to receive emails and accept the <a href="#datenschutz">Privacy Policy</a>.</span>
+                        </label>
+                        <div class="newsletter-status" id="newsletter-status-tohru"></div>
+                    </form>
                 </div>
 
                 <!-- Footer in Newsletter Section -->
@@ -763,84 +763,62 @@
 
     <script src="script.js"></script>
     <script>
-    /* Restyle Flodesk forms — persistent observer, re-applies on every mutation */
+    /* Newsletter: submit to /api/subscribe */
     (function() {
-      var formId = '69866e6515c468859b405032';
-      var p = 'ff-' + formId;
-      var S = function(el, css) { if (el) el.style.cssText = css; };
-      var H = function(el) { if (el) el.style.cssText = 'display:none!important;'; };
-
-      function style(c) {
-        var root = c.querySelector('.' + p);
-        if (!root) return;
-
-        S(root, 'background:transparent!important;padding:0!important;margin:0!important;border:none!important;box-shadow:none!important;max-width:100%!important;');
-        S(c.querySelector('.' + p + '__container'), 'background:transparent!important;padding:0!important;margin:0!important;border:none!important;box-shadow:none!important;max-width:100%!important;');
-        S(c.querySelector('.' + p + '__form'), 'background:transparent!important;padding:0!important;margin:0!important;');
-        S(c.querySelector('.' + p + '__content'), 'padding:0!important;');
-
-        /* Hide: title, subtitle, config */
-        H(c.querySelector('.' + p + '__title'));
-        H(c.querySelector('.' + p + '__subtitle'));
-        H(c.querySelector('[data-ff-el="config"]'));
-
-        /* Fields row */
-        S(c.querySelector('.' + p + '__fields'), 'display:flex!important;gap:12px!important;margin:0!important;align-items:stretch!important;');
-
-        /* All field wrappers */
-        var allFields = c.querySelectorAll('.' + p + '__field');
-        allFields.forEach(function(f) {
-          S(f, 'flex:1!important;min-width:0!important;margin:0!important;padding:0!important;');
+      function setup(formId, segment) {
+        var form = document.getElementById(formId);
+        if (!form) return;
+        var statusId = formId.replace('newsletter-form-', 'newsletter-status-');
+        var status = document.getElementById(statusId);
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var email = form.querySelector('input[name="email"]');
+          var gdpr = form.querySelector('input[name="gdpr"]');
+          var btn = form.querySelector('.newsletter-button');
+          var original = btn.textContent;
+          status.textContent = '';
+          status.className = 'newsletter-status';
+          if (!email.value || !email.validity.valid) {
+            status.textContent = 'Please enter a valid email address.';
+            status.classList.add('newsletter-error');
+            return;
+          }
+          if (gdpr && !gdpr.checked) {
+            status.textContent = 'Please accept the Privacy Policy.';
+            status.classList.add('newsletter-error');
+            return;
+          }
+          btn.disabled = true;
+          btn.textContent = 'Sending…';
+          fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email.value, segment: segment, gdpr: gdpr ? gdpr.checked : false })
+          })
+          .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
+          .then(function(res) {
+            if (res.ok) {
+              status.textContent = 'Thank you! You are now subscribed.';
+              status.classList.add('newsletter-success');
+              email.value = '';
+              if (gdpr) gdpr.checked = false;
+            } else {
+              status.textContent = 'Something went wrong. Please try again.';
+              status.classList.add('newsletter-error');
+            }
+          })
+          .catch(function() {
+            status.textContent = 'Something went wrong. Please try again.';
+            status.classList.add('newsletter-error');
+          })
+          .finally(function() {
+            btn.disabled = false;
+            btn.textContent = original;
+          });
         });
-
-        /* Hide honeypot + any non-email inputs */
-        c.querySelectorAll('input[name="confirm_email_address"]').forEach(function(el) { H(el); });
-
-        /* Email input */
-        var input = c.querySelector('input[name="email"]');
-        if (input) {
-          S(input, 'width:100%!important;height:100%!important;box-sizing:border-box!important;padding:16px 20px!important;font-family:"Work Sans",sans-serif!important;font-size:16px!important;font-weight:300!important;color:#fff!important;background:rgba(255,255,255,0.1)!important;border:1px solid rgba(255,255,255,0.2)!important;border-radius:0!important;outline:none!important;');
-          input.setAttribute('placeholder', 'Email address');
-        }
-
-        /* Hide labels */
-        c.querySelectorAll('.' + p + '__label').forEach(function(el) { H(el); });
-
-        /* Footer + button */
-        S(c.querySelector('.' + p + '__footer'), 'padding:0!important;margin:0!important;');
-        var btn = c.querySelector('.' + p + '__button');
-        if (btn) {
-          S(btn, 'padding:16px 28px!important;font-family:"Work Sans",sans-serif!important;font-size:16px!important;font-weight:400!important;color:#0e0c0a!important;background:#fff!important;border:none!important;border-radius:0!important;cursor:pointer!important;white-space:nowrap!important;');
-          if (btn.textContent.trim() === 'Subscribe') btn.textContent = 'Sign up';
-        }
-
-        /* GDPR */
-        S(c.querySelector('.' + p + '__accepts-gdpr-block'), 'margin-top:12px!important;padding:0!important;');
-        S(c.querySelector('.' + p + '__accepts-gdpr-checkbox'), 'display:flex!important;align-items:center!important;gap:8px!important;cursor:pointer!important;');
-
-        /* Checkbox: force visible */
-        var cb = c.querySelector('.fd-form-check__input');
-        if (cb) S(cb, 'position:static!important;opacity:1!important;width:16px!important;height:16px!important;accent-color:#fff!important;flex-shrink:0!important;pointer-events:auto!important;appearance:auto!important;-webkit-appearance:checkbox!important;margin:0!important;');
-
-        H(c.querySelector('.fd-form-check__checkmark'));
-        S(c.querySelector('.fd-form-check__label'), 'font-family:"Work Sans",sans-serif!important;font-size:12px!important;font-weight:300!important;color:rgba(255,255,255,0.8)!important;line-height:1.3!important;');
-        S(c.querySelector('.' + p + '__privacy-policy-link'), 'color:rgba(255,255,255,0.8)!important;text-decoration:underline!important;');
-        S(c.querySelector('.' + p + '__success'), 'font-family:"Work Sans",sans-serif!important;font-size:16px!important;color:rgba(255,255,255,0.8)!important;background:transparent!important;padding:12px 0!important;');
       }
-
-      function observe(id) {
-        var c = document.getElementById(id);
-        if (!c) return;
-        new MutationObserver(function() { style(c); }).observe(c, { childList: true, subtree: true, attributes: true });
-        style(c);
-        /* Re-apply after Flodesk's own scripts finish */
-        setTimeout(function() { style(c); }, 500);
-        setTimeout(function() { style(c); }, 1500);
-        setTimeout(function() { style(c); }, 3000);
-      }
-
-      observe('fd-form-events');
-      observe('fd-form-newsletter');
+      setup('newsletter-form-events', 'tohru');
+      setup('newsletter-form-tohru', 'tohru');
     })();
     </script>
 
