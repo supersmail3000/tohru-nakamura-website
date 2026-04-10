@@ -1,7 +1,10 @@
 {
   "rewrites": [
     { "source": "/tohru", "destination": "/tohru.html" },
-    { "source": "/schreiberei", "destination": "/schreiberei.html" }
+    { "source": "/bar-tatar", "destination": "/schreiberei.html" }
+  ],
+  "redirects": [
+    { "source": "/schreiberei", "destination": "/bar-tatar", "permanent": true }
   ],
   "headers": [
     {
