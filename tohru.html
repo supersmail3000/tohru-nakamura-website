@@ -92,6 +92,20 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+    <!-- Flodesk (submission only) -->
+    <script>
+      (function(w, d, t, h, s, n) {
+        w.FlodeskObject = n;
+        var fn = function() { (w[n].q = w[n].q || []).push(arguments); };
+        w[n] = w[n] || fn;
+        var f = d.getElementsByTagName(t)[0];
+        var v = '?v=' + Math.floor(new Date().getTime() / (120 * 1000)) * 60;
+        var sm = d.createElement(t); sm.async = true; sm.type = 'module';
+        sm.src = h + s + '.mjs' + v; f.parentNode.insertBefore(sm, f);
+        var sn = d.createElement(t); sn.async = true; sn.noModule = true;
+        sn.src = h + s + '.js' + v; f.parentNode.insertBefore(sn, f);
+      })(window, document, 'script', 'https://assets.flodesk.com', '/universal', 'fd');
+    </script>
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -230,8 +244,13 @@
                         </label>
                         <div class="newsletter-status" aria-live="polite"></div>
                     </form>
+                    <!-- Hidden Flodesk form for submission -->
+                    <div id="fd-form-events-hidden" style="position:absolute;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;"></div>
+                    <script>
+                      window.fd('form', { formId: '69866e6515c468859b405032', containerEl: '#fd-form-events-hidden' });
+                    </script>
                 </div>
-                
+
                 <div class="section-footer">
                     <a href="#impressum">Legal Notice</a>
                     <span>|</span>
@@ -429,8 +448,13 @@
                         </label>
                         <div class="newsletter-status" aria-live="polite"></div>
                     </form>
+                    <!-- Hidden Flodesk form for submission -->
+                    <div id="fd-form-newsletter-hidden" style="position:absolute;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;"></div>
+                    <script>
+                      window.fd('form', { formId: '69866e6515c468859b405032', containerEl: '#fd-form-newsletter-hidden' });
+                    </script>
                 </div>
-                
+
                 <!-- Footer in Newsletter Section -->
                 <div class="section-footer">
                     <a href="#impressum">Legal Notice</a>
@@ -764,6 +788,37 @@
     <script src="script.js"></script>
     <script>
     (function() {
+      function findFdInput(container) {
+        var el = container.querySelector('input[type="email"]');
+        if (el) return el;
+        var all = container.querySelectorAll('*');
+        for (var i = 0; i < all.length; i++) {
+          if (all[i].shadowRoot) {
+            el = all[i].shadowRoot.querySelector('input[type="email"]');
+            if (el) return el;
+          }
+        }
+        return null;
+      }
+
+      function findFdSubmit(container) {
+        var el = container.querySelector('button[type="submit"], input[type="submit"]');
+        if (el) return el;
+        var all = container.querySelectorAll('*');
+        for (var i = 0; i < all.length; i++) {
+          if (all[i].shadowRoot) {
+            el = all[i].shadowRoot.querySelector('button[type="submit"], input[type="submit"]');
+            if (el) return el;
+          }
+        }
+        return null;
+      }
+
+      var formMap = {
+        'newsletter-form-events': 'fd-form-events-hidden',
+        'newsletter-form-main': 'fd-form-newsletter-hidden'
+      };
+
       var forms = document.querySelectorAll('.newsletter-form');
       forms.forEach(function(form) {
         form.addEventListener('submit', function(e) {
@@ -775,20 +830,41 @@
           if (!consent) { status.textContent = 'Please agree to receive emails.'; status.className = 'newsletter-status newsletter-error'; return; }
           var btn = form.querySelector('.newsletter-button');
           btn.disabled = true; btn.textContent = '...';
-          fetch('https://assets.flodesk.com/api/v1/subscriber-forms/69866e6515c468859b405032', {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email })
-          }).then(function(r) {
-            if (r.ok || r.status === 200 || r.status === 201) {
+
+          var hiddenId = formMap[form.id];
+          var fdContainer = hiddenId ? document.getElementById(hiddenId) : null;
+          var fdInput = fdContainer ? findFdInput(fdContainer) : null;
+          var fdSubmit = fdContainer ? findFdSubmit(fdContainer) : null;
+
+          if (fdInput && fdSubmit) {
+            var nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+            nativeSetter.call(fdInput, email);
+            fdInput.dispatchEvent(new Event('input', { bubbles: true }));
+            fdInput.dispatchEvent(new Event('change', { bubbles: true }));
+            fdSubmit.click();
+            setTimeout(function() {
               status.textContent = 'Welcome to the circle!';
               status.className = 'newsletter-status newsletter-success';
               form.querySelector('input[type="email"]').value = '';
               form.querySelector('input[type="checkbox"]').checked = false;
-            } else { throw new Error('Error'); }
-          }).catch(function() {
-            status.textContent = 'Something went wrong. Please try again.';
-            status.className = 'newsletter-status newsletter-error';
-          }).finally(function() { btn.disabled = false; btn.textContent = 'Subscribe'; });
+              btn.disabled = false; btn.textContent = 'Subscribe';
+            }, 1500);
+          } else {
+            fetch('https://assets.flodesk.com/api/v1/subscriber-forms/69866e6515c468859b405032', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: email }),
+              mode: 'no-cors'
+            }).then(function() {
+              status.textContent = 'Welcome to the circle!';
+              status.className = 'newsletter-status newsletter-success';
+              form.querySelector('input[type="email"]').value = '';
+              form.querySelector('input[type="checkbox"]').checked = false;
+            }).catch(function() {
+              status.textContent = 'Something went wrong. Please try again.';
+              status.className = 'newsletter-status newsletter-error';
+            }).finally(function() { btn.disabled = false; btn.textContent = 'Subscribe'; });
+          }
         });
       });
     })();

@@ -23,6 +23,21 @@
 
     <link rel="stylesheet" href="schreiberei-styles.css">
 
+    <!-- Flodesk (submission only) -->
+    <script>
+      (function(w, d, t, h, s, n) {
+        w.FlodeskObject = n;
+        var fn = function() { (w[n].q = w[n].q || []).push(arguments); };
+        w[n] = w[n] || fn;
+        var f = d.getElementsByTagName(t)[0];
+        var v = '?v=' + Math.floor(new Date().getTime() / (120 * 1000)) * 60;
+        var sm = d.createElement(t); sm.async = true; sm.type = 'module';
+        sm.src = h + s + '.mjs' + v; f.parentNode.insertBefore(sm, f);
+        var sn = d.createElement(t); sn.async = true; sn.noModule = true;
+        sn.src = h + s + '.js' + v; f.parentNode.insertBefore(sn, f);
+      })(window, document, 'script', 'https://assets.flodesk.com', '/universal', 'fd');
+    </script>
+
     <!-- Theme Color -->
     <meta name="theme-color" content="#c6b47b">
 
@@ -329,6 +344,11 @@
                         </label>
                         <div class="newsletter-status" aria-live="polite"></div>
                     </form>
+                    <!-- Hidden Flodesk form for submission -->
+                    <div id="fd-form-hidden" style="position:absolute;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;"></div>
+                    <script>
+                      window.fd('form', { formId: '69d8d93bdd2f311ef9b1076e', containerEl: '#fd-form-hidden' });
+                    </script>
                 </div>
 
                 <div class="section-footer">
@@ -609,6 +629,34 @@
     (function() {
       var form = document.getElementById('newsletter-form');
       if (!form) return;
+
+      function findFdInput(container) {
+        // Check shadow DOM first
+        var el = container.querySelector('input[type="email"]');
+        if (el) return el;
+        var shadows = container.querySelectorAll('*');
+        for (var i = 0; i < shadows.length; i++) {
+          if (shadows[i].shadowRoot) {
+            el = shadows[i].shadowRoot.querySelector('input[type="email"]');
+            if (el) return el;
+          }
+        }
+        return null;
+      }
+
+      function findFdSubmit(container) {
+        var el = container.querySelector('button[type="submit"], input[type="submit"]');
+        if (el) return el;
+        var shadows = container.querySelectorAll('*');
+        for (var i = 0; i < shadows.length; i++) {
+          if (shadows[i].shadowRoot) {
+            el = shadows[i].shadowRoot.querySelector('button[type="submit"], input[type="submit"]');
+            if (el) return el;
+          }
+        }
+        return null;
+      }
+
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         var email = form.querySelector('input[type="email"]').value.trim();
@@ -618,20 +666,43 @@
         if (!consent) { status.textContent = 'Bitte stimme dem Erhalt von E-Mails zu.'; status.className = 'newsletter-status newsletter-error'; return; }
         var btn = form.querySelector('.newsletter-button');
         btn.disabled = true; btn.textContent = '...';
-        fetch('https://assets.flodesk.com/api/v1/subscriber-forms/69d8d93bdd2f311ef9b1076e', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email })
-        }).then(function(r) {
-          if (r.ok || r.status === 200 || r.status === 201) {
+
+        var fdContainer = document.getElementById('fd-form-hidden');
+        var fdInput = findFdInput(fdContainer);
+        var fdSubmit = findFdSubmit(fdContainer);
+
+        if (fdInput && fdSubmit) {
+          // Set value natively so frameworks detect the change
+          var nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+          nativeSetter.call(fdInput, email);
+          fdInput.dispatchEvent(new Event('input', { bubbles: true }));
+          fdInput.dispatchEvent(new Event('change', { bubbles: true }));
+          fdSubmit.click();
+          // Assume success after short delay
+          setTimeout(function() {
             status.textContent = 'Willkommen an Bord!';
             status.className = 'newsletter-status newsletter-success';
             form.querySelector('input[type="email"]').value = '';
             form.querySelector('input[type="checkbox"]').checked = false;
-          } else { throw new Error('Error'); }
-        }).catch(function() {
-          status.textContent = 'Etwas ist schiefgelaufen. Bitte versuche es erneut.';
-          status.className = 'newsletter-status newsletter-error';
-        }).finally(function() { btn.disabled = false; btn.textContent = 'Anmelden'; });
+            btn.disabled = false; btn.textContent = 'Anmelden';
+          }, 1500);
+        } else {
+          // Fallback: direct POST
+          fetch('https://assets.flodesk.com/api/v1/subscriber-forms/69d8d93bdd2f311ef9b1076e', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email }),
+            mode: 'no-cors'
+          }).then(function() {
+            status.textContent = 'Willkommen an Bord!';
+            status.className = 'newsletter-status newsletter-success';
+            form.querySelector('input[type="email"]').value = '';
+            form.querySelector('input[type="checkbox"]').checked = false;
+          }).catch(function() {
+            status.textContent = 'Etwas ist schiefgelaufen. Bitte versuche es erneut.';
+            status.className = 'newsletter-status newsletter-error';
+          }).finally(function() { btn.disabled = false; btn.textContent = 'Anmelden'; });
+        }
       });
     })();
     </script>

@@ -1782,7 +1782,7 @@ body:has(.home-section) .navbar {
 /* Newsletter Consent Checkbox */
 .newsletter-consent {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 8px;
     margin-top: 12px;
     cursor: pointer;
@@ -1791,7 +1791,7 @@ body:has(.home-section) .navbar {
 .newsletter-consent input[type="checkbox"] {
     width: 16px;
     height: 16px;
-    margin-top: 2px;
+    margin-top: 0;
     accent-color: #ffffff;
     flex-shrink: 0;
 }
@@ -1800,8 +1800,8 @@ body:has(.home-section) .navbar {
     font-family: 'Work Sans', sans-serif;
     font-size: 12px;
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.5);
-    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1;
 }
 
 /* Newsletter Status Messages */
