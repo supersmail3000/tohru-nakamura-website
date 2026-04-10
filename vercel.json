@@ -4,7 +4,8 @@
     { "source": "/bar-tatar", "destination": "/schreiberei.html" }
   ],
   "redirects": [
-    { "source": "/schreiberei", "destination": "/bar-tatar", "permanent": true }
+    { "source": "/schreiberei", "destination": "/bar-tatar", "permanent": true },
+    { "source": "/restaurant", "destination": "/bar-tatar", "permanent": true }
   ],
   "headers": [
     {
