@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Schreiberei — Home of Bar Tatar & Tohru. Burgstraße 5, München Altstadt.">
+  <meta name="description" content="Schreiberei München — zwei Konzepte unter einem Dach: Bar Tatar mit Tatar-Variationen & Drinks (Di–Sa) und Tohru, Drei-Sterne-Küche von Tohru Nakamura. Burgstraße 5, Altstadt.">
   <title>Schreiberei München — Bar Tatar & Tohru | Burgstraße 5</title>
   <link rel="canonical" href="https://schreiberei-muc.de/">
 
@@ -17,10 +17,58 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Schreiberei München — Bar Tatar & Tohru">
-  <meta property="og:description" content="Bar Tatar & Tohru in der Schreiberei. Burgstraße 5, München Altstadt.">
+  <meta property="og:description" content="Zwei Konzepte unter einem Dach: Bar Tatar — Tatar-Variationen & ehrliche Drinks. Tohru — Drei-Sterne-Küche von Tohru Nakamura. Burgstraße 5, München Altstadt.">
   <meta property="og:url" content="https://schreiberei-muc.de/">
   <meta property="og:image" content="https://schreiberei-muc.de/images/hero-1.jpg">
   <meta property="og:locale" content="de_DE">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Schreiberei München",
+    "description": "Zwei Konzepte unter einem Dach: Bar Tatar und Tohru — Burgstraße 5, München Altstadt.",
+    "url": "https://schreiberei-muc.de",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Burgstraße 5",
+      "addressLocality": "München",
+      "postalCode": "80331",
+      "addressCountry": "DE"
+    },
+    "subOrganization": [
+      {
+        "@type": "Restaurant",
+        "name": "Bar Tatar",
+        "url": "https://schreiberei-muc.de/bar-tatar",
+        "servesCuisine": ["Tatar", "Cocktails"],
+        "priceRange": "€€–€€€",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "17:00",
+            "closes": "01:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "13:00",
+            "closes": "01:00"
+          }
+        ]
+      },
+      {
+        "@type": "Restaurant",
+        "name": "Tohru",
+        "url": "https://tohru-nakamura.de/tohru",
+        "servesCuisine": ["Fine Dining", "French-Japanese"],
+        "priceRange": "€€€€"
+      }
+    ]
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

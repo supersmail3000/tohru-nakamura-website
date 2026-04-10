@@ -1617,6 +1617,19 @@ a.button-outline:hover {
     transform: scaleX(1);
 }
 
+.contact-subheadline {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-light);
+    opacity: 0.7;
+    margin: 8px 0 2px 0;
+}
+
+.contact-hours p {
+    font-size: 12px;
+}
+
 /* Page Section Responsive */
 @media (max-width: 1024px) {
     .page-container {

@@ -365,6 +365,14 @@ body:has(.home-section) .navbar {
     min-height: 1.6em;
 }
 
+.home-tagline .location-time {
+    font-size: 0.75rem;
+    opacity: 0.6;
+    font-weight: 400;
+    color: rgba(36, 36, 35, 0.6);
+    animation-delay: 0.8s;
+}
+
 .open-status {
     display: inline-flex;
     align-items: center;
@@ -1029,6 +1037,48 @@ body:has(.home-section) .navbar {
     margin: 0;
 }
 
+.event-date {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: var(--spacing-xs);
+}
+
+.event-date p {
+    font-family: "orpheuspro", serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(36, 36, 35, 0.9);
+    margin: 0;
+}
+
+/* Outline button (small) */
+a.button-outline,
+a.button-outline:link,
+a.button-outline:visited {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: #1D1D1B;
+    font-family: "orpheuspro", serif;
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: none;
+    padding: 8px 20px;
+    border: 1px solid rgba(36, 36, 35, 0.4);
+    transition: all 0.3s ease;
+    align-self: flex-start;
+    letter-spacing: 0.02em;
+}
+
+a.button-outline:hover {
+    background-color: #1D1D1B;
+    color: #ffffff;
+    border-color: #1D1D1B;
+    text-decoration: none;
+}
+
 .reserve-text {
     font-family: "orpheuspro", serif;
     font-size: 16px;
@@ -1513,6 +1563,19 @@ body:has(.home-section) .navbar {
 .contact-link:hover::before {
     visibility: visible;
     transform: scaleX(1);
+}
+
+.contact-subheadline {
+    font-family: "orpheuspro", serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-light);
+    opacity: 0.7;
+    margin: 8px 0 2px 0;
+}
+
+.contact-hours p {
+    font-size: 12px;
 }
 
 /* Page Section Responsive */
