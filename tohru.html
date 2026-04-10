@@ -233,21 +233,9 @@
                         <p>Stay connected – receive our newsletter and be part of the journey.</p>
                     </div>
                     
-                    <form class="newsletter-form" id="newsletter-form-events" novalidate>
-                        <div class="newsletter-input-group">
-                            <input type="email" class="newsletter-input" placeholder="Email address" required aria-label="Email address">
-                            <button type="submit" class="newsletter-button">Subscribe</button>
-                        </div>
-                        <label class="newsletter-consent">
-                            <input type="checkbox" required>
-                            <span>I agree to receive marketing emails.</span>
-                        </label>
-                        <div class="newsletter-status" aria-live="polite"></div>
-                    </form>
-                    <!-- Hidden Flodesk form for submission -->
-                    <div id="fd-form-events-hidden" style="position:absolute;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;"></div>
+                    <div id="fd-form-events"></div>
                     <script>
-                      window.fd('form', { formId: '69866e6515c468859b405032', containerEl: '#fd-form-events-hidden' });
+                      window.fd('form', { formId: '69866e6515c468859b405032', containerEl: '#fd-form-events' });
                     </script>
                 </div>
 
@@ -437,21 +425,9 @@
                 </div>
                 
                 <div class="page-section-block">
-                    <form class="newsletter-form" id="newsletter-form-main" novalidate>
-                        <div class="newsletter-input-group">
-                            <input type="email" class="newsletter-input" placeholder="Email address" required aria-label="Email address">
-                            <button type="submit" class="newsletter-button">Subscribe</button>
-                        </div>
-                        <label class="newsletter-consent">
-                            <input type="checkbox" required>
-                            <span>I agree to receive marketing emails.</span>
-                        </label>
-                        <div class="newsletter-status" aria-live="polite"></div>
-                    </form>
-                    <!-- Hidden Flodesk form for submission -->
-                    <div id="fd-form-newsletter-hidden" style="position:absolute;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;"></div>
+                    <div id="fd-form-newsletter"></div>
                     <script>
-                      window.fd('form', { formId: '69866e6515c468859b405032', containerEl: '#fd-form-newsletter-hidden' });
+                      window.fd('form', { formId: '69866e6515c468859b405032', containerEl: '#fd-form-newsletter' });
                     </script>
                 </div>
 
@@ -787,86 +763,52 @@
 
     <script src="script.js"></script>
     <script>
+    /* Inject custom styles into Flodesk shadow DOM */
     (function() {
-      function findFdInput(container) {
-        var el = container.querySelector('input[type="email"]');
-        if (el) return el;
-        var all = container.querySelectorAll('*');
-        for (var i = 0; i < all.length; i++) {
-          if (all[i].shadowRoot) {
-            el = all[i].shadowRoot.querySelector('input[type="email"]');
-            if (el) return el;
+      var css = '\
+        * { box-sizing: border-box; }\
+        :host { all: initial; display: block; }\
+        .fd-form-container, form, div[class] { background: transparent !important; padding: 0 !important; margin: 0 !important; border: none !important; box-shadow: none !important; }\
+        h1, h2, h3, .fd-form-title, .fd-form-description, p, [data-branding], .fd-powered-by, a[href*="flodesk"], .fd-form-header, .fd-form-footer, .fd-form-branding { display: none !important; }\
+        form { display: flex !important; gap: 12px !important; flex-wrap: wrap !important; align-items: stretch !important; }\
+        input[type="email"], input[type="text"] { flex: 1 !important; min-width: 200px !important; padding: 16px 20px !important; font-family: "Work Sans", sans-serif !important; font-size: 16px !important; font-weight: 300 !important; color: #ffffff !important; background-color: rgba(255,255,255,0.08) !important; border: 1px solid rgba(255,255,255,0.15) !important; border-radius: 0 !important; outline: none !important; -webkit-appearance: none !important; }\
+        input[type="email"]::placeholder, input[type="text"]::placeholder { color: rgba(255,255,255,0.5) !important; }\
+        input[type="email"]:focus, input[type="text"]:focus { background-color: rgba(255,255,255,0.15) !important; border-color: rgba(255,255,255,0.4) !important; }\
+        button[type="submit"], input[type="submit"] { padding: 16px 28px !important; font-family: "Work Sans", sans-serif !important; font-size: 16px !important; font-weight: 400 !important; color: #0e0c0a !important; background-color: #ffffff !important; border: none !important; border-radius: 0 !important; cursor: pointer !important; white-space: nowrap !important; -webkit-appearance: none !important; transition: all 0.4s cubic-bezier(0.23,1,0.32,1) !important; }\
+        button[type="submit"]:hover, input[type="submit"]:hover { background-color: #f5f5f5 !important; transform: translateY(-2px) !important; }\
+        .fd-form-group, .fd-form-col { width: 100% !important; }\
+        label, .fd-checkbox, .fd-consent { font-family: "Work Sans", sans-serif !important; font-size: 12px !important; font-weight: 300 !important; color: rgba(255,255,255,0.8) !important; display: flex !important; align-items: center !important; gap: 8px !important; margin-top: 12px !important; }\
+        input[type="checkbox"] { accent-color: #ffffff !important; width: 16px !important; height: 16px !important; }\
+        @media (max-width: 768px) { form { flex-direction: column !important; } button[type="submit"], input[type="submit"] { width: 100% !important; } }\
+      ';
+
+      function injectStyles(container) {
+        var els = container.querySelectorAll('*');
+        for (var i = 0; i < els.length; i++) {
+          if (els[i].shadowRoot) {
+            var style = document.createElement('style');
+            style.textContent = css;
+            els[i].shadowRoot.appendChild(style);
+            return true;
           }
         }
-        return null;
+        return false;
       }
 
-      function findFdSubmit(container) {
-        var el = container.querySelector('button[type="submit"], input[type="submit"]');
-        if (el) return el;
-        var all = container.querySelectorAll('*');
-        for (var i = 0; i < all.length; i++) {
-          if (all[i].shadowRoot) {
-            el = all[i].shadowRoot.querySelector('button[type="submit"], input[type="submit"]');
-            if (el) return el;
-          }
-        }
-        return null;
-      }
-
-      var formMap = {
-        'newsletter-form-events': 'fd-form-events-hidden',
-        'newsletter-form-main': 'fd-form-newsletter-hidden'
-      };
-
-      var forms = document.querySelectorAll('.newsletter-form');
-      forms.forEach(function(form) {
-        form.addEventListener('submit', function(e) {
-          e.preventDefault();
-          var email = form.querySelector('input[type="email"]').value.trim();
-          var consent = form.querySelector('input[type="checkbox"]').checked;
-          var status = form.querySelector('.newsletter-status');
-          if (!email) { status.textContent = 'Please enter your email address.'; status.className = 'newsletter-status newsletter-error'; return; }
-          if (!consent) { status.textContent = 'Please agree to receive emails.'; status.className = 'newsletter-status newsletter-error'; return; }
-          var btn = form.querySelector('.newsletter-button');
-          btn.disabled = true; btn.textContent = '...';
-
-          var hiddenId = formMap[form.id];
-          var fdContainer = hiddenId ? document.getElementById(hiddenId) : null;
-          var fdInput = fdContainer ? findFdInput(fdContainer) : null;
-          var fdSubmit = fdContainer ? findFdSubmit(fdContainer) : null;
-
-          if (fdInput && fdSubmit) {
-            var nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
-            nativeSetter.call(fdInput, email);
-            fdInput.dispatchEvent(new Event('input', { bubbles: true }));
-            fdInput.dispatchEvent(new Event('change', { bubbles: true }));
-            fdSubmit.click();
-            setTimeout(function() {
-              status.textContent = 'Welcome to the circle!';
-              status.className = 'newsletter-status newsletter-success';
-              form.querySelector('input[type="email"]').value = '';
-              form.querySelector('input[type="checkbox"]').checked = false;
-              btn.disabled = false; btn.textContent = 'Subscribe';
-            }, 1500);
-          } else {
-            fetch('https://assets.flodesk.com/api/v1/subscriber-forms/69866e6515c468859b405032', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ email: email }),
-              mode: 'no-cors'
-            }).then(function() {
-              status.textContent = 'Welcome to the circle!';
-              status.className = 'newsletter-status newsletter-success';
-              form.querySelector('input[type="email"]').value = '';
-              form.querySelector('input[type="checkbox"]').checked = false;
-            }).catch(function() {
-              status.textContent = 'Something went wrong. Please try again.';
-              status.className = 'newsletter-status newsletter-error';
-            }).finally(function() { btn.disabled = false; btn.textContent = 'Subscribe'; });
+      function observe(id) {
+        var container = document.getElementById(id);
+        if (!container) return;
+        var observer = new MutationObserver(function() {
+          if (injectStyles(container)) {
+            observer.disconnect();
           }
         });
-      });
+        observer.observe(container, { childList: true, subtree: true });
+        injectStyles(container);
+      }
+
+      observe('fd-form-events');
+      observe('fd-form-newsletter');
     })();
     </script>
 
