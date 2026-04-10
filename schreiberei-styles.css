@@ -200,7 +200,7 @@ body:has(.home-section) .navbar {
 
 .nav-brand h1 {
     color: var(--secondary-color);
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 700;
 }
 
@@ -324,7 +324,7 @@ body:has(.home-section) .navbar {
     margin: 0;
     color: var(--text-light);
     font-family: "orpheuspro", serif;
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 400;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -335,7 +335,7 @@ body:has(.home-section) .navbar {
 .home-tagline #datetime-display {
     animation-delay: 0.8s;
     color: rgba(36, 36, 35, 0.5);
-    font-size: 13px;
+    font-size: 12px;
     font-variant-numeric: tabular-nums;
     min-height: 1.4em;
     line-height: 1.4;
@@ -660,7 +660,7 @@ body:has(.home-section) .navbar {
     }
 
     .home-tagline p {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     }
 
     .home-tagline .hero-headline {
@@ -668,7 +668,7 @@ body:has(.home-section) .navbar {
     }
 
     .home-tagline .hero-subline {
-        font-size: 0.875rem;
+        font-size: 1rem;
     }
 
     .home-hero-image {
@@ -689,7 +689,7 @@ body:has(.home-section) .navbar {
     }
 
     .home-navigation .nav-item {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     .home-footer {
@@ -727,7 +727,7 @@ body:has(.home-section) .navbar {
     }
 
     .home-tagline .countdown {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     }
 
     .home-hero-image {
@@ -768,7 +768,7 @@ body:has(.home-section) .navbar {
     }
 
     .home-navigation .nav-item {
-        font-size: 0.85rem;
+        font-size: 1rem;
     }
 
     .home-footer {
@@ -911,7 +911,7 @@ body:has(.home-section) .navbar {
 
 .reserve-headline h1 {
     font-family: "orpheuspro", serif;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
     letter-spacing: 0.5px;
     margin: 0;
@@ -1023,7 +1023,7 @@ body:has(.home-section) .navbar {
 
 .reserve-section-block h2 {
     font-family: "orpheuspro", serif;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     margin: 0;
 }
@@ -1117,21 +1117,21 @@ body:has(.home-section) .navbar {
     }
 
     .reserve-headline h1 {
-        font-size: 24px;
+        font-size: 28px;
     }
 
     .reserve-intro,
     .reserve-text {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .reserve-button {
-        font-size: 14px;
-        padding: 12px 20px;
+        font-size: 16px;
+        padding: 16px 28px;
     }
 
     .reserve-section-block h2 {
-        font-size: 18px;
+        font-size: 20px;
     }
 }
 
@@ -1191,7 +1191,7 @@ body:has(.home-section) .navbar {
 
 .page-headline h1 {
     font-family: "orpheuspro", serif;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
     letter-spacing: 0.5px;
     margin: 0;
@@ -1302,7 +1302,7 @@ body:has(.home-section) .navbar {
 
 .page-section-block h2 {
     font-family: "orpheuspro", serif;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     margin: 0;
 }
@@ -1376,12 +1376,12 @@ body:has(.home-section) .navbar {
     }
 
     .portrait-name {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .portrait-role,
     .portrait-desc {
-        font-size: 11px;
+        font-size: 12px;
     }
 }
 
@@ -1474,7 +1474,7 @@ body:has(.home-section) .navbar {
 
 .contact-section-block h2 {
     font-family: "orpheuspro", serif;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 400;
     margin: 0;
 }
@@ -1539,25 +1539,25 @@ body:has(.home-section) .navbar {
 
 @media (max-width: 480px) {
     .page-headline h1 {
-        font-size: 24px;
+        font-size: 28px;
     }
 
     .page-text {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .page-button {
-        font-size: 14px;
-        padding: 12px 20px;
+        font-size: 16px;
+        padding: 16px 28px;
     }
 
     .page-section-block h2,
     .contact-section-block h2 {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     .contact-link {
-        font-size: 14px;
+        font-size: 16px;
     }
 }
 
@@ -1685,34 +1685,8 @@ body:has(.home-section) .navbar {
     box-shadow: none;
 }
 
-.newsletter-success {
-    font-family: "orpheuspro", serif;
-    font-size: 16px;
-    font-weight: 400;
-    color: #4caf50;
-    padding: 12px;
-    text-align: center;
-    animation: fadeIn 0.5s ease;
-}
-
 .newsletter-error {
-    font-family: "orpheuspro", serif;
-    font-size: 14px;
-    font-weight: 400;
     color: #ff5252;
-    padding: 12px;
-    text-align: center;
-    animation: fadeIn 0.5s ease;
-}
-
-.newsletter-info {
-    font-family: "orpheuspro", serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: rgba(36, 36, 35, 0.5);
-    padding: 12px;
-    text-align: center;
-    margin-top: 8px;
 }
 
 /* Newsletter Form Responsive */
@@ -1723,148 +1697,70 @@ body:has(.home-section) .navbar {
     }
 
     .newsletter-input {
-        padding: 14px 18px;
-        font-size: 15px;
+        padding: 16px 20px;
+        font-size: 16px;
     }
 
     .newsletter-button {
-        padding: 14px 28px;
-        font-size: 15px;
+        padding: 16px 28px;
+        font-size: 16px;
         width: 100%;
     }
 }
 
 @media (max-width: 480px) {
     .newsletter-input {
-        padding: 12px 16px;
-        font-size: 14px;
+        padding: 16px 16px;
+        font-size: 16px;
     }
 
     .newsletter-button {
-        padding: 12px 24px;
-        font-size: 14px;
+        padding: 16px 28px;
+        font-size: 16px;
     }
 }
 
-/* ========================================
-   Flodesk Form Overrides (Bar Tatar)
-   Hide headline/text, match site design
-   ======================================== */
-[id^="fd-form"] {
-    width: 100%;
+/* Newsletter Consent Checkbox */
+.newsletter-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 12px;
+    cursor: pointer;
 }
 
-/* Hide Flodesk headline, description, branding */
-[id^="fd-form"] h1,
-[id^="fd-form"] h2,
-[id^="fd-form"] h3,
-[id^="fd-form"] p,
-[id^="fd-form"] .fd-form-description,
-[id^="fd-form"] .fd-form-title,
-[id^="fd-form"] [data-branding],
-[id^="fd-form"] .fd-powered-by,
-[id^="fd-form"] a[href*="flodesk"] {
-    display: none !important;
+.newsletter-consent input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    accent-color: #1D1D1B;
+    flex-shrink: 0;
 }
 
-/* Form container */
-[id^="fd-form"] form {
-    display: flex !important;
-    gap: var(--spacing-sm) !important;
-    flex-wrap: wrap !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+.newsletter-consent span {
+    font-family: "orpheuspro", serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(36, 36, 35, 0.5);
+    line-height: 1.4;
 }
 
-/* Input field */
-[id^="fd-form"] input[type="email"],
-[id^="fd-form"] input[type="text"] {
-    flex: 1 !important;
-    min-width: 200px !important;
-    padding: var(--spacing-sm) var(--spacing-md) !important;
-    font-family: "orpheuspro", serif !important;
-    font-size: 16px !important;
-    font-weight: 400 !important;
-    color: var(--text-light) !important;
-    background-color: rgba(0, 0, 0, 0.08) !important;
-    border: 1px solid rgba(36, 36, 35, 0.15) !important;
-    border-radius: 0 !important;
-    outline: none !important;
-    transition: all 0.3s ease !important;
-    -webkit-appearance: none !important;
+/* Newsletter Status Messages */
+.newsletter-status {
+    font-family: "orpheuspro", serif;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 12px;
+    text-align: center;
+    margin-top: 8px;
 }
 
-[id^="fd-form"] input[type="email"]::placeholder,
-[id^="fd-form"] input[type="text"]::placeholder {
-    color: rgba(36, 36, 35, 0.4) !important;
+.newsletter-status:empty {
+    display: none;
 }
 
-[id^="fd-form"] input[type="email"]:focus,
-[id^="fd-form"] input[type="text"]:focus {
-    background-color: rgba(0, 0, 0, 0.15) !important;
-    border-color: rgba(36, 36, 35, 0.4) !important;
-}
-
-/* Submit button */
-[id^="fd-form"] button[type="submit"],
-[id^="fd-form"] input[type="submit"] {
-    padding: var(--spacing-sm) var(--spacing-lg) !important;
-    font-family: "orpheuspro", serif !important;
-    font-size: 16px !important;
-    font-weight: 400 !important;
-    color: #ffffff !important;
-    background-color: #1D1D1B !important;
-    border: none !important;
-    border-radius: 0 !important;
-    cursor: pointer !important;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1) !important;
-    white-space: nowrap !important;
-    -webkit-appearance: none !important;
-}
-
-[id^="fd-form"] button[type="submit"]:hover,
-[id^="fd-form"] input[type="submit"]:hover {
-    background-color: #2a2a28 !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2) !important;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    [id^="fd-form"] form {
-        flex-direction: column !important;
-        gap: 12px !important;
-    }
-
-    [id^="fd-form"] input[type="email"],
-    [id^="fd-form"] input[type="text"] {
-        padding: 14px 18px !important;
-        font-size: 15px !important;
-    }
-
-    [id^="fd-form"] button[type="submit"],
-    [id^="fd-form"] input[type="submit"] {
-        padding: 14px 28px !important;
-        font-size: 15px !important;
-        width: 100% !important;
-    }
-}
-
-@media (max-width: 480px) {
-    [id^="fd-form"] input[type="email"],
-    [id^="fd-form"] input[type="text"] {
-        padding: 12px 16px !important;
-        font-size: 14px !important;
-    }
-
-    [id^="fd-form"] button[type="submit"],
-    [id^="fd-form"] input[type="submit"] {
-        padding: 12px 24px !important;
-        font-size: 14px !important;
-    }
+.newsletter-success {
+    color: rgba(36, 36, 35, 0.8);
 }
 
 /* Section Footer - Visible in scrollable sections */
@@ -2020,7 +1916,7 @@ body:has(.home-section) .navbar {
 
 .legal-content h3 {
     font-family: "orpheuspro", serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     margin: 24px 0 12px 0;
     color: var(--text-light);
@@ -2046,7 +1942,7 @@ body:has(.home-section) .navbar {
     align-items: center;
     justify-content: center;
     color: #666;
-    font-size: 14px;
+    font-size: 12px;
     border-radius: 4px;
 }
 
@@ -2065,12 +1961,12 @@ body:has(.home-section) .navbar {
 
     .home-footer a,
     .section-footer a {
-        font-size: 11px;
+        font-size: 12px;
     }
 
     .home-footer span,
     .section-footer span {
-        font-size: 11px;
+        font-size: 12px;
     }
 }
 
@@ -2094,16 +1990,16 @@ body:has(.home-section) .navbar {
 
     .home-footer a,
     .section-footer a {
-        font-size: 10px;
+        font-size: 12px;
     }
 
     .home-footer span,
     .section-footer span {
-        font-size: 10px;
+        font-size: 12px;
     }
 
     .legal-content h2 {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     .legal-content h3 {

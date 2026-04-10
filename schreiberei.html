@@ -23,29 +23,6 @@
 
     <link rel="stylesheet" href="schreiberei-styles.css">
 
-    <!-- Flodesk -->
-    <script>
-      (function(w, d, t, h, s, n) {
-        w.FlodeskObject = n;
-        var fn = function() {
-          (w[n].q = w[n].q || []).push(arguments);
-        };
-        w[n] = w[n] || fn;
-        var f = d.getElementsByTagName(t)[0];
-        var v = '?v=' + Math.floor(new Date().getTime() / (120 * 1000)) * 60;
-        var sm = d.createElement(t);
-        sm.async = true;
-        sm.type = 'module';
-        sm.src = h + s + '.mjs' + v;
-        f.parentNode.insertBefore(sm, f);
-        var sn = d.createElement(t);
-        sn.async = true;
-        sn.noModule = true;
-        sn.src = h + s + '.js' + v;
-        f.parentNode.insertBefore(sn, f);
-      })(window, document, 'script', 'https://assets.flodesk.com', '/universal', 'fd');
-    </script>
-
     <!-- Theme Color -->
     <meta name="theme-color" content="#c6b47b">
 
@@ -131,9 +108,7 @@
                     <p>Kein Dresscode, kein Stress. Nur gutes Tatar, ehrliche Drinks und Leute, die sich freuen, euch zu sehen.</p>
                 </div>
 
-                <div class="opentable-widget">
-                    <script type='text/javascript' src='//www.opentable.de/widget/reservation/loader?rid=272529&type=button&theme=standard&color=8&dark=false&iframe=true&domain=de&lang=de-DE&newtab=true&ot_source=Restaurant%20website&font=garamond&ot_logo=standard&primary_color=f4f1ed&primary_font_color=333333&button_color=c6b47b&button_font_color=333333&logo_pid=92592861&cfe=true'></script>
-                </div>
+                <a href="https://www.opentable.de/r/bar-tatar-in-der-schreiberei-munchen?rid=272529" target="_blank" class="reserve-button">Jetzt reservieren</a>
 
                 <div class="reserve-section-block">
                     <h2>Via WhatsApp</h2>
@@ -343,13 +318,17 @@
                 </div>
 
                 <div class="page-section-block">
-                    <div id="fd-form-69d8d93bdd2f311ef9b1076e"></div>
-                    <script>
-                      window.fd('form', {
-                        formId: '69d8d93bdd2f311ef9b1076e',
-                        containerEl: '#fd-form-69d8d93bdd2f311ef9b1076e'
-                      });
-                    </script>
+                    <form class="newsletter-form" id="newsletter-form" novalidate>
+                        <div class="newsletter-input-group">
+                            <input type="email" class="newsletter-input" placeholder="E-Mail-Adresse" required aria-label="E-Mail-Adresse">
+                            <button type="submit" class="newsletter-button">Anmelden</button>
+                        </div>
+                        <label class="newsletter-consent">
+                            <input type="checkbox" required>
+                            <span>Ich stimme dem Erhalt von Marketing-E-Mails zu.</span>
+                        </label>
+                        <div class="newsletter-status" aria-live="polite"></div>
+                    </form>
                 </div>
 
                 <div class="section-footer">
@@ -626,5 +605,35 @@
     </section>
 
     <script src="schreiberei-script.js"></script>
+    <script>
+    (function() {
+      var form = document.getElementById('newsletter-form');
+      if (!form) return;
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var email = form.querySelector('input[type="email"]').value.trim();
+        var consent = form.querySelector('input[type="checkbox"]').checked;
+        var status = form.querySelector('.newsletter-status');
+        if (!email) { status.textContent = 'Bitte E-Mail-Adresse eingeben.'; status.className = 'newsletter-status newsletter-error'; return; }
+        if (!consent) { status.textContent = 'Bitte stimme dem Erhalt von E-Mails zu.'; status.className = 'newsletter-status newsletter-error'; return; }
+        var btn = form.querySelector('.newsletter-button');
+        btn.disabled = true; btn.textContent = '...';
+        fetch('https://assets.flodesk.com/api/v1/subscriber-forms/69d8d93bdd2f311ef9b1076e', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email })
+        }).then(function(r) {
+          if (r.ok || r.status === 200 || r.status === 201) {
+            status.textContent = 'Willkommen an Bord!';
+            status.className = 'newsletter-status newsletter-success';
+            form.querySelector('input[type="email"]').value = '';
+            form.querySelector('input[type="checkbox"]').checked = false;
+          } else { throw new Error('Error'); }
+        }).catch(function() {
+          status.textContent = 'Etwas ist schiefgelaufen. Bitte versuche es erneut.';
+          status.className = 'newsletter-status newsletter-error';
+        }).finally(function() { btn.disabled = false; btn.textContent = 'Anmelden'; });
+      });
+    })();
+    </script>
 </body>
 </html>

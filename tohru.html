@@ -92,28 +92,6 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Flodesk -->
-    <script>
-      (function(w, d, t, h, s, n) {
-        w.FlodeskObject = n;
-        var fn = function() {
-          (w[n].q = w[n].q || []).push(arguments);
-        };
-        w[n] = w[n] || fn;
-        var f = d.getElementsByTagName(t)[0];
-        var v = '?v=' + Math.floor(new Date().getTime() / (120 * 1000)) * 60;
-        var sm = d.createElement(t);
-        sm.async = true;
-        sm.type = 'module';
-        sm.src = h + s + '.mjs' + v;
-        f.parentNode.insertBefore(sm, f);
-        var sn = d.createElement(t);
-        sn.async = true;
-        sn.noModule = true;
-        sn.src = h + s + '.js' + v;
-        f.parentNode.insertBefore(sn, f);
-      })(window, document, 'script', 'https://assets.flodesk.com', '/universal', 'fd');
-    </script>
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -241,13 +219,17 @@
                         <p>Stay connected – receive our newsletter and be part of the journey.</p>
                     </div>
                     
-                    <div id="fd-form-events"></div>
-                    <script>
-                      window.fd('form', {
-                        formId: '69866e6515c468859b405032',
-                        containerEl: '#fd-form-events'
-                      });
-                    </script>
+                    <form class="newsletter-form" id="newsletter-form-events" novalidate>
+                        <div class="newsletter-input-group">
+                            <input type="email" class="newsletter-input" placeholder="Email address" required aria-label="Email address">
+                            <button type="submit" class="newsletter-button">Subscribe</button>
+                        </div>
+                        <label class="newsletter-consent">
+                            <input type="checkbox" required>
+                            <span>I agree to receive marketing emails.</span>
+                        </label>
+                        <div class="newsletter-status" aria-live="polite"></div>
+                    </form>
                 </div>
                 
                 <div class="section-footer">
@@ -436,13 +418,17 @@
                 </div>
                 
                 <div class="page-section-block">
-                    <div id="fd-form-newsletter"></div>
-                    <script>
-                      window.fd('form', {
-                        formId: '69866e6515c468859b405032',
-                        containerEl: '#fd-form-newsletter'
-                      });
-                    </script>
+                    <form class="newsletter-form" id="newsletter-form-main" novalidate>
+                        <div class="newsletter-input-group">
+                            <input type="email" class="newsletter-input" placeholder="Email address" required aria-label="Email address">
+                            <button type="submit" class="newsletter-button">Subscribe</button>
+                        </div>
+                        <label class="newsletter-consent">
+                            <input type="checkbox" required>
+                            <span>I agree to receive marketing emails.</span>
+                        </label>
+                        <div class="newsletter-status" aria-live="polite"></div>
+                    </form>
                 </div>
                 
                 <!-- Footer in Newsletter Section -->
@@ -776,6 +762,37 @@
     </section>
 
     <script src="script.js"></script>
+    <script>
+    (function() {
+      var forms = document.querySelectorAll('.newsletter-form');
+      forms.forEach(function(form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var email = form.querySelector('input[type="email"]').value.trim();
+          var consent = form.querySelector('input[type="checkbox"]').checked;
+          var status = form.querySelector('.newsletter-status');
+          if (!email) { status.textContent = 'Please enter your email address.'; status.className = 'newsletter-status newsletter-error'; return; }
+          if (!consent) { status.textContent = 'Please agree to receive emails.'; status.className = 'newsletter-status newsletter-error'; return; }
+          var btn = form.querySelector('.newsletter-button');
+          btn.disabled = true; btn.textContent = '...';
+          fetch('https://assets.flodesk.com/api/v1/subscriber-forms/69866e6515c468859b405032', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email })
+          }).then(function(r) {
+            if (r.ok || r.status === 200 || r.status === 201) {
+              status.textContent = 'Welcome to the circle!';
+              status.className = 'newsletter-status newsletter-success';
+              form.querySelector('input[type="email"]').value = '';
+              form.querySelector('input[type="checkbox"]').checked = false;
+            } else { throw new Error('Error'); }
+          }).catch(function() {
+            status.textContent = 'Something went wrong. Please try again.';
+            status.className = 'newsletter-status newsletter-error';
+          }).finally(function() { btn.disabled = false; btn.textContent = 'Subscribe'; });
+        });
+      });
+    })();
+    </script>
 
     <!-- OpenTable Widget Integration handled inline -->
 
