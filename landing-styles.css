@@ -160,18 +160,17 @@ body {
    ======================================== */
 .footer {
   position: absolute;
-  bottom: 80px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .tagline {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 400;
   text-align: center;
   color: #101010;
   white-space: nowrap;
-  padding-bottom: 24px;
 }
 
 /* ========================================
