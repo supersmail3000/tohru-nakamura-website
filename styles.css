@@ -1678,148 +1678,160 @@ body:has(.home-section) .navbar {
     font-size: 12px;
 }
 
-/* Newsletter Form Styles */
-.newsletter-form {
-    width: 100%;
+/* ── Flodesk Form Overrides (Tohru: 69866e6515c468859b405032) ── */
+[id^="fd-form"] .ff-69866e6515c468859b405032,
+[id^="fd-form"] .ff-69866e6515c468859b405032__container {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
 }
 
-.newsletter-input-group {
-    display: flex;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-sm);
+/* Hide title, subtitle, branding */
+[id^="fd-form"] .ff-69866e6515c468859b405032__title,
+[id^="fd-form"] .ff-69866e6515c468859b405032__subtitle,
+[id^="fd-form"] [data-ff-el="config"] {
+    display: none !important;
 }
 
-.newsletter-input {
-    flex: 1;
-    padding: var(--spacing-sm) var(--spacing-md);
-    font-family: 'Work Sans', sans-serif;
-    font-size: 16px;
-    font-weight: 300;
-    color: var(--text-light);
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 0;
-    outline: none;
-    transition: all 0.3s ease;
+/* Form layout */
+[id^="fd-form"] .ff-69866e6515c468859b405032__form {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
-.newsletter-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+[id^="fd-form"] .ff-69866e6515c468859b405032__content {
+    padding: 0 !important;
 }
 
-.newsletter-input:focus {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.4);
+[id^="fd-form"] .ff-69866e6515c468859b405032__fields {
+    display: flex !important;
+    gap: 12px !important;
+    margin-bottom: 0 !important;
 }
 
-.newsletter-input:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+/* Email input */
+[id^="fd-form"] .ff-69866e6515c468859b405032__control {
+    flex: 1 !important;
+    padding: 16px 20px !important;
+    font-family: 'Work Sans', sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 300 !important;
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 0 !important;
+    outline: none !important;
+    -webkit-appearance: none !important;
+    transition: all 0.3s ease !important;
 }
 
-.newsletter-button {
-    padding: var(--spacing-sm) var(--spacing-lg);
-    font-family: 'Work Sans', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    color: #0e0c0a;
-    background-color: #ffffff;
-    border: none;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    white-space: nowrap;
+[id^="fd-form"] .ff-69866e6515c468859b405032__control::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
 }
 
-.newsletter-button:hover {
-    background-color: #f5f5f5;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+[id^="fd-form"] .ff-69866e6515c468859b405032__control:focus {
+    background-color: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
 }
 
-.newsletter-button:disabled {
-    background-color: #666666;
-    color: #999;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
+/* Hide label (placeholder is enough) */
+[id^="fd-form"] .ff-69866e6515c468859b405032__label {
+    display: none !important;
 }
 
-.newsletter-error {
-    color: #ff5252;
+/* Submit button */
+[id^="fd-form"] .ff-69866e6515c468859b405032__button {
+    padding: 16px 28px !important;
+    font-family: 'Work Sans', sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    color: #0e0c0a !important;
+    background-color: #ffffff !important;
+    border: none !important;
+    border-radius: 0 !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1) !important;
 }
 
-/* Newsletter Form Responsive */
+[id^="fd-form"] .ff-69866e6515c468859b405032__button:hover {
+    background-color: #f5f5f5 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2) !important;
+}
+
+[id^="fd-form"] .ff-69866e6515c468859b405032__footer {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* GDPR checkbox */
+[id^="fd-form"] .ff-69866e6515c468859b405032__accepts-gdpr-block {
+    margin-top: 12px !important;
+    padding: 0 !important;
+}
+
+[id^="fd-form"] .ff-69866e6515c468859b405032__accepts-gdpr-checkbox {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    cursor: pointer !important;
+}
+
+[id^="fd-form"] .fd-form-check__input {
+    width: 16px !important;
+    height: 16px !important;
+    accent-color: #ffffff !important;
+    flex-shrink: 0 !important;
+}
+
+[id^="fd-form"] .fd-form-check__checkmark {
+    display: none !important;
+}
+
+[id^="fd-form"] .fd-form-check__label {
+    font-family: 'Work Sans', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 300 !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    line-height: 1.3 !important;
+}
+
+[id^="fd-form"] .ff-69866e6515c468859b405032__privacy-policy-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+    text-decoration: underline !important;
+}
+
+/* Success message */
+[id^="fd-form"] .ff-69866e6515c468859b405032__success {
+    font-family: 'Work Sans', sans-serif !important;
+    font-size: 16px !important;
+    color: rgba(255, 255, 255, 0.8) !important;
+    background: transparent !important;
+    padding: 12px 0 !important;
+}
+
+/* Error message */
+[id^="fd-form"] .ff-69866e6515c468859b405032__error {
+    font-family: 'Work Sans', sans-serif !important;
+    font-size: 12px !important;
+    color: #ff5252 !important;
+    background: transparent !important;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-    .newsletter-input-group {
-        flex-direction: column;
-        gap: 12px;
-    }
-    
-    .newsletter-input {
-        padding: 16px 20px;
-        font-size: 16px;
+    [id^="fd-form"] .ff-69866e6515c468859b405032__fields {
+        flex-direction: column !important;
     }
 
-    .newsletter-button {
-        padding: 16px 28px;
-        font-size: 16px;
-        width: 100%;
+    [id^="fd-form"] .ff-69866e6515c468859b405032__button {
+        width: 100% !important;
     }
-}
-
-@media (max-width: 480px) {
-    .newsletter-input {
-        padding: 16px 16px;
-        font-size: 16px;
-    }
-
-    .newsletter-button {
-        padding: 16px 28px;
-        font-size: 16px;
-    }
-}
-
-/* Newsletter Consent Checkbox */
-.newsletter-consent {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 12px;
-    cursor: pointer;
-}
-
-.newsletter-consent input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    margin-top: 0;
-    accent-color: #ffffff;
-    flex-shrink: 0;
-}
-
-.newsletter-consent span {
-    font-family: 'Work Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1;
-}
-
-/* Newsletter Status Messages */
-.newsletter-status {
-    font-family: 'Work Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 300;
-    padding: 12px;
-    text-align: center;
-    margin-top: 8px;
-}
-
-.newsletter-status:empty {
-    display: none;
-}
-
-.newsletter-success {
-    color: rgba(255, 255, 255, 0.8);
 }
 
 /* Section Footer - Sichtbar in scrollbaren Sections */

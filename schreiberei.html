@@ -23,6 +23,20 @@
 
     <link rel="stylesheet" href="schreiberei-styles.css">
 
+    <!-- Flodesk Universal -->
+    <script>
+      (function(w, d, t, h, s, n) {
+        w.FlodeskObject = n;
+        var fn = function() { (w[n].q = w[n].q || []).push(arguments); };
+        w[n] = w[n] || fn;
+        var f = d.getElementsByTagName(t)[0];
+        var v = '?v=' + Math.floor(new Date().getTime() / (120 * 1000)) * 60;
+        var sm = d.createElement(t); sm.async = true; sm.type = 'module';
+        sm.src = h + s + '.mjs' + v; f.parentNode.insertBefore(sm, f);
+        var sn = d.createElement(t); sn.async = true; sn.noModule = true;
+        sn.src = h + s + '.js' + v; f.parentNode.insertBefore(sn, f);
+      })(window, document, 'script', 'https://assets.flodesk.com', '/universal', 'fd');
+    </script>
 
     <!-- Theme Color -->
     <meta name="theme-color" content="#c6b47b">
@@ -109,7 +123,7 @@
                     <p>Kein Dresscode, kein Stress. Nur gutes Tatar, ehrliche Drinks und Leute, die sich freuen, euch zu sehen.</p>
                 </div>
 
-                <a href="https://www.opentable.de/r/bar-tatar-in-der-schreiberei-munchen?rid=272529" target="_blank" class="reserve-button">Jetzt reservieren</a>
+                <a href="https://www.opentable.de/r/schreiberei-reservations-munchen?restref=272529&lang=de-DE&ot_source=Restaurant%20website" target="_blank" class="reserve-button">Jetzt reservieren</a>
 
                 <div class="reserve-section-block">
                     <h2>Via WhatsApp</h2>
@@ -319,18 +333,10 @@
                 </div>
 
                 <div class="page-section-block">
-                    <form class="newsletter-form" id="newsletter-form-bt" novalidate>
-                        <div class="newsletter-input-group">
-                            <input type="email" name="email" class="newsletter-input" placeholder="E-Mail-Adresse" required>
-                            <button type="submit" class="newsletter-button">Anmelden</button>
-                        </div>
-                        <input type="text" name="confirm_email_address" style="display:none" tabindex="-1" autocomplete="off">
-                        <label class="newsletter-consent">
-                            <input type="checkbox" name="acceptsGdpr" value="true" required>
-                            <span>Ich stimme zu, E-Mails zu erhalten und akzeptiere die <a href="#datenschutz" style="color: inherit; text-decoration: underline;">Datenschutzerklärung</a>.</span>
-                        </label>
-                        <div class="newsletter-status" id="newsletter-status-bt"></div>
-                    </form>
+                    <div id="fd-form-bt"></div>
+                    <script>
+                      window.fd('form', { formId: '69d8d93bdd2f311ef9b1076e', containerEl: '#fd-form-bt' });
+                    </script>
                 </div>
 
                 <div class="section-footer">
@@ -608,63 +614,102 @@
 
     <script src="schreiberei-script.js"></script>
     <script>
-    /* Newsletter form submission via no-cors fetch */
+    /* Restyle Flodesk form after it renders */
     (function() {
-      function setupForm(formId, flodeskId) {
-        var form = document.getElementById(formId);
-        var statusId = formId.replace('newsletter-form', 'newsletter-status');
-        var status = document.getElementById(statusId);
-        if (!form) return;
+      var formId = '69d8d93bdd2f311ef9b1076e';
+      var prefix = 'ff-' + formId;
 
-        form.addEventListener('submit', function(e) {
-          e.preventDefault();
-          var email = form.querySelector('input[name="email"]');
-          var consent = form.querySelector('input[name="acceptsGdpr"]');
-          var btn = form.querySelector('.newsletter-button');
-
-          status.textContent = '';
-          status.className = 'newsletter-status';
-
-          if (!email.value || !email.validity.valid) {
-            status.textContent = 'Bitte gib eine gültige E-Mail-Adresse ein.';
-            status.classList.add('newsletter-error');
-            return;
-          }
-          if (consent && !consent.checked) {
-            status.textContent = 'Bitte stimme der Datenschutzerklärung zu.';
-            status.classList.add('newsletter-error');
-            return;
-          }
-
-          btn.disabled = true;
-          btn.textContent = 'Wird gesendet…';
-
-          var params = new URLSearchParams();
-          params.append('email', email.value);
-          params.append('confirm_email_address', '');
-          if (consent) params.append('acceptsGdpr', 'true');
-
-          fetch('https://form.flodesk.com/forms/' + flodeskId + '/submit', {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: params.toString()
-          }).then(function() {
-            status.textContent = 'Vielen Dank! Du bist jetzt angemeldet.';
-            status.className = 'newsletter-status newsletter-success';
-            email.value = '';
-            if (consent) consent.checked = false;
-          }).catch(function() {
-            status.textContent = 'Ein Fehler ist aufgetreten. Bitte versuche es erneut.';
-            status.classList.add('newsletter-error');
-          }).finally(function() {
-            btn.disabled = false;
-            btn.textContent = 'Anmelden';
-          });
+      function styleForm(container) {
+        /* Root + container: transparent */
+        var root = container.querySelector('.' + prefix);
+        if (!root) return false;
+        var box = container.querySelector('.' + prefix + '__container');
+        [root, box].forEach(function(el) {
+          if (!el) return;
+          el.style.cssText = 'background:transparent!important;padding:0!important;margin:0!important;border:none!important;box-shadow:none!important;max-width:100%!important;';
         });
+
+        /* Form */
+        var form = container.querySelector('.' + prefix + '__form');
+        if (form) form.style.cssText = 'background:transparent!important;padding:0!important;margin:0!important;';
+
+        /* Hide title + subtitle */
+        var title = container.querySelector('.' + prefix + '__title');
+        var subtitle = container.querySelector('.' + prefix + '__subtitle');
+        var config = container.querySelector('[data-ff-el="config"]');
+        [title, subtitle, config].forEach(function(el) { if (el) el.style.display = 'none'; });
+
+        /* Content area */
+        var content = container.querySelector('.' + prefix + '__content');
+        if (content) content.style.cssText = 'padding:0!important;';
+
+        /* Fields row: flex horizontal */
+        var fields = container.querySelector('.' + prefix + '__fields');
+        if (fields) fields.style.cssText = 'display:flex!important;gap:12px!important;margin:0!important;';
+
+        /* Email input */
+        var input = container.querySelector('.' + prefix + '__control');
+        if (input) {
+          input.style.cssText = 'flex:1!important;padding:16px 20px!important;font-family:"orpheuspro",serif!important;font-size:16px!important;font-weight:400!important;color:#242423!important;background:rgba(0,0,0,0.1)!important;border:1px solid rgba(36,36,35,0.2)!important;border-radius:0!important;outline:none!important;';
+          input.setAttribute('placeholder', 'E-Mail-Adresse');
+        }
+
+        /* Hide label */
+        var label = container.querySelector('.' + prefix + '__label');
+        if (label) label.style.display = 'none';
+
+        /* Submit button */
+        var btn = container.querySelector('.' + prefix + '__button');
+        if (btn) {
+          btn.style.cssText = 'padding:16px 28px!important;font-family:"orpheuspro",serif!important;font-size:16px!important;font-weight:400!important;color:#fff!important;background:#1D1D1B!important;border:none!important;border-radius:0!important;cursor:pointer!important;white-space:nowrap!important;';
+          btn.textContent = 'Anmelden';
+        }
+
+        /* Footer */
+        var footer = container.querySelector('.' + prefix + '__footer');
+        if (footer) footer.style.cssText = 'padding:0!important;margin:0!important;';
+
+        /* GDPR block */
+        var gdpr = container.querySelector('.' + prefix + '__accepts-gdpr-block');
+        if (gdpr) gdpr.style.cssText = 'margin-top:12px!important;padding:0!important;';
+
+        var gdprLabel = container.querySelector('.' + prefix + '__accepts-gdpr-checkbox');
+        if (gdprLabel) gdprLabel.style.cssText = 'display:flex!important;align-items:center!important;gap:8px!important;cursor:pointer!important;';
+
+        /* Checkbox */
+        var checkbox = container.querySelector('.fd-form-check__input');
+        if (checkbox) checkbox.style.cssText = 'width:16px!important;height:16px!important;accent-color:#1D1D1B!important;flex-shrink:0!important;';
+
+        /* Custom checkmark: hide */
+        var checkmark = container.querySelector('.fd-form-check__checkmark');
+        if (checkmark) checkmark.style.display = 'none';
+
+        /* Checkbox label text */
+        var checkLabel = container.querySelector('.fd-form-check__label');
+        if (checkLabel) checkLabel.style.cssText = 'font-family:"orpheuspro",serif!important;font-size:12px!important;font-weight:400!important;color:rgba(36,36,35,0.8)!important;line-height:1.3!important;';
+
+        /* Privacy link */
+        var privacyLink = container.querySelector('.' + prefix + '__privacy-policy-link');
+        if (privacyLink) privacyLink.style.cssText = 'color:rgba(36,36,35,0.8)!important;text-decoration:underline!important;';
+
+        /* Success message */
+        var success = container.querySelector('.' + prefix + '__success');
+        if (success) success.style.cssText = 'font-family:"orpheuspro",serif!important;font-size:16px!important;color:rgba(36,36,35,0.8)!important;background:transparent!important;padding:12px 0!important;';
+
+        return true;
       }
 
-      setupForm('newsletter-form-bt', '69d8d93bdd2f311ef9b1076e');
+      function observe(id) {
+        var container = document.getElementById(id);
+        if (!container) return;
+        var observer = new MutationObserver(function() {
+          if (styleForm(container)) observer.disconnect();
+        });
+        observer.observe(container, { childList: true, subtree: true });
+        styleForm(container);
+      }
+
+      observe('fd-form-bt');
     })();
     </script>
 </body>
