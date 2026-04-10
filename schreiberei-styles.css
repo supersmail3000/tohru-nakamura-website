@@ -343,6 +343,12 @@ body:has(.home-section) .navbar {
     letter-spacing: 0.3px;
 }
 
+.home-tagline #datetime-display .digit {
+    display: inline-block;
+    width: 0.6em;
+    text-align: center;
+}
+
 .home-tagline #countdown-display {
     animation-delay: 1s;
     font-variant-numeric: tabular-nums;

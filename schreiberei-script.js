@@ -10,12 +10,16 @@ function updateDateTime() {
     const monthName = months[now.getMonth()];
     const day = now.getDate();
 
-    const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0') + ':' + now.getSeconds().toString().padStart(2, '0');
+    const h = now.getHours().toString().padStart(2, '0');
+    const m = now.getMinutes().toString().padStart(2, '0');
+    const s = now.getSeconds().toString().padStart(2, '0');
+    const wrapDigits = str => str.split('').map(ch => /\d/.test(ch) ? `<span class="digit">${ch}</span>` : ch).join('');
+    const timeStr = wrapDigits(h) + ':' + wrapDigits(m) + ':' + wrapDigits(s);
     const dateTimeString = `${dayName}, ${day}. ${monthName}, ${timeStr}, München`;
 
     const display = document.getElementById('datetime-display');
     if (display) {
-        display.textContent = dateTimeString;
+        display.innerHTML = dateTimeString;
     }
 }
 
