@@ -926,7 +926,7 @@ body:has(.home-section) .navbar {
     max-width: 90%;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-3xl);
 }
 
 .reserve-intro {
@@ -1206,7 +1206,7 @@ body:has(.home-section) .navbar {
     max-width: 90%;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-3xl);
     flex: 1;
     overflow: visible;
 }
