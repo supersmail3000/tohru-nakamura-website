@@ -5,7 +5,20 @@
   ],
   "redirects": [
     { "source": "/schreiberei", "destination": "/bar-tatar", "permanent": true },
-    { "source": "/restaurant", "destination": "/bar-tatar", "permanent": true }
+    { "source": "/restaurant", "destination": "/bar-tatar", "permanent": true },
+    { "source": "/en", "destination": "/", "permanent": true },
+    { "source": "/en/restaurant", "destination": "/bar-tatar", "permanent": true },
+    { "source": "/en/menu-schreiberei", "destination": "/bar-tatar", "permanent": true },
+    { "source": "/en/menu-schreiberei/", "destination": "/bar-tatar", "permanent": true },
+    { "source": "/en/reservierungen", "destination": "/bar-tatar", "permanent": true },
+    { "source": "/en/menu", "destination": "/bar-tatar", "permanent": true },
+    { "source": "/en/tohru", "destination": "/tohru", "permanent": true },
+    { "source": "/en/tohru/", "destination": "/tohru", "permanent": true },
+    { "source": "/en/team", "destination": "/", "permanent": true },
+    { "source": "/en/team-tohru", "destination": "/tohru", "permanent": true },
+    { "source": "/en/nachhaltigkeit", "destination": "/", "permanent": true },
+    { "source": "/en/location", "destination": "/", "permanent": true },
+    { "source": "/en/:path*", "destination": "/", "permanent": true }
   ],
   "headers": [
     {
