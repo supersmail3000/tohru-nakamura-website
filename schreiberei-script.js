@@ -102,6 +102,19 @@ function handlePageNavigation() {
     const hash = window.location.hash;
     const isPageSection = hash && (hash === '#reserve' || hash === '#events' || hash === '#origin' || hash === '#gift' || hash === '#contact' || hash === '#newsletter' || hash === '#impressum' || hash === '#datenschutz');
 
+    // Update document title based on active section
+    var sectionTitles = {
+        '#reserve': 'Reservieren — Bar Tatar',
+        '#origin': 'Story — Bar Tatar',
+        '#events': 'Events — Bar Tatar',
+        '#gift': 'Gutschein — Bar Tatar',
+        '#contact': 'Kontakt — Bar Tatar',
+        '#newsletter': 'Newsletter — Bar Tatar',
+        '#impressum': 'Impressum — Bar Tatar',
+        '#datenschutz': 'Datenschutz — Bar Tatar'
+    };
+    document.title = sectionTitles[hash] || 'Bar Tatar — Tatar & Drinks in der Schreiberei München';
+
     requestAnimationFrame(() => {
         if (isPageSection) {
             isAnimating = true;

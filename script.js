@@ -84,12 +84,25 @@ function handlePageNavigation() {
     const hash = window.location.hash;
     const isPageSection = hash && (hash === '#reserve' || hash === '#events' || hash === '#origin' || hash === '#gift' || hash === '#contact' || hash === '#newsletter' || hash === '#impressum' || hash === '#datenschutz');
     
+    // Update document title based on active section
+    var sectionTitles = {
+        '#reserve': 'Reserve a Table — Tohru',
+        '#origin': 'Origin — Tohru',
+        '#events': 'Private Dining — Tohru',
+        '#gift': 'Gift Voucher — Tohru',
+        '#contact': 'Contact — Tohru',
+        '#newsletter': 'Newsletter — Tohru',
+        '#impressum': 'Legal Notice — Tohru',
+        '#datenschutz': 'Privacy Policy — Tohru'
+    };
+    document.title = sectionTitles[hash] || 'Tohru — 3-starred Michelin Restaurant by Tohru Nakamura';
+
     // Use requestAnimationFrame for smoother transitions
     requestAnimationFrame(() => {
         if (isPageSection) {
             // Navigate to any page section - Home slides up, Page slides up from bottom
             isAnimating = true;
-            
+
             // Home slides up
             homeSection.classList.add('slide-up');
             homeSection.classList.remove('slide-in-from-top');
