@@ -1059,6 +1059,12 @@ body:has(.home-section) .navbar {
     margin-bottom: 0;
 }
 
+.menu-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
 .reserve-button {
     display: inline-flex;
     align-items: center;
