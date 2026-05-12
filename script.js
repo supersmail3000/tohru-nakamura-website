@@ -365,6 +365,44 @@ if (document.readyState === 'loading') {
     initHeroSlider();
 }
 
+// ===== PAST EVENT FILTER =====
+// Automatically hides events whose date has passed.
+// Each .event-date element needs a data-date="YYYY-MM-DD" attribute.
+// Season labels (.season-label) are hidden when all their following events are gone.
+(function() {
+    var today = new Date();
+    today.setHours(23, 59, 59, 999); // Keep visible until end of event day
+
+    var eventDates = document.querySelectorAll('.event-date[data-date]');
+    eventDates.forEach(function(el) {
+        var dateStr = el.getAttribute('data-date');
+        if (!dateStr) return;
+        var eventDate = new Date(dateStr + 'T23:59:59');
+        if (eventDate < today) {
+            el.style.display = 'none';
+        }
+    });
+
+    // Hide season labels that have no visible events after them
+    var seasonLabels = document.querySelectorAll('.season-label');
+    seasonLabels.forEach(function(label) {
+        var hasVisibleEvent = false;
+        var sibling = label.nextElementSibling;
+        while (sibling) {
+            // Stop at the next season label or non-event-date element that isn't an event
+            if (sibling.classList.contains('season-label')) break;
+            if (sibling.classList.contains('event-date') && sibling.style.display !== 'none') {
+                hasVisibleEvent = true;
+                break;
+            }
+            sibling = sibling.nextElementSibling;
+        }
+        if (!hasVisibleEvent) {
+            label.style.display = 'none';
+        }
+    });
+})();
+
 // ===== NEWSLETTER FORM HANDLER =====
 (function() {
     function setupNewsletterForm(form) {
