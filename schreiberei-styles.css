@@ -649,6 +649,10 @@ body:has(.home-section) .navbar {
     animation-delay: 1.7s;
 }
 
+.home-navigation .nav-item:nth-child(7) {
+    animation-delay: 1.8s;
+}
+
 .home-navigation .nav-item::before {
     content: '';
     position: absolute;
@@ -906,7 +910,6 @@ body:has(.home-section) .navbar {
 }
 
 /* Reserve slides up when active */
-.reserve-section:target,
 .reserve-section.active {
     transform: none;
     visibility: visible;
@@ -1009,6 +1012,73 @@ body:has(.home-section) .navbar {
 
 .reserve-intro p:nth-child(2) {
     animation-delay: 0.2s;
+}
+
+/* Menu items (Bar Tatar à la carte menu) */
+.menu-category {
+    margin-bottom: 40px;
+}
+
+.menu-category h2 {
+    font-family: 'orpheuspro', serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: #1D1D1B;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(29, 29, 27, 0.15);
+}
+
+.menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.menu-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.menu-item-name {
+    font-family: 'orpheuspro', serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: #1D1D1B;
+}
+
+.menu-item-price {
+    font-family: 'orpheuspro', serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(29, 29, 27, 0.6);
+    white-space: nowrap;
+}
+
+.menu-item-desc {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(29, 29, 27, 0.6);
+    margin: 2px 0 0 0;
+}
+
+.menu-footer {
+    margin: 32px 0;
+    text-align: center;
+}
+
+.menu-footer p {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(29, 29, 27, 0.5);
+    margin: 0;
 }
 
 .reserve-button {
@@ -1197,9 +1267,7 @@ a.button-outline:hover {
         z-index: -1;
         pointer-events: none;
     }
-    .reserve-section:target,
     .reserve-section.active,
-    .page-section:target,
     .page-section.active {
         animation: none;
     }
@@ -1299,7 +1367,6 @@ a.button-outline:hover {
     flex-direction: column;
 }
 
-.page-section:target,
 .page-section.active {
     transform: none;
     visibility: visible;

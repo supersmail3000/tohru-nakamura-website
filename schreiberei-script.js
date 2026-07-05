@@ -100,11 +100,12 @@ function handlePageNavigation() {
     if (!homeSection || !reserveSection) return;
 
     const hash = window.location.hash;
-    const isPageSection = hash && (hash === '#reserve' || hash === '#events' || hash === '#origin' || hash === '#gift' || hash === '#contact' || hash === '#newsletter' || hash === '#impressum' || hash === '#datenschutz');
+    const isPageSection = hash && (hash === '#reserve' || hash === '#menu' || hash === '#events' || hash === '#origin' || hash === '#gift' || hash === '#contact' || hash === '#newsletter' || hash === '#impressum' || hash === '#datenschutz');
 
     // Update document title based on active section
     var sectionTitles = {
         '#reserve': 'Reservieren — Bar Tatar',
+        '#menu': 'Speisekarte — Bar Tatar',
         '#origin': 'Story — Bar Tatar',
         '#events': 'Events — Bar Tatar',
         '#gift': 'Gutschein — Bar Tatar',

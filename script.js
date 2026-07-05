@@ -82,11 +82,12 @@ function handlePageNavigation() {
     if (!homeSection || !reserveSection) return;
     
     const hash = window.location.hash;
-    const isPageSection = hash && (hash === '#reserve' || hash === '#events' || hash === '#origin' || hash === '#gift' || hash === '#contact' || hash === '#newsletter' || hash === '#impressum' || hash === '#datenschutz');
+    const isPageSection = hash && (hash === '#reserve' || hash === '#menu' || hash === '#events' || hash === '#origin' || hash === '#gift' || hash === '#contact' || hash === '#newsletter' || hash === '#impressum' || hash === '#datenschutz');
     
     // Update document title based on active section
     var sectionTitles = {
         '#reserve': 'Reserve a Table — Tohru',
+        '#menu': 'Menu — Tohru',
         '#origin': 'Origin — Tohru',
         '#events': 'Private Dining — Tohru',
         '#gift': 'Gift Voucher — Tohru',

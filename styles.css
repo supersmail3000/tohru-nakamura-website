@@ -663,6 +663,10 @@ body:has(.home-section) .navbar {
     animation-delay: 1.7s;
 }
 
+.home-navigation .nav-item:nth-child(7) {
+    animation-delay: 1.8s;
+}
+
 .home-navigation .nav-item::before {
     content: '';
     position: absolute;
@@ -946,7 +950,6 @@ body:has(.home-section) .navbar {
 }
 
 /* Reserve slides up when active */
-.reserve-section:target,
 .reserve-section.active {
     transform: none;
     visibility: visible;
@@ -1061,8 +1064,49 @@ body:has(.home-section) .navbar {
 
 .menu-buttons {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 16px;
-    flex-wrap: wrap;
+}
+
+/* Menu course list (Tohru tasting menu) */
+.menu-course-list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin: 32px 0;
+    text-align: center;
+}
+
+.menu-course h3 {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin: 0 0 6px 0;
+}
+
+.menu-course p {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+}
+
+.menu-price {
+    text-align: center;
+    margin: 24px 0 32px;
+}
+
+.menu-price p {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #ffffff;
+    margin: 0;
 }
 
 .reserve-button {
@@ -1252,9 +1296,7 @@ a.button-outline:hover {
         z-index: -1;
         pointer-events: none;
     }
-    .reserve-section:target,
     .reserve-section.active,
-    .page-section:target,
     .page-section.active {
         animation: none;
     }
@@ -1354,7 +1396,6 @@ a.button-outline:hover {
     flex-direction: column;
 }
 
-.page-section:target,
 .page-section.active {
     transform: none;
     visibility: visible;
