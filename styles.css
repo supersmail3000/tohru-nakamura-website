@@ -1069,6 +1069,10 @@ body:has(.home-section) .navbar {
     gap: 16px;
 }
 
+.menu-buttons .reserve-button {
+    align-self: center;
+}
+
 /* Menu course list (Tohru tasting menu) */
 .menu-course-list {
     display: flex;
