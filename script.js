@@ -27,10 +27,22 @@ function updateCountdown() {
     const hours = now.getHours();
     const minutes = now.getMinutes();
     const time = hours + minutes / 60;
-    
+
     const countdownDisplay = document.getElementById('countdown-display');
     if (!countdownDisplay) return;
-    
+
+    // Closure periods — creative breaks
+    const closures = [
+        { start: new Date(2026, 7, 31), end: new Date(2026, 8, 14), reopen: 'September 15' },
+        { start: new Date(2026, 9, 11), end: new Date(2026, 9, 18), reopen: 'October 19' }
+    ];
+    for (const c of closures) {
+        if (now >= c.start && now < new Date(c.end.getTime() + 86400000)) {
+            countdownDisplay.innerHTML = '<span>Creative break — we reopen on ' + c.reopen + '.</span>';
+            return;
+        }
+    }
+
     // Sunday (0) or Monday (1): closed all day
     if (day === 0 || day === 1) {
         countdownDisplay.innerHTML = '<span>We reopen on Tuesday evening.</span>';

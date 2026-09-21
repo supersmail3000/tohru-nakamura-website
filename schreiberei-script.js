@@ -38,6 +38,18 @@ function updateCountdown() {
     const countdownDisplay = document.getElementById('countdown-display');
     if (!countdownDisplay) return;
 
+    // Closure periods — creative breaks
+    const closures = [
+        { start: new Date(2026, 7, 31), end: new Date(2026, 8, 14), reopen: '15. September' },
+        { start: new Date(2026, 9, 11), end: new Date(2026, 9, 18), reopen: '19. Oktober' }
+    ];
+    for (const c of closures) {
+        if (now >= c.start && now < new Date(c.end.getTime() + 86400000)) {
+            countdownDisplay.innerHTML = '<span>Kreativpause — wir sind ab dem ' + c.reopen + ' wieder da.</span>';
+            return;
+        }
+    }
+
     // Sunday (0) or Monday (1): closed all day
     if (day === 0 || day === 1) {
         // Different message depending on day
