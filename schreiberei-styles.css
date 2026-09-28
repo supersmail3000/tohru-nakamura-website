@@ -1708,16 +1708,26 @@ a.button-outline:hover {
     font-size: 16px;
     font-weight: 400;
     color: var(--text-light);
-    text-decoration: none;
     display: inline-block;
     align-self: flex-start;
     position: relative;
-    padding-bottom: 4px;
-    border-bottom: 1px solid rgba(36, 36, 35, 0.3);
+    /* Underline sits right under the text (was a border with padding, too far away) */
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: rgba(36, 36, 35, 0.3);
+    text-underline-offset: 4px;
+    transition: text-decoration-color 0.3s ease;
+}
+
+/* Voucher widget container: plain block so the widget's own margin:auto
+   only centres horizontally and doesn't push it down */
+.gift-widget {
+    display: block;
+    width: 100%;
 }
 
 .contact-link:hover {
-    border-bottom-color: var(--text-light);
+    text-decoration-color: var(--text-light);
 }
 
 .contact-subheadline {
