@@ -33,7 +33,6 @@ function updateCountdown() {
 
     // Closure periods — creative breaks
     const closures = [
-        { start: new Date(2026, 7, 31), end: new Date(2026, 8, 14), reopen: 'September 15' },
         { start: new Date(2026, 9, 11), end: new Date(2026, 9, 18), reopen: 'October 19' }
     ];
     for (const c of closures) {
@@ -101,7 +100,7 @@ function handlePageNavigation() {
         '#reserve': 'Reserve a Table — Tohru',
         '#menu': 'Menu — Tohru',
         '#origin': 'Origin — Tohru',
-        '#events': 'Private Dining — Tohru',
+        '#events': 'Events — Tohru',
         '#gift': 'Gift Voucher — Tohru',
         '#contact': 'Contact — Tohru',
         '#newsletter': 'Newsletter — Tohru',
@@ -414,61 +413,4 @@ if (document.readyState === 'loading') {
             label.style.display = 'none';
         }
     });
-})();
-
-// ===== NEWSLETTER FORM HANDLER =====
-(function() {
-    function setupNewsletterForm(form) {
-        if (!form) return;
-        
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            var emailInput = form.querySelector('.newsletter-input');
-            var messageEl = form.querySelector('.newsletter-info');
-            var submitBtn = form.querySelector('.newsletter-button');
-            
-            var email = emailInput.value.trim();
-            
-            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                messageEl.textContent = 'Please enter a valid email address.';
-                messageEl.className = 'newsletter-info newsletter-error';
-                return;
-            }
-            
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
-            messageEl.textContent = '';
-            messageEl.className = 'newsletter-info';
-            
-            fetch('/api/subscribe', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: email })
-            })
-            .then(function(response) { return response.json(); })
-            .then(function(data) {
-                if (data.success) {
-                    messageEl.textContent = 'Welcome to our Circle \u2013 we look forward to sharing the journey with you.';
-                    messageEl.className = 'newsletter-info newsletter-success';
-                    emailInput.value = '';
-                } else {
-                    messageEl.textContent = data.error || 'Something went wrong. Please try again.';
-                    messageEl.className = 'newsletter-info newsletter-error';
-                }
-            })
-            .catch(function() {
-                messageEl.textContent = 'Something went wrong. Please try again.';
-                messageEl.className = 'newsletter-info newsletter-error';
-            })
-            .finally(function() {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Subscribe';
-            });
-        });
-    }
-    
-    var forms = document.querySelectorAll('.newsletter-form');
-    forms.forEach(setupNewsletterForm);
 })();

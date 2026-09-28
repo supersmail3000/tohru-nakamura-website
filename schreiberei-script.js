@@ -40,7 +40,6 @@ function updateCountdown() {
 
     // Closure periods — creative breaks
     const closures = [
-        { start: new Date(2026, 7, 31), end: new Date(2026, 8, 14), reopen: '15. September' },
         { start: new Date(2026, 9, 11), end: new Date(2026, 9, 18), reopen: '19. Oktober' }
     ];
     for (const c of closures) {
