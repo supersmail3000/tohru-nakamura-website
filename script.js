@@ -21,6 +21,14 @@ function updateDateTime() {
     }
 }
 
+// Only update the status line when its content actually changes —
+// rewriting it every second restarted the open-dot pulse animation
+function setStatus(el, html) {
+    if (el.dataset.status === html) return;
+    el.dataset.status = html;
+    el.innerHTML = html;
+}
+
 function updateCountdown() {
     const now = new Date();
     const day = now.getDay(); // 0=Sunday, 1=Monday, ..., 6=Saturday
@@ -37,32 +45,32 @@ function updateCountdown() {
     ];
     for (const c of closures) {
         if (now >= c.start && now < new Date(c.end.getTime() + 86400000)) {
-            countdownDisplay.innerHTML = '<span>Creative break — we reopen on ' + c.reopen + '.</span>';
+            setStatus(countdownDisplay, '<span>Creative break — we reopen on ' + c.reopen + '.</span>');
             return;
         }
     }
 
     // Sunday (0) or Monday (1): closed all day
     if (day === 0 || day === 1) {
-        countdownDisplay.innerHTML = '<span>We reopen on Tuesday evening.</span>';
+        setStatus(countdownDisplay, '<span>We reopen on Tuesday evening.</span>');
         return;
     }
 
     // Tuesday (2) - Saturday (6): schedule based on time
     if (time >= 19 && time < 23) {
-        countdownDisplay.innerHTML = '<div class="open-status"><span class="open-dot"></span><span>Dinner service is underway.</span></div>';
+        setStatus(countdownDisplay, '<div class="open-status"><span class="open-dot"></span><span>Dinner service is underway.</span></div>');
     } else if (time >= 1 && time < 9) {
-        countdownDisplay.innerHTML = '<span>The kitchen is resting.</span>';
+        setStatus(countdownDisplay, '<span>The kitchen is resting.</span>');
     } else if (time >= 9 && time < 13) {
-        countdownDisplay.innerHTML = '<span>Sourcing the finest ingredients.</span>';
+        setStatus(countdownDisplay, '<span>Sourcing the finest ingredients.</span>');
     } else if (time >= 13 && time < 18) {
-        countdownDisplay.innerHTML = '<span>Preparing for tonight\'s service.</span>';
+        setStatus(countdownDisplay, '<span>Preparing for tonight\'s service.</span>');
     } else if (time >= 18 && time < 18.75) {
-        countdownDisplay.innerHTML = '<span>The team is gathering for family meal.</span>';
+        setStatus(countdownDisplay, '<span>The team is gathering for family meal.</span>');
     } else if (time >= 18.75 && time < 19) {
-        countdownDisplay.innerHTML = '<span>Final preparations before service.</span>';
+        setStatus(countdownDisplay, '<span>Final preparations before service.</span>');
     } else if (time >= 23 || time < 1) {
-        countdownDisplay.innerHTML = '<span>Winding down for the evening.</span>';
+        setStatus(countdownDisplay, '<span>Winding down for the evening.</span>');
     }
 }
 
@@ -79,6 +87,9 @@ const homeSection = document.querySelector('.home-section');
 const reserveSection = document.querySelector('.reserve-section');
 const pageSections = document.querySelectorAll('.page-section');
 let isAnimating = false;
+let pendingNavigation = false;
+let isInitialLoad = true;
+const TRANSITION_MS = 1000; // matches the 1s section slide in CSS
 
 // Null checks for critical elements
 if (!homeSection) {
@@ -89,12 +100,18 @@ if (!reserveSection) {
 }
 
 function handlePageNavigation() {
-    if (isAnimating) return;
     if (!homeSection || !reserveSection) return;
-    
+
+    // A hash change during a running transition is queued, not dropped —
+    // otherwise URL and visible section get out of sync (e.g. fast back button)
+    if (isAnimating) {
+        pendingNavigation = true;
+        return;
+    }
+
     const hash = window.location.hash;
     const isPageSection = hash && (hash === '#reserve' || hash === '#menu' || hash === '#events' || hash === '#origin' || hash === '#gift' || hash === '#contact' || hash === '#newsletter' || hash === '#impressum' || hash === '#datenschutz');
-    
+
     // Update document title based on active section
     var sectionTitles = {
         '#reserve': 'Reserve a Table — Tohru',
@@ -109,77 +126,66 @@ function handlePageNavigation() {
     };
     document.title = sectionTitles[hash] || 'Tohru — 3-starred Michelin Restaurant by Tohru Nakamura';
 
-    // Use requestAnimationFrame for smoother transitions
-    requestAnimationFrame(() => {
-        if (isPageSection) {
-            // Navigate to any page section - Home slides up, Page slides up from bottom
-            isAnimating = true;
+    const initialLoad = isInitialLoad;
+    isInitialLoad = false;
 
-            // Home slides up
+    requestAnimationFrame(() => {
+        isAnimating = true;
+        const allSections = [reserveSection, ...pageSections];
+
+        if (isPageSection) {
+            // Home slides up, target section slides up from the bottom
             homeSection.classList.add('slide-up');
             homeSection.classList.remove('slide-in-from-top');
-            
-            // Hide all other sections first
-            if (hash === '#reserve') {
-                reserveSection.classList.add('active');
-                reserveSection.classList.remove('slide-down');
-                pageSections.forEach(section => {
+
+            allSections.forEach(section => {
+                const isTarget = ('#' + section.id) === hash;
+                if (isTarget) {
+                    // Restart the content reveal for this section
+                    section.classList.remove('animate-in');
+                    void section.offsetWidth;
+                    section.classList.add('animate-in');
+                    section.classList.add('active');
+                    section.classList.remove('slide-down');
+                } else {
                     section.classList.remove('active');
                     section.classList.add('slide-down');
-                });
-            } else {
-                reserveSection.classList.remove('active');
-                reserveSection.classList.add('slide-down');
-                
-                pageSections.forEach(section => {
-                    const sectionId = '#' + section.id;
-                    if (sectionId === hash) {
-                        section.classList.add('active');
-                        section.classList.remove('slide-down');
-                    } else {
-                        section.classList.remove('active');
-                        section.classList.add('slide-down');
-                    }
-                });
-            }
-            
-            // Allow scrolling for page sections
+                }
+            });
+
             document.documentElement.style.overflow = 'auto';
             document.body.style.overflow = 'auto';
-            
-            setTimeout(() => {
-                isAnimating = false;
-            }, 800);
         } else {
-            // Navigate to Home - All pages slide down, Home slides down from top
-            isAnimating = true;
-            
-            // All sections slide down
-            reserveSection.classList.add('slide-down');
-            reserveSection.classList.remove('active');
-            
-            pageSections.forEach(section => {
+            // All sections slide down, Home slides in from the top
+            allSections.forEach(section => {
                 section.classList.add('slide-down');
                 section.classList.remove('active');
-                section.scrollTop = 0;
             });
-            
-            // Home slides in from top
+
             homeSection.classList.remove('slide-up');
-            homeSection.classList.add('slide-in-from-top');
-            
-            // Prevent scrolling on home page
+            // On first load the curtain intro reveals Home — no extra slide-in
+            if (!initialLoad) homeSection.classList.add('slide-in-from-top');
+
             document.documentElement.style.overflow = 'hidden';
             document.body.style.overflow = 'hidden';
-            
-            // Scroll all sections to top for next time
-            reserveSection.scrollTop = 0;
-            
-            setTimeout(() => {
-                homeSection.classList.remove('slide-in-from-top');
-                isAnimating = false;
-            }, 800);
         }
+
+        setTimeout(() => {
+            homeSection.classList.remove('slide-in-from-top');
+            // Tidy up closed sections only once they are off-screen
+            // (no visible scroll jump or content flash while sliding down)
+            allSections.forEach(section => {
+                if (!section.classList.contains('active')) {
+                    section.classList.remove('animate-in');
+                    section.scrollTop = 0;
+                }
+            });
+            isAnimating = false;
+            if (pendingNavigation) {
+                pendingNavigation = false;
+                handlePageNavigation();
+            }
+        }, (initialLoad && !isPageSection) ? 0 : TRANSITION_MS); // nothing moves on a plain first load
     });
 }
 
@@ -282,82 +288,69 @@ pageImages.forEach(img => {
 // Production ready - Console messages removed for performance
 
 // ===== HERO IMAGE SLIDER =====
-// Creative Director Grade: Virgil Abloh Level 🔥
-// 6s per image, 1.8s crossfade (butterweich), Ken Burns zoom
-
+// 6s per image, 1.8s true crossfade (incoming fades in on top of the outgoing
+// image), Ken Burns zoom. Pauses in background tabs; off for reduced motion.
 const heroSlider = {
     slides: document.querySelectorAll('.hero-image-slide'),
     currentIndex: 0,
     intervalId: null,
-    slideDuration: 6000, // 6 seconds per image
-    fadeDuration: 1800, // 1.8s crossfade
-    
+    slideDuration: 6000,
+    fadeDuration: 1800,
+
     init() {
-        if (!this.slides.length) {
-            // No slides found - fail silently
-            return;
-        }
-        
-        // Check if images are loaded
-        let imagesLoaded = 0;
-        this.slides.forEach((slide, index) => {
-            const img = slide;
-            if (img.complete) {
-                imagesLoaded++;
+        if (this.slides.length < 2) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        let settled = 0;
+        const onSettled = () => {
+            settled++;
+            if (settled === this.slides.length) this.start();
+        };
+        this.slides.forEach(slide => {
+            if (slide.complete) {
+                settled++;
             } else {
-                img.addEventListener('load', () => {
-                    imagesLoaded++;
-                    if (imagesLoaded === this.slides.length) {
-                        this.startAutoplay();
-                    }
-                });
-                img.addEventListener('error', () => {
-                    // Hide broken image gracefully
-                    img.style.display = 'none';
-                });
+                slide.addEventListener('load', onSettled, { once: true });
+                slide.addEventListener('error', () => {
+                    slide.style.display = 'none';
+                    onSettled();
+                }, { once: true });
             }
         });
-        
-        // Start if all images already loaded
-        if (imagesLoaded === this.slides.length) {
-            this.startAutoplay();
-        }
+        if (settled === this.slides.length) this.start();
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) this.stop(); else this.start();
+        });
     },
-    
+
     nextSlide() {
-        if (!this.slides.length) return;
-        
-        const currentSlide = this.slides[this.currentIndex];
-        if (!currentSlide) return;
-        
-        // Add fade-out to current slide for smooth exit
-        currentSlide.classList.add('fade-out');
-        
-        // Calculate next index
+        const current = this.slides[this.currentIndex];
         const nextIndex = (this.currentIndex + 1) % this.slides.length;
-        const nextSlide = this.slides[nextIndex];
-        
-        if (!nextSlide) return;
-        
-        // After a brief delay, swap slides
-        setTimeout(() => {
-            // Remove both classes from old slide
-            currentSlide.classList.remove('active', 'fade-out');
-            
-            // Add active to new slide (triggers fade-in + zoom)
-            nextSlide.classList.add('active');
-            
-            // Update index
-            this.currentIndex = nextIndex;
-        }, this.fadeDuration);
+        const next = this.slides[nextIndex];
+        if (!current || !next) return;
+
+        // Outgoing stays visible underneath (zoom keeps running),
+        // incoming fades in on top
+        this.slides.forEach(s => s.classList.remove('prev'));
+        current.classList.remove('active');
+        current.classList.add('prev');
+        next.classList.add('active');
+        this.currentIndex = nextIndex;
+
+        setTimeout(() => current.classList.remove('prev'), this.fadeDuration);
     },
-    
-    startAutoplay() {
+
+    start() {
+        if (this.intervalId) return;
         this.intervalId = setInterval(() => {
-            requestAnimationFrame(() => {
-                this.nextSlide();
-            });
+            requestAnimationFrame(() => this.nextSlide());
         }, this.slideDuration);
+    },
+
+    stop() {
+        clearInterval(this.intervalId);
+        this.intervalId = null;
     }
 };
 

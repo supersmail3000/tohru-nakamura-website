@@ -28,6 +28,14 @@ function updateDateTime() {
 // Di–Fr: 17:00 – 01:00 Uhr
 // Sa: 13:00 – 01:00 Uhr
 // So + Mo: geschlossen
+// Only update the status line when its content actually changes —
+// rewriting it every second restarted the open-dot pulse animation
+function setStatus(el, html) {
+    if (el.dataset.status === html) return;
+    el.dataset.status = html;
+    el.innerHTML = html;
+}
+
 function updateCountdown() {
     const now = new Date();
     const day = now.getDay(); // 0=Sun, 1=Mon, 2=Tue...6=Sat
@@ -44,7 +52,7 @@ function updateCountdown() {
     ];
     for (const c of closures) {
         if (now >= c.start && now < new Date(c.end.getTime() + 86400000)) {
-            countdownDisplay.innerHTML = '<span>Kreativpause — wir sind ab dem ' + c.reopen + ' wieder da.</span>';
+            setStatus(countdownDisplay, '<span>Kreativpause — wir sind ab dem ' + c.reopen + ' wieder da.</span>');
             return;
         }
     }
@@ -53,9 +61,9 @@ function updateCountdown() {
     if (day === 0 || day === 1) {
         // Different message depending on day
         if (day === 0) {
-            countdownDisplay.innerHTML = '<span>Ruhetag. Morgen auch. Ab Dienstag wieder.</span>';
+            setStatus(countdownDisplay, '<span>Ruhetag. Morgen auch. Ab Dienstag wieder.</span>');
         } else {
-            countdownDisplay.innerHTML = '<span>Ruhetag. Morgen ab 17 Uhr wieder da.</span>';
+            setStatus(countdownDisplay, '<span>Ruhetag. Morgen ab 17 Uhr wieder da.</span>');
         }
         return;
     }
@@ -63,32 +71,32 @@ function updateCountdown() {
     // Saturday (6): opens at 13:00
     if (day === 6) {
         if (time >= 13 || time < 1) {
-            countdownDisplay.innerHTML = '<div class="open-status"><span class="open-dot"></span><span>Wir sind da. Kommt vorbei.</span></div>';
+            setStatus(countdownDisplay, '<div class="open-status"><span class="open-dot"></span><span>Wir sind da. Kommt vorbei.</span></div>');
         } else if (time >= 1 && time < 10) {
-            countdownDisplay.innerHTML = '<span>Noch geschlossen. Samstags ab 13 Uhr.</span>';
+            setStatus(countdownDisplay, '<span>Noch geschlossen. Samstags ab 13 Uhr.</span>');
         } else if (time >= 10 && time < 11) {
-            countdownDisplay.innerHTML = '<span>Der Markt wird gerade leergeräumt.</span>';
+            setStatus(countdownDisplay, '<span>Der Markt wird gerade leergeräumt.</span>');
         } else if (time >= 11 && time < 12.5) {
-            countdownDisplay.innerHTML = '<span>In der Küche wird schon geschnippelt.</span>';
+            setStatus(countdownDisplay, '<span>In der Küche wird schon geschnippelt.</span>');
         } else if (time >= 12.5 && time < 13) {
-            countdownDisplay.innerHTML = '<span>Gleich geht\u2019s los.</span>';
+            setStatus(countdownDisplay, '<span>Gleich geht\u2019s los.</span>');
         }
         return;
     }
 
     // Tuesday (2) – Friday (5): opens at 17:00
     if (time >= 17 || time < 1) {
-        countdownDisplay.innerHTML = '<div class="open-status"><span class="open-dot"></span><span>Wir sind da. Kommt vorbei.</span></div>';
+        setStatus(countdownDisplay, '<div class="open-status"><span class="open-dot"></span><span>Wir sind da. Kommt vorbei.</span></div>');
     } else if (time >= 1 && time < 10) {
-        countdownDisplay.innerHTML = '<span>Noch geschlossen. Ab 17 Uhr wieder.</span>';
+        setStatus(countdownDisplay, '<span>Noch geschlossen. Ab 17 Uhr wieder.</span>');
     } else if (time >= 10 && time < 13) {
-        countdownDisplay.innerHTML = '<span>Der Markt wird gerade leergeräumt.</span>';
+        setStatus(countdownDisplay, '<span>Der Markt wird gerade leergeräumt.</span>');
     } else if (time >= 13 && time < 16) {
-        countdownDisplay.innerHTML = '<span>In der Küche wird schon geschnippelt.</span>';
+        setStatus(countdownDisplay, '<span>In der Küche wird schon geschnippelt.</span>');
     } else if (time >= 16 && time < 16.75) {
-        countdownDisplay.innerHTML = '<span>Das Team trudelt ein.</span>';
+        setStatus(countdownDisplay, '<span>Das Team trudelt ein.</span>');
     } else if (time >= 16.75 && time < 17) {
-        countdownDisplay.innerHTML = '<span>Gleich geht\u2019s los.</span>';
+        setStatus(countdownDisplay, '<span>Gleich geht\u2019s los.</span>');
     }
 }
 
@@ -105,10 +113,19 @@ const homeSection = document.querySelector('.home-section');
 const reserveSection = document.querySelector('.reserve-section');
 const pageSections = document.querySelectorAll('.page-section');
 let isAnimating = false;
+let pendingNavigation = false;
+let isInitialLoad = true;
+const TRANSITION_MS = 1000; // matches the 1s section slide in CSS
 
 function handlePageNavigation() {
-    if (isAnimating) return;
     if (!homeSection || !reserveSection) return;
+
+    // A hash change during a running transition is queued, not dropped —
+    // otherwise URL and visible section get out of sync (e.g. fast back button)
+    if (isAnimating) {
+        pendingNavigation = true;
+        return;
+    }
 
     const hash = window.location.hash;
     const isPageSection = hash && (hash === '#reserve' || hash === '#menu' || hash === '#events' || hash === '#origin' || hash === '#gift' || hash === '#contact' || hash === '#newsletter' || hash === '#impressum' || hash === '#datenschutz');
@@ -127,67 +144,66 @@ function handlePageNavigation() {
     };
     document.title = sectionTitles[hash] || 'Bar Tatar — Tatar & Drinks in der Schreiberei München';
 
-    requestAnimationFrame(() => {
-        if (isPageSection) {
-            isAnimating = true;
+    const initialLoad = isInitialLoad;
+    isInitialLoad = false;
 
+    requestAnimationFrame(() => {
+        isAnimating = true;
+        const allSections = [reserveSection, ...pageSections];
+
+        if (isPageSection) {
+            // Home slides up, target section slides up from the bottom
             homeSection.classList.add('slide-up');
             homeSection.classList.remove('slide-in-from-top');
 
-            if (hash === '#reserve') {
-                reserveSection.classList.add('active');
-                reserveSection.classList.remove('slide-down');
-                pageSections.forEach(section => {
+            allSections.forEach(section => {
+                const isTarget = ('#' + section.id) === hash;
+                if (isTarget) {
+                    // Restart the content reveal for this section
+                    section.classList.remove('animate-in');
+                    void section.offsetWidth;
+                    section.classList.add('animate-in');
+                    section.classList.add('active');
+                    section.classList.remove('slide-down');
+                } else {
                     section.classList.remove('active');
                     section.classList.add('slide-down');
-                });
-            } else {
-                reserveSection.classList.remove('active');
-                reserveSection.classList.add('slide-down');
-
-                pageSections.forEach(section => {
-                    const sectionId = '#' + section.id;
-                    if (sectionId === hash) {
-                        section.classList.add('active');
-                        section.classList.remove('slide-down');
-                    } else {
-                        section.classList.remove('active');
-                        section.classList.add('slide-down');
-                    }
-                });
-            }
+                }
+            });
 
             document.documentElement.style.overflow = 'auto';
             document.body.style.overflow = 'auto';
-
-            setTimeout(() => {
-                isAnimating = false;
-            }, 800);
         } else {
-            isAnimating = true;
-
-            reserveSection.classList.add('slide-down');
-            reserveSection.classList.remove('active');
-
-            pageSections.forEach(section => {
+            // All sections slide down, Home slides in from the top
+            allSections.forEach(section => {
                 section.classList.add('slide-down');
                 section.classList.remove('active');
-                section.scrollTop = 0;
             });
 
             homeSection.classList.remove('slide-up');
-            homeSection.classList.add('slide-in-from-top');
+            // On first load the curtain intro reveals Home — no extra slide-in
+            if (!initialLoad) homeSection.classList.add('slide-in-from-top');
 
             document.documentElement.style.overflow = 'hidden';
             document.body.style.overflow = 'hidden';
-
-            reserveSection.scrollTop = 0;
-
-            setTimeout(() => {
-                homeSection.classList.remove('slide-in-from-top');
-                isAnimating = false;
-            }, 800);
         }
+
+        setTimeout(() => {
+            homeSection.classList.remove('slide-in-from-top');
+            // Tidy up closed sections only once they are off-screen
+            // (no visible scroll jump or content flash while sliding down)
+            allSections.forEach(section => {
+                if (!section.classList.contains('active')) {
+                    section.classList.remove('animate-in');
+                    section.scrollTop = 0;
+                }
+            });
+            isAnimating = false;
+            if (pendingNavigation) {
+                pendingNavigation = false;
+                handlePageNavigation();
+            }
+        }, (initialLoad && !isPageSection) ? 0 : TRANSITION_MS); // nothing moves on a plain first load
     });
 }
 
@@ -253,6 +269,8 @@ pageImages.forEach(img => {
 });
 
 // ===== HERO IMAGE SLIDER =====
+// 6s per image, 1.8s true crossfade (incoming fades in on top of the outgoing
+// image), Ken Burns zoom. Pauses in background tabs; off for reduced motion.
 const heroSlider = {
     slides: document.querySelectorAll('.hero-image-slide'),
     currentIndex: 0,
@@ -261,55 +279,59 @@ const heroSlider = {
     fadeDuration: 1800,
 
     init() {
-        if (!this.slides.length) return;
+        if (this.slides.length < 2) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-        let imagesLoaded = 0;
-        this.slides.forEach((slide) => {
+        let settled = 0;
+        const onSettled = () => {
+            settled++;
+            if (settled === this.slides.length) this.start();
+        };
+        this.slides.forEach(slide => {
             if (slide.complete) {
-                imagesLoaded++;
+                settled++;
             } else {
-                slide.addEventListener('load', () => {
-                    imagesLoaded++;
-                    if (imagesLoaded === this.slides.length) {
-                        this.startAutoplay();
-                    }
-                });
+                slide.addEventListener('load', onSettled, { once: true });
                 slide.addEventListener('error', () => {
                     slide.style.display = 'none';
-                });
+                    onSettled();
+                }, { once: true });
             }
         });
+        if (settled === this.slides.length) this.start();
 
-        if (imagesLoaded === this.slides.length) {
-            this.startAutoplay();
-        }
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) this.stop(); else this.start();
+        });
     },
 
     nextSlide() {
-        if (!this.slides.length) return;
-
-        const currentSlide = this.slides[this.currentIndex];
-        if (!currentSlide) return;
-
-        currentSlide.classList.add('fade-out');
-
+        const current = this.slides[this.currentIndex];
         const nextIndex = (this.currentIndex + 1) % this.slides.length;
-        const nextSlide = this.slides[nextIndex];
-        if (!nextSlide) return;
+        const next = this.slides[nextIndex];
+        if (!current || !next) return;
 
-        setTimeout(() => {
-            currentSlide.classList.remove('active', 'fade-out');
-            nextSlide.classList.add('active');
-            this.currentIndex = nextIndex;
-        }, this.fadeDuration);
+        // Outgoing stays visible underneath (zoom keeps running),
+        // incoming fades in on top
+        this.slides.forEach(s => s.classList.remove('prev'));
+        current.classList.remove('active');
+        current.classList.add('prev');
+        next.classList.add('active');
+        this.currentIndex = nextIndex;
+
+        setTimeout(() => current.classList.remove('prev'), this.fadeDuration);
     },
 
-    startAutoplay() {
+    start() {
+        if (this.intervalId) return;
         this.intervalId = setInterval(() => {
-            requestAnimationFrame(() => {
-                this.nextSlide();
-            });
+            requestAnimationFrame(() => this.nextSlide());
         }, this.slideDuration);
+    },
+
+    stop() {
+        clearInterval(this.intervalId);
+        this.intervalId = null;
     }
 };
 
