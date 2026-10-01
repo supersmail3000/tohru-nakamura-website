@@ -1,6 +1,7 @@
 # Arbeits-Dokumente (nicht für Produktion)
 *.md
 !README.md
+!CLAUDE.md
 
 # Temporäre Dateien
 .vercel-deploy
