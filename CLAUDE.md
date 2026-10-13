@@ -59,8 +59,9 @@ Impressum und Datenschutz stehen als Abschnitte in beiden HTML-Dateien (Tohru EN
 ## Schließzeiten / Ticker
 
 - Status-Ticker (`#countdown-display`) in `script.js` und `schreiberei-script.js`, Array `closures`
-  in `updateCountdown()`. Bei neuen Schließzeiten **beide** JS-Dateien anpassen (EN/DE-Text)
-  und die Liste unter „Closures" in `tohru.html` (`#reserve`).
+  in `updateCountdown()`. **Schließzeiten gelten pro Restaurant:** Tohru-Kreativpausen nur in
+  `script.js` + Liste unter „Closures" in `tohru.html` (`#reserve`). Bar Tatar hat dann geöffnet,
+  `schreiberei-script.js` nur anpassen, wenn Bar Tatar selbst schließt.
 - Öffnungszeiten: Tohru Di–Sa ab 19 Uhr. Bar Tatar Di–Fr 17–01, Sa 13–01, So/Mo zu.
 
 ## Team-Portraits (Tohru, `#origin`)

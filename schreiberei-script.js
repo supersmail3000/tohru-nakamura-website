@@ -46,10 +46,10 @@ function updateCountdown() {
     const countdownDisplay = document.getElementById('countdown-display');
     if (!countdownDisplay) return;
 
-    // Closure periods — creative breaks
-    const closures = [
-        { start: new Date(2026, 9, 11), end: new Date(2026, 9, 18), reopen: '19. Oktober' }
-    ];
+    // Closure periods — creative breaks of Bar Tatar only
+    // (Tohru's closures live in script.js; Bar Tatar stays open when Tohru is closed)
+    // Format: { start: new Date(YYYY, M-1, D), end: new Date(YYYY, M-1, D), reopen: 'D. Monat' }
+    const closures = [];
     for (const c of closures) {
         if (now >= c.start && now < new Date(c.end.getTime() + 86400000)) {
             setStatus(countdownDisplay, '<span>Kreativpause — wir sind ab dem ' + c.reopen + ' wieder da.</span>');
