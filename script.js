@@ -40,9 +40,7 @@ function updateCountdown() {
     if (!countdownDisplay) return;
 
     // Closure periods — creative breaks
-    const closures = [
-        { start: new Date(2026, 9, 11), end: new Date(2026, 9, 18), reopen: 'October 19' }
-    ];
+    const closures = [];
     for (const c of closures) {
         if (now >= c.start && now < new Date(c.end.getTime() + 86400000)) {
             setStatus(countdownDisplay, '<span>Creative break — we reopen on ' + c.reopen + '.</span>');
