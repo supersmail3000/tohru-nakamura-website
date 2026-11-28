@@ -116,6 +116,10 @@ let isAnimating = false;
 let pendingNavigation = false;
 let isInitialLoad = true;
 const TRANSITION_MS = 1000; // matches the 1s section slide in CSS
+// The content stagger starts once the panel is mostly in view, not while it
+// is still travelling in from below (no delay for reduced motion)
+const REVEAL_DELAY_MS = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 300;
+let revealTimer = null;
 
 function handlePageNavigation() {
     if (!homeSection || !reserveSection) return;
@@ -159,12 +163,17 @@ function handlePageNavigation() {
             allSections.forEach(section => {
                 const isTarget = ('#' + section.id) === hash;
                 if (isTarget) {
-                    // Restart the content reveal for this section
+                    // Content stays hidden while the panel slides in, then the
+                    // reveal restarts for this section
                     section.classList.remove('animate-in');
-                    void section.offsetWidth;
-                    section.classList.add('animate-in');
                     section.classList.add('active');
                     section.classList.remove('slide-down');
+                    clearTimeout(revealTimer);
+                    revealTimer = setTimeout(() => {
+                        if (section.classList.contains('active')) {
+                            section.classList.add('animate-in');
+                        }
+                    }, REVEAL_DELAY_MS);
                 } else {
                     section.classList.remove('active');
                     section.classList.add('slide-down');
@@ -232,18 +241,14 @@ const backButtons = document.querySelectorAll('.back-button');
 backButtons.forEach(button => {
     button.addEventListener('click', (e) => {
         e.preventDefault();
-        if (!isAnimating) {
-            window.location.hash = '#home';
-        }
+        window.location.hash = '#home';
     });
 });
 
 // ESC key to navigate back to home
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && window.location.hash && window.location.hash !== '#home') {
-        if (!isAnimating) {
-            window.location.hash = '#home';
-        }
+        window.location.hash = '#home';
     }
 });
 

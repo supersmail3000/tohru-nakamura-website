@@ -319,7 +319,7 @@ body:has(.home-section) .navbar {
     padding: 0;
     overflow: hidden;
     z-index: 100;
-    transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
     transform: translate3d(0, 0, 0);
     will-change: transform;
     backface-visibility: hidden;
@@ -354,7 +354,7 @@ body:has(.home-section) .navbar {
 /* Home slides in from top */
 .home-section.slide-in-from-top {
     transform: translate3d(0, -100%, 0);
-    animation: slideInFromTop 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+    animation: slideInFromTop 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
 
 @keyframes slideInFromTop {
@@ -727,7 +727,7 @@ body:has(.home-section) .navbar {
     }
     to {
         opacity: 1;
-        transform: translate3d(0, 0, 0);
+        transform: none;
     }
 }
 
@@ -1013,7 +1013,6 @@ body:has(.home-section) .navbar {
     opacity: 0;
     transform: translate3d(0, 20px, 0);
     animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards;
-    will-change: transform, opacity;
 }
 
 .reserve-content {
@@ -1035,7 +1034,6 @@ body:has(.home-section) .navbar {
     opacity: 0;
     transform: translate3d(0, 20px, 0);
     animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    will-change: transform, opacity;
 }
 
 .reserve-intro p:nth-child(1) {
@@ -1131,7 +1129,6 @@ body:has(.home-section) .navbar {
     opacity: 0;
     translate: 0 20px;
     animation: fadeInUpTranslate 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.25s forwards;
-    will-change: transform, opacity;
     backface-visibility: hidden;
 }
 
@@ -1165,7 +1162,6 @@ body:has(.home-section) .navbar {
     opacity: 0;
     transform: translate3d(0, 20px, 0);
     animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    will-change: transform, opacity;
 }
 
 .reserve-content > .reserve-section-block:nth-of-type(1) {
@@ -1435,7 +1431,6 @@ a.button-outline:hover {
     opacity: 0;
     transform: translate3d(0, 20px, 0);
     animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards;
-    will-change: transform, opacity;
 }
 
 .page-content {
@@ -1456,7 +1451,6 @@ a.button-outline:hover {
     opacity: 0;
     transform: translate3d(0, 20px, 0);
     animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
-    will-change: transform, opacity;
 }
 
 .page-text p {
@@ -1484,7 +1478,6 @@ a.button-outline:hover {
     opacity: 0;
     transform: translate3d(0, 20px, 0);
     animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
-    will-change: transform, opacity;
     backface-visibility: hidden;
 }
 
@@ -1501,7 +1494,6 @@ a.button-outline:hover {
     opacity: 0;
     transform: translate3d(0, 20px, 0);
     animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    will-change: transform, opacity;
 }
 
 .page-section-block:first-child {
@@ -1649,7 +1641,6 @@ a.button-outline:hover {
     opacity: 0;
     transform: translate3d(0, 20px, 0);
     animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
-    will-change: transform, opacity;
 }
 
 .page-image.arch-clipped {
@@ -1677,7 +1668,6 @@ a.button-outline:hover {
     opacity: 0;
     transform: translate3d(0, 20px, 0);
     animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    will-change: transform, opacity;
 }
 
 .contact-section-block:nth-of-type(1) {
