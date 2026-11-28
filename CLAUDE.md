@@ -49,6 +49,11 @@ Impressum und Datenschutz stehen als Abschnitte in beiden HTML-Dateien (Tohru EN
    tmp = tempfile.NamedTemporaryFile(delete=False, suffix='.pdf').name
    pdf.save(tmp); pdf.close(); shutil.move(tmp, f)   # nicht direkt überschreiben
    ```
+5. Der Tohru-Menüpreis steht zusätzlich im JSON-LD (`hasMenu.offers.price` im `<head>` von `tohru.html`)
+   und in `llms.txt`. Bei einer Preisänderung dort mitziehen.
+
+`pikepdf` ist lokal nicht installiert. Alternative mit `pypdf`:
+`PdfWriter(clone_from=PdfReader(f)).add_metadata({'/Title': title})`, dann schreiben und mit `pdfinfo` prüfen.
 
 ## Events (Tohru)
 
@@ -63,6 +68,10 @@ Impressum und Datenschutz stehen als Abschnitte in beiden HTML-Dateien (Tohru EN
   `script.js` + Liste unter „Closures" in `tohru.html` (`#reserve`). Bar Tatar hat dann geöffnet,
   `schreiberei-script.js` nur anpassen, wenn Bar Tatar selbst schließt.
 - Öffnungszeiten: Tohru Di–Sa ab 19 Uhr. Bar Tatar Di–Fr 17–01, Sa 13–01, So/Mo zu.
+- Sonderzeiten (Feiertage, Jahreswechsel) stehen bei Tohru an vier Stellen: Ticker in `script.js`
+  (`closures`, `extraOpenDays`, `lunchDays`), Block „Holiday Hours" in `tohru.html` (`#reserve`),
+  `specialOpeningHoursSpecification` im JSON-LD von `tohru.html` und Abschnitt „Year-end hours" in `llms.txt`.
+  Nach Ablauf alle vier wieder entfernen.
 
 ## Team-Portraits (Tohru, `#origin`)
 
@@ -81,3 +90,8 @@ Impressum und Datenschutz stehen als Abschnitte in beiden HTML-Dateien (Tohru EN
 - Datenschutz nennt OpenTable, Flodesk, gastronovi, Vercel. Bei neuen Drittanbietern dort ergänzen
   (DE + EN) und das Datum „Stand" aktualisieren.
 - Bar Tatar hat zwei Eingänge: Burgstraße 5 und Dienerstraße 20. Beide Adressen sind korrekt.
+- SEO/GEO: Kanonische Domain ist `https://www.schreiberei-muc.de` (ohne `www` leitet um). Jede Seite hat
+  eine unsichtbare H1 mit dem Restaurantnamen (`.visually-hidden` im Home-Bereich), die sichtbaren
+  Abschnittstitel bleiben, wie sie sind. `llms.txt` im Root fasst die Fakten beider Restaurants für
+  KI-Assistenten zusammen: bei geänderten Öffnungszeiten, Preisen, Kontaktdaten oder Teamwechseln mitpflegen.
+  `sitemap.xml`: `lastmod` bei inhaltlichen Änderungen aktualisieren.

@@ -43,13 +43,18 @@
     {
       "@context": "https://schema.org",
       "@type": "Restaurant",
+      "@id": "https://www.schreiberei-muc.de/bar-tatar",
       "name": "Bar Tatar in der Schreiberei",
-      "description": "Tatar-Variationen, kreative Gerichte, ehrliche Drinks. Locker, ungezwungen, kompromisslos beim Genuss.",
+      "alternateName": "Bar Tatar",
+      "image": "https://www.schreiberei-muc.de/images/og-bartatar.jpg",
+      "description": "Bar Tatar in der Schreiberei München: Tatar-Variationen, kreative Gerichte und ehrliche Drinks im Erdgeschoss des historischen Hauses an der Burgstraße 5 in der Altstadt. Locker, ungezwungen, kompromisslos beim Genuss.",
       "url": "https://www.schreiberei-muc.de/bar-tatar",
       "telephone": "+49-89-21529173",
       "email": "ml@schreiberei-muc.de",
       "servesCuisine": ["Tatar", "Bar Food", "Cocktails"],
       "priceRange": "€€–€€€",
+      "currenciesAccepted": "EUR",
+      "acceptsReservations": "https://www.opentable.de/r/schreiberei-reservations-munchen?restref=272529",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Burgstraße 5",
@@ -57,6 +62,11 @@
         "postalCode": "80331",
         "addressCountry": "DE",
         "addressRegion": "Bayern"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 48.137154,
+        "longitude": 11.576124
       },
       "openingHoursSpecification": [
         {
@@ -71,6 +81,15 @@
           "opens": "13:00",
           "closes": "01:00"
         }
+      ],
+      "hasMenu": {
+        "@type": "Menu",
+        "name": "Speisekarte",
+        "url": "https://www.schreiberei-muc.de/bar-tatar#menu",
+        "inLanguage": "de"
+      },
+      "sameAs": [
+        "https://www.instagram.com/bartatar_schreiberei/"
       ],
       "parentOrganization": {
         "@type": "Organization",
@@ -926,6 +945,7 @@
 
     <!-- Home Section -->
     <section id="home" class="home-section">
+        <h1 class="visually-hidden">Bar Tatar — Tatar &amp; Drinks in der Schreiberei München</h1>
         <div class="home-tagline">
             <p class="location-time" id="datetime-display">München</p>
             <div role="status" aria-live="polite" aria-atomic="true">

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="google" content="notranslate">
     <meta name="description" content="Tohru — 3-starred Michelin Restaurant by Tohru Nakamura. Japanese precision meets European soul. Schreiberei München, Burgstraße 5.">
-    <title>Tohru — 3-starred Michelin Restaurant by Tohru Nakamura</title>
+    <title>Tohru — 3-starred Michelin Restaurant in Munich by Tohru Nakamura</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon-tohru.svg">
@@ -16,14 +16,15 @@
     
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Tohru — 3-starred Michelin Restaurant by Tohru Nakamura">
+    <meta property="og:title" content="Tohru — 3-starred Michelin Restaurant in Munich by Tohru Nakamura">
     <meta property="og:description" content="Japanese precision meets European soul. Fine dining in the heart of Munich.">
     <meta property="og:image" content="https://www.schreiberei-muc.de/images/og-tohru.jpg">
     <meta property="og:url" content="https://www.schreiberei-muc.de/tohru">
+    <meta property="og:locale" content="en_GB">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Tohru — 3-starred Michelin Restaurant by Tohru Nakamura">
+    <meta name="twitter:title" content="Tohru — 3-starred Michelin Restaurant in Munich by Tohru Nakamura">
     <meta name="twitter:description" content="Japanese precision meets European soul. Fine dining in the heart of Munich.">
     <meta name="twitter:image" content="https://www.schreiberei-muc.de/images/og-tohru.jpg">
     
@@ -35,20 +36,28 @@
     {
       "@context": "https://schema.org",
       "@type": "Restaurant",
-      "name": "Tohru in der Schreiberei",
-      "image": "https://www.schreiberei-muc.de/images/og-tohru.jpg",
-      "description": "Japanese precision meets European soul. Fine dining in the heart of Munich. Chef Tohru Nakamura creates a unique blend of Japanese, German and French cuisines.",
       "@id": "https://www.schreiberei-muc.de/tohru",
+      "name": "Tohru in der Schreiberei",
+      "alternateName": "Tohru",
+      "image": "https://www.schreiberei-muc.de/images/og-tohru.jpg",
+      "description": "Three-Michelin-star restaurant by chef Tohru Nakamura in Munich's old town. Japanese precision meets European soul: a seasonal tasting menu blending Japanese, German and French cuisines, served to 30 guests each evening.",
       "url": "https://www.schreiberei-muc.de/tohru",
       "telephone": "+49-89-21529172",
+      "email": "kontakt@schreiberei-muc.de",
       "priceRange": "€€€€",
+      "currenciesAccepted": "EUR",
       "servesCuisine": ["Japanese", "German", "French", "Fine Dining"],
-      "acceptsReservations": true,
-      "starRating": {
-        "@type": "Rating",
-        "ratingValue": "3",
-        "bestRating": "3",
-        "ratingSystem": "Michelin Guide"
+      "acceptsReservations": "https://www.opentable.de/r/tohru-fine-dining-reservations-munchen?restref=216039",
+      "award": "3 Michelin stars (Guide Michelin)",
+      "memberOf": {
+        "@type": "Organization",
+        "name": "Les Grandes Tables du Monde",
+        "url": "https://lesgrandestablesdumonde.com/restaurant/tohru-in-der-schreiberei/"
+      },
+      "employee": {
+        "@type": "Person",
+        "name": "Tohru Nakamura",
+        "jobTitle": "Chef"
       },
       "address": {
         "@type": "PostalAddress",
@@ -71,11 +80,64 @@
           "closes": "23:00"
         }
       ],
-      "menu": "https://www.schreiberei-muc.de/tohru#menu",
+      "specialOpeningHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "validFrom": "2026-12-21",
+          "validThrough": "2026-12-21",
+          "opens": "19:00",
+          "closes": "23:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "validFrom": "2026-12-23",
+          "validThrough": "2026-12-23",
+          "opens": "12:30",
+          "closes": "16:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "validFrom": "2026-12-24",
+          "validThrough": "2026-12-27",
+          "opens": "00:00",
+          "closes": "00:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "validFrom": "2026-12-28",
+          "validThrough": "2026-12-28",
+          "opens": "19:00",
+          "closes": "23:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "validFrom": "2026-12-31",
+          "validThrough": "2026-12-31",
+          "opens": "12:30",
+          "closes": "16:00"
+        }
+      ],
+      "hasMenu": {
+        "@type": "Menu",
+        "name": "Tasting menu",
+        "url": "https://www.schreiberei-muc.de/tohru#menu",
+        "inLanguage": "en",
+        "offers": {
+          "@type": "Offer",
+          "price": "380",
+          "priceCurrency": "EUR"
+        }
+      },
       "sameAs": [
         "https://www.instagram.com/tohrunakamura",
-        "https://www.facebook.com/tohrunakamura"
-      ]
+        "https://www.facebook.com/tohrunakamura",
+        "https://guide.michelin.com/en/bayern/mnchen/restaurant/tohru-in-der-schreiberei",
+        "https://lesgrandestablesdumonde.com/restaurant/tohru-in-der-schreiberei/"
+      ],
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Ensemble Culinaire GmbH"
+      }
     }
     </script>
     
@@ -338,6 +400,7 @@
                         <p>The building at Burgstraße 5 dates back to the 14th century — rebuilt in stone after Munich's great fire of 1327, acquired by the city in 1550. Step through the red wooden door and you feel every one of those 700 years.</p>
                         <p>Chef Tohru Nakamura's cooking is shaped by his German-Japanese heritage. Trained in Europe's finest kitchens and in Japan, he brings together European flavours and the philosophy of kaiseki — with meticulous attention to local, seasonal ingredients.</p>
                         <p>The result is neither strictly Japanese nor German, but something entirely its own — a cuisine built on precision, curiosity and respect for what each season offers.</p>
+                        <p>Tohru in der Schreiberei holds three Michelin stars and is a member of Les Grandes Tables du Monde.</p>
                     </div>
                     <div class="page-image">
                         <img src="images/origin-image-1-optimized.jpg" alt="Tohru in der Schreiberei Restaurant Interior - Historic building in Munich's Altstadt" loading="lazy">
@@ -796,6 +859,7 @@
 
     <!-- Home Section -->
     <section id="home" class="home-section">
+        <h1 class="visually-hidden">Tohru in der Schreiberei — three-Michelin-star restaurant in Munich by Tohru Nakamura</h1>
         <div class="home-tagline">
             <p class="location-time" id="datetime-display">Munich</p>
             <div role="status" aria-live="polite" aria-atomic="true">

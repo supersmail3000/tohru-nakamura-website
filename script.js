@@ -148,7 +148,7 @@ function handlePageNavigation() {
         '#impressum': 'Legal Notice — Tohru',
         '#datenschutz': 'Privacy Policy — Tohru'
     };
-    document.title = sectionTitles[hash] || 'Tohru — 3-starred Michelin Restaurant by Tohru Nakamura';
+    document.title = sectionTitles[hash] || 'Tohru — 3-starred Michelin Restaurant in Munich by Tohru Nakamura';
 
     const initialLoad = isInitialLoad;
     isInitialLoad = false;

@@ -21,14 +21,23 @@
   <meta property="og:image" content="https://www.schreiberei-muc.de/images/og-schreiberei.jpg">
   <meta property="og:locale" content="de_DE">
 
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Schreiberei München — Bar Tatar &amp; Tohru">
+  <meta name="twitter:description" content="Zwei Konzepte unter einem Dach: Bar Tatar — Tatar-Variationen &amp; ehrliche Drinks. Tohru — Drei-Sterne-Küche von Tohru Nakamura. Burgstraße 5, München Altstadt.">
+  <meta name="twitter:image" content="https://www.schreiberei-muc.de/images/og-schreiberei.jpg">
+
   <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": "https://www.schreiberei-muc.de/#organization",
     "name": "Schreiberei München",
     "description": "Zwei Konzepte unter einem Dach: Bar Tatar und Tohru — Burgstraße 5, München Altstadt.",
     "url": "https://www.schreiberei-muc.de",
+    "logo": "https://www.schreiberei-muc.de/images/landing/logo-schreiberei.svg",
+    "image": "https://www.schreiberei-muc.de/images/og-schreiberei.jpg",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Burgstraße 5",
@@ -36,9 +45,14 @@
       "postalCode": "80331",
       "addressCountry": "DE"
     },
+    "sameAs": [
+      "https://www.instagram.com/schreiberei_muc/",
+      "https://www.facebook.com/schreiberei.muc"
+    ],
     "subOrganization": [
       {
         "@type": "Restaurant",
+        "@id": "https://www.schreiberei-muc.de/bar-tatar",
         "name": "Bar Tatar",
         "url": "https://www.schreiberei-muc.de/bar-tatar",
         "servesCuisine": ["Tatar", "Cocktails"],
@@ -60,10 +74,20 @@
       },
       {
         "@type": "Restaurant",
+        "@id": "https://www.schreiberei-muc.de/tohru",
         "name": "Tohru",
         "url": "https://www.schreiberei-muc.de/tohru",
-        "servesCuisine": ["Fine Dining", "French-Japanese"],
-        "priceRange": "€€€€"
+        "servesCuisine": ["Japanese", "German", "French", "Fine Dining"],
+        "priceRange": "€€€€",
+        "award": "3 Michelin stars (Guide Michelin)",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "19:00",
+            "closes": "23:00"
+          }
+        ]
       }
     ]
   }
@@ -76,6 +100,7 @@
   <div class="page">
     <!-- Logo -->
     <header class="header">
+      <h1 class="visually-hidden">Schreiberei München — Bar Tatar &amp; Tohru</h1>
       <img src="images/landing/logo-schreiberei.svg" alt="Schreiberei" class="logo">
     </header>
 
