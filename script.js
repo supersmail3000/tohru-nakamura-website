@@ -39,18 +39,40 @@ function updateCountdown() {
     const countdownDisplay = document.getElementById('countdown-display');
     if (!countdownDisplay) return;
 
-    // Closure periods — creative breaks
-    const closures = [];
+    // Local date keys, e.g. '2026-12-24'
+    const dateKey = (d) => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    const todayKey = dateKey(now);
+    const tomorrowKey = dateKey(new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1));
+
+    // Closure periods — creative breaks and holidays (optional custom message)
+    const closures = [
+        { start: new Date(2026, 11, 24), end: new Date(2026, 11, 27), message: 'With our families for the holidays — we reopen on December 28.' }
+    ];
     for (const c of closures) {
         if (now >= c.start && now < new Date(c.end.getTime() + 86400000)) {
-            setStatus(countdownDisplay, '<span>Creative break — we reopen on ' + c.reopen + '.</span>');
+            setStatus(countdownDisplay, '<span>' + (c.message || 'Creative break — we reopen on ' + c.reopen + '.') + '</span>');
             return;
         }
     }
 
-    // Sunday (0) or Monday (1): closed all day
-    if (day === 0 || day === 1) {
-        setStatus(countdownDisplay, '<span>We reopen on Tuesday evening.</span>');
+    // Year-end 2026: Mondays with dinner service, and days with lunch instead of dinner
+    const extraOpenDays = ['2026-12-21', '2026-12-28'];
+    const lunchDays = ['2026-12-23', '2026-12-31'];
+
+    if (lunchDays.includes(todayKey)) {
+        if (time < 12.5) {
+            setStatus(countdownDisplay, '<span>Lunch service starts at 12:30 p.m.</span>');
+        } else if (time < 16) {
+            setStatus(countdownDisplay, '<div class="open-status"><span class="open-dot"></span><span>Lunch service is underway.</span></div>');
+        } else {
+            setStatus(countdownDisplay, '<span>The kitchen is resting.</span>');
+        }
+        return;
+    }
+
+    // Sunday (0) or Monday (1): closed all day, unless it is an extra open day
+    if ((day === 0 || day === 1) && !extraOpenDays.includes(todayKey)) {
+        setStatus(countdownDisplay, extraOpenDays.includes(tomorrowKey) ? '<span>We reopen on Monday evening.</span>' : '<span>We reopen on Tuesday evening.</span>');
         return;
     }
 
